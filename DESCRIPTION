@@ -1,0 +1,9 @@
+Package: bggAnalytics
+Type: Package
+Title: BGG's Board Game Data Analysis Tools
+Version: 0.1.0.9000
+Author: Jakub Bujnowicz [aut, cre]
+Maintainer: Jakub Bujnowicz <bujnowiczgithub@gmail.com>
+License: GPL-3 + file LICENSE
+Encoding: UTF-8
+LazyData: true
