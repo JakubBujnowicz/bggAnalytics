@@ -19,52 +19,62 @@ bggGames <- R6Class(
     private = list(
         .ids = numeric()
     ),
-    public = list(
-        initialize = function(ids) {
-            # Assertion
-            assert_that(is.numeric(ids), length(ids) != 0,
-                        noNA(ids), all(ids %% 1 == 0), all(ids > 0))
-
-            ids <- unique(ids)
-
-            api_url <- bgg_url("api")
-            api_url <- paste0(api_url, "thing?id=", paste0(ids, collapse = ","))
-
-            xml <- read_html(api_url)
-            xml <- expand_xml(xml)
-
-            xml_ids <- as.numeric(sapply(xml, xml_attr, attr = "id"))
-            missing <- setdiff(ids, xml_ids)
-
-            # Check for any success
-            ids <- intersect(ids, xml_ids)
-            if (length(ids) == 0) {
-                stop("No ids were available through BGG API", call. = FALSE)
-            }
-
-            # Check for missing
-            if (length(missing) > 0) {
-                warning("Following ids were not available through BGG API:\n",
-                        paste0(missing, collapse = ", "), call. = FALSE)
-            }
-
-            private$.ids <- ids
-            private$.xml <- xml
-            private$.data <- data.table(objectid = ids)
-        },
-        print = function(n_show = 5) {
-            string <- paste0(
-                "---- bggGames ----",
-                "\nGames data API.\n",
-                "\n* IDs: ", compress(private$.ids,
-                                      n_show = n_show),
-                "\n* Variables: ", compress(names(private$.data),
-                                            n_show = n_show))
-
-            cat(string)
-        }
-    ),
     active = list(
         ids = private_getter("ids")
     )
 )
+
+# Initialize ###################################################################
+bggGames$set("public", "initialize",
+function(ids, stats = FALSE) {
+    # Assertions
+    assert_that(is.numeric(ids), not_empty(ids),
+                noNA(ids), all(ids %% 1 == 0), all(ids > 0))
+    assert_that(is.flag(stats), noNA(stats))
+
+    ids <- unique(ids)
+
+    # Getting full URL with params
+    api_url <- paste0(bgg_url("api"), "thing?id=",
+                      paste0(ids, collapse = ",")) %>%
+        path_add_flag(stats)
+
+    xml <- read_html(api_url) %>%
+        xml_expand
+
+    xml_ids <- as.numeric(sapply(xml, xml_attr, attr = "id"))
+    missing <- setdiff(ids, xml_ids)
+
+    # Check for any success
+    ids <- intersect(ids, xml_ids)
+    if (length(ids) == 0) {
+        stop("No ids were available through BGG API", call. = FALSE)
+    }
+
+    # Check for missing
+    if (length(missing) > 0) {
+        warning("Following ids were not available through BGG API:\n",
+                paste0(missing, collapse = ", "), call. = FALSE)
+    }
+
+    private$.ids <- ids
+    private$.xml <- xml
+    private$.data <- data.table(objectid = ids, key = "objectid")
+})
+
+
+# Print ########################################################################
+bggGames$set("public", "print",
+function() {
+    n_show <- getOption(".bggAnalytics.print")
+
+    string <- paste0(
+        "---- bggGames ----",
+        "\nGames data API.\n",
+        "\n* IDs: ", compress(private$.ids,
+                              n_show = n_show),
+        "\n* Variables: ", compress(names(private$.data),
+                                    n_show = n_show))
+
+    cat(string)
+})

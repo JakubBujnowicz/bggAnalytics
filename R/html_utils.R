@@ -8,7 +8,7 @@
 #' @keywords internal
 #'
 bgg_url <- function(of) {
-    assert_that(is.character(of), is.scalar(of))
+    assert_that(is.string(of))
 
     result <- switch(of,
                      api = "https://boardgamegeek.com/xmlapi2/",
@@ -32,7 +32,8 @@ bgg_url <- function(of) {
 #' @return XML Nodeset.
 #' @keywords internal
 #'
-expand_xml <- function(xml) {
-    result <- xml_children(html_node(xml, "items"))
+xml_expand <- function(xml) {
+    result <- html_node(xml, "items") %>%
+        xml_children()
     return (result)
 }

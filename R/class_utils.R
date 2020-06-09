@@ -10,17 +10,28 @@
 #'
 private_getter <- function(slotname) {
     # Assertion
-    assert_that(is.character(slotname), is.scalar(slotname))
+    assert_that(is.string(slotname))
 
     # Closure
     result <- function(value) {
         if (missing(value)) {
             return(private[[paste0(".", slotname)]])
         } else {
-            stop(slotname, " cannot be manually overwritten", call. = FALSE)
+            stop(slotname, " is a private field and cannot be manually overwritten",
+                 call. = FALSE)
         }
     }
 
     result <- unenclose(result)
     return(result)
+}
+
+expand_by <- function(data, xml, variable_names, params = NULL) {
+    assert_that(is.data.table(data))
+    assert_that(is.character(variable_names), noNA(variable_names))
+
+    for (var in variable_names) {
+        expand_function <- match.fun(paste0("expand_by_", var))
+        expand_function(data = data, xml = xml, params = params)
+    }
 }
