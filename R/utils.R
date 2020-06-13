@@ -28,6 +28,13 @@ compress <- function(vec, n_show = 5, collapse = ", ") {
     return (string)
 }
 
+all_scalars <- function(x) {
+    assert_that(is.list(x))
+
+    result <- all(sapply(x, length) == 1)
+    return(result)
+}
+
 # path_add_* ###################################################################
 #' Add params to APIs URL
 #'

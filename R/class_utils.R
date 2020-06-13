@@ -35,3 +35,16 @@ expand_by <- function(data, xml, variable_names, params = NULL) {
         expand_function(data = data, xml = xml, params = params)
     }
 }
+
+fetch <- function(xml, variable_names) {
+    assert_that(is.character(variable_names), noNA(variable_names))
+
+    fun_names <- paste0("fetch_", variable_names)
+    result <- lapply(fun_names, function(fun) match.fun(fun)(xml))
+
+    scalar_outputs <- sapply(result, all_scalars)
+    result[scalar_outputs] <- lapply(result[scalar_outputs], unlist)
+
+    names(result) <- variable_names
+    return(result)
+}

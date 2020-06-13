@@ -18,8 +18,8 @@ globalVariables(c("self", "private"))
 # Options ######################################################################
 # Amount of elements to print
 options(`.bggAnalytics.print` = 10)
-# Maximum tries of collection fetching
-options(`.bggAnalytics.max_tries` = 3)
+# Should print messages from functions?
+options(`.bggAnalytics.verbose` = TRUE)
 
 # For testing
 options(`.bggAnalytics.username` = "Beo_")

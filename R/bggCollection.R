@@ -17,18 +17,18 @@ bggCollection <- R6Class(
     classname = "bggCollection",
     inherit = bggAPI,
     private = list(
-        .usernames = character(),
+        .username = character(),
         .ids = numeric()
     ),
     active = list(
-        usernames = private_getter("usernames"),
+        username = private_getter("username"),
         ids = private_getter("ids")
     )
 )
 
 # Initialize ###################################################################
 bggCollection$set("public", "initialize",
-function(usernames = NULL,
+function(username = NULL,
          stats = FALSE,
          brief = FALSE,
          own = NULL,
@@ -41,18 +41,13 @@ function(usernames = NULL,
          wishlistpriority = NULL,
          minrating = NULL,
          rating = NULL) {
-    if (is.null(usernames)) {
-        usernames <- getOption(".bggAnalytics.username")
 
-        if (is.null(usernames)) {
-            stop("username must be specified, consider setting
-                               default username by ",
-                 "options(.bggAnalytics.username = 'your_username'")
-        }
+    if (is.null(username)) {
+        username <- getOption(".bggAnalytics.username")
     }
 
     # Assertions ---------------------------------------------------------------
-    assert_that(is.string(usernames), noNA(usernames))
+    assert_that(is.string(username), noNA(username))
     # Flags
     assert_that(is.flag(stats), noNA(stats))
     assert_that(is.flag(brief), noNA(brief))
@@ -70,7 +65,7 @@ function(usernames = NULL,
 
     # Connecting to API --------------------------------------------------------
     api_url <- paste0(bgg_url("api"), "collection?username=",
-                      paste0(usernames, collapse = ",")) %>%
+                      paste0(username, collapse = ",")) %>%
         path_add_flag(stats) %>%
         path_add_flag(brief) %>%
         path_add_filter(own) %>%
@@ -86,29 +81,50 @@ function(usernames = NULL,
 
     xml <- read_html(api_url)
 
-    max_tries <- getOption(".bggAnalytics.max_tries")
-    tries <- 1
-    while (length(xml) == 0 & tries <= max_tries) {
-        cat("Server need time to process the request, trying again in",
-            try_delay, "seconds...\t\r")
+    # Check if the request has been processed
+    txt <- xml_text(xml)
+    processing_message <-
+        "request for this collection has been accepted and will be processed."
+    messages <- getOption(".bggAnalytics.verbose")
+    while (xml_length(xml) == 1 && grepl(processing_message, txt)) {
+        if (messages) {
+            message("Server needs time to process the request...")
+            messages <- FALSE
+        }
+
         # Server needs a while to process this request
-        Sys.sleep(tries + 1)
+        Sys.sleep(1)
 
         # Try again
         xml <- read_html(api_url)
-
-        # Increment a little bit
-        tries <- tries + 1
+        txt <- xml_text(xml)
     }
     xml <- xml_expand(xml)
 
     # Setting params -----------------------------------------------------------
     ids <- as.numeric(sapply(xml, xml_attr, attr = "objectid"))
 
-    private$.usernames <- usernames
+    if (length(ids) == 0) {
+        warning("this collection contains no games, perhaps the username is wrong?")
+    }
+
+    private$.username <- username
     private$.ids <- ids
     private$.xml <- xml
-    private$.data <- data.table(objectid = ids)
+    private$.api_url <- api_url
+    private$.data <- data.table(objectid = ids, key = "objectid")
+    private$.params <- list(stats = stats,
+                            brief = brief,
+                            own = own,
+                            rated = rated,
+                            played = played,
+                            comment = comment,
+                            trade = trade,
+                            want = want,
+                            wishlist = wishlist,
+                            wishlistpriority = wishlistpriority,
+                            minrating = minrating,
+                            rating = rating)
 })
 
 
@@ -120,7 +136,7 @@ function() {
     string <- paste0(
         "---- bggCollection ----",
         "\nUser collection data API.\n",
-        "\n* Usernames: ", compress(private$.usernames,
+        "\n* username: ", compress(private$.username,
                                     n_show = n_show),
         "\n* IDs: ", compress(private$.ids,
                               n_show = n_show),

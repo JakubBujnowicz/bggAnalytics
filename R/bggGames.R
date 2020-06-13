@@ -59,7 +59,9 @@ function(ids, stats = FALSE) {
 
     private$.ids <- ids
     private$.xml <- xml
+    private$.api_url <- api_url
     private$.data <- data.table(objectid = ids, key = "objectid")
+    private$.params <- list(stats = stats)
 })
 
 
