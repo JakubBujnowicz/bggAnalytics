@@ -42,7 +42,7 @@ xml_expand <- function(xml) {
 nodes2text <- function(xml, xpath) {
     assert_that(is.string(xpath), noNA(xpath))
 
-    nodes <- lapply(xml, html_node, xpath = xpath)
+    nodes <- lapply(xml, html_nodes, xpath = xpath)
     values <- lapply(nodes, html_text, trim = TRUE)
 
     return (values)
@@ -51,7 +51,7 @@ nodes2text <- function(xml, xpath) {
 nodes2number <- function(xml, xpath) {
     assert_that(is.string(xpath), noNA(xpath))
 
-    nodes <- lapply(xml, html_node, xpath = xpath)
+    nodes <- lapply(xml, html_nodes, xpath = xpath)
     values <- lapply(nodes, xml_double)
 
     return (values)
@@ -61,7 +61,7 @@ attr2text <- function(xml, xpath, attr) {
     assert_that(is.string(xpath), noNA(xpath))
     assert_that(is.string(attr), noNA(attr))
 
-    nodes <- lapply(xml, html_node, xpath = xpath)
+    nodes <- lapply(xml, html_nodes, xpath = xpath)
     values <- lapply(nodes, xml_attr, attr = attr)
 
     return(values)

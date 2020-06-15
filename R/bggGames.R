@@ -26,7 +26,7 @@ bggGames <- R6Class(
 
 # Initialize ###################################################################
 bggGames$set("public", "initialize",
-function(ids, stats = FALSE) {
+function(ids, stats = TRUE) {
     # Assertions
     assert_that(is.numeric(ids), not_empty(ids),
                 noNA(ids), all(ids %% 1 == 0), all(ids > 0))

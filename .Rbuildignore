@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 
 package_building.R
+data/
+tars/

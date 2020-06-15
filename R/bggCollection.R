@@ -29,7 +29,7 @@ bggCollection <- R6Class(
 # Initialize ###################################################################
 bggCollection$set("public", "initialize",
 function(username = NULL,
-         stats = FALSE,
+         stats = TRUE,
          brief = FALSE,
          own = NULL,
          rated = NULL,

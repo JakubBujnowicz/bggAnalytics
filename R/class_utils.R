@@ -36,15 +36,38 @@ expand_by <- function(data, xml, variable_names, params = NULL) {
     }
 }
 
-fetch <- function(xml, variable_names) {
+fetch <- function(xml, variable_names, class_name) {
     assert_that(is.character(variable_names), noNA(variable_names))
+    assert_that(is.string(class_name), noNA(class_name))
 
-    fun_names <- paste0("fetch_", variable_names)
-    result <- lapply(fun_names, function(fun) match.fun(fun)(xml))
+    var_specs <- fread("data/variable_specification.csv")
+    setkey(var_specs, Variable)
 
-    scalar_outputs <- sapply(result, all_scalars)
-    result[scalar_outputs] <- lapply(result[scalar_outputs], unlist)
+    var_specs <- var_specs[Class == class_name]
 
+    result <- list()
+    for (var in variable_names) {
+        var_data <- var_specs[.(var)]
+
+        node <- var_data$Node
+        attr <- var_data$Attribute
+        type <- var_data$Type
+        scalar <- var_data$Scalar
+
+        if (attr != "") {
+            fun <- match.fun(paste0("attr2", type))
+            fetched <- fun(xml, node, attr)
+        } else {
+            fun <- match.fun(paste0("nodes2", type))
+            fetched <- fun(xml, node)
+        }
+
+        if (scalar) {
+            fetched <- unlist(fetched)
+        }
+
+        result[[var_data$Variable]] <- fetched
+    }
     names(result) <- variable_names
     return(result)
 }
