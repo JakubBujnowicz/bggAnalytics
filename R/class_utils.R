@@ -36,11 +36,24 @@ expand_by <- function(data, xml, variable_names, params = NULL) {
     }
 }
 
-fetch <- function(xml, variable_names, class_name) {
+#' Generalised fetch for every class
+#'
+#' It is a universal tool for fetching variables from XMLs, should be used
+#' within fetch methods from every bgg* class. It uses internal variable
+#' parameter specification to extract data.
+#'
+#' @param xml XML nodeset.
+#' @param variable_names Character vector of variable names to extract.
+#' @param var_specs Data.table with parameter specification.
+#'
+#' @return List of variables. Variables marked as 'scalar' in param specification
+#'         will be unlisted.
+#' @keywords internal
+#'
+fetch_internal <- function(xml, variable_names, var_specs) {
+    assert_that(inherits(xml, "xml_nodeset"))
     assert_that(is.character(variable_names), noNA(variable_names))
-    assert_that(is.string(class_name), noNA(class_name))
-
-    var_specs <- var_specs[Class == class_name]
+    assert_that(is.data.table(var_specs))
 
     result <- list()
     for (var in variable_names) {
@@ -66,5 +79,37 @@ fetch <- function(xml, variable_names, class_name) {
         result[[var_data$Variable]] <- fetched
     }
     names(result) <- variable_names
+    return(result)
+}
+
+#' @describeIn fetch_internal This should be put in public slot of a class.
+#'
+fetch_external <- function(variable_names) {
+    assert_that(is.character(variable_names),
+                noNA(variable_names),
+                not_empty(variable_names))
+
+    # Internal data
+    var_specs <- var_specs[Class == class(self)[1]]
+
+    if (!all(variable_names %in% var_specs$Variable)) {
+        unavailable <- setdiff(variable_names, var_specs$Variable)
+        unavailable <- paste0(missing, collapse = ", ")
+        stop("following variables are not available for bggCollection objects:\n",
+             unavailable)
+    }
+
+    if (!private$.params$stats) {
+        stats_vars <- var_specs[Stats == TRUE, Variable]
+        unavailable <- intersect(stats_vars, variable_names)
+        if (length(unavailable) > 0) {
+            unavailable <- paste0(unavailable, collapse = ", ")
+            stop("following variables are not available without stats module:\n",
+                 unavailable,
+                 ",\nconsider setting 'stats = TRUE' when creating an object")
+        }
+    }
+
+    result <- fetch_internal(private$.xml, variable_names, var_specs)
     return(result)
 }

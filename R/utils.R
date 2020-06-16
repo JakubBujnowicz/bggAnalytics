@@ -28,6 +28,16 @@ compress <- function(vec, n_show = 5, collapse = ", ") {
     return (string)
 }
 
+#' Check if all elements of a list are of length 1
+#'
+#' Checks if lists contains onyl scalar values and can be safely unlisted,
+#' maintaining the same length.
+#'
+#' @param x List.
+#'
+#' @return Logical flag, TRUE or FALSE.
+#' @keywords internal
+#'
 all_scalars <- function(x) {
     assert_that(is.list(x))
 

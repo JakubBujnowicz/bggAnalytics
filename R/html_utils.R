@@ -38,7 +38,23 @@ xml_expand <- function(xml) {
     return (result)
 }
 
+# Extraction ###################################################################
+#' Extraction functions
+#'
+#' These functions extract data from given nodes/attributes from XML item list.
+#'
+#' @param xml XML item list.
+#' @param xpath Single string, name of XPATH expression, for example node name.
+#' @param attr Single string, name of attribute
+#'
+#' @return List of elements of equal length as \code{xml}.
+#' @keywords internal
+#'
+#' @name extraction_functions
+#'
+NULL
 
+#' @rdname extraction_functions
 nodes2text <- function(xml, xpath) {
     assert_that(is.string(xpath), noNA(xpath))
 
@@ -48,6 +64,7 @@ nodes2text <- function(xml, xpath) {
     return (values)
 }
 
+#' @rdname extraction_functions
 nodes2number <- function(xml, xpath) {
     assert_that(is.string(xpath), noNA(xpath))
 
@@ -57,6 +74,7 @@ nodes2number <- function(xml, xpath) {
     return (values)
 }
 
+#' @rdname extraction_functions
 attr2text <- function(xml, xpath, attr) {
     assert_that(is.string(xpath), noNA(xpath))
     assert_that(is.string(attr), noNA(attr))
@@ -67,6 +85,7 @@ attr2text <- function(xml, xpath, attr) {
     return(values)
 }
 
+#' @rdname extraction_functions
 attr2number <- function(xml, xpath, attr) {
     # Assertions for xpath and attr made in attr2text
 

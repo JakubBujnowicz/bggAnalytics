@@ -13,7 +13,11 @@
 NULL
 
 # To remove notes from CMD Check
-globalVariables(c("self", "private"))
+globalVariables(
+    # Due to R6
+    c("self", "private",
+      # Due to data.table
+      ".", "Class", "Stats", "Variable"))
 
 # Options ######################################################################
 # Amount of elements to print
