@@ -40,9 +40,6 @@ fetch <- function(xml, variable_names, class_name) {
     assert_that(is.character(variable_names), noNA(variable_names))
     assert_that(is.string(class_name), noNA(class_name))
 
-    var_specs <- fread("data/variable_specification.csv")
-    setkey(var_specs, Variable)
-
     var_specs <- var_specs[Class == class_name]
 
     result <- list()
