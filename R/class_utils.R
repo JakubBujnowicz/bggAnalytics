@@ -84,17 +84,21 @@ fetch_internal <- function(xml, variable_names, var_specs) {
 
 #' @describeIn fetch_internal This should be put in public slot of a class.
 #'
-fetch_external <- function(variable_names) {
-    assert_that(is.character(variable_names),
-                noNA(variable_names),
-                not_empty(variable_names))
-
+fetch_external <- function(variable_names = NULL) {
     # Internal data
     var_specs <- var_specs[Class == class(self)[1]]
 
+    if (!is.null(variable_names)) {
+        assert_that(is.character(variable_names),
+                    noNA(variable_names),
+                    not_empty(variable_names))
+    } else {
+        variable_names <- var_specs$Variable
+    }
+
     if (!all(variable_names %in% var_specs$Variable)) {
         unavailable <- setdiff(variable_names, var_specs$Variable)
-        unavailable <- paste0(missing, collapse = ", ")
+        unavailable <- paste0(unavailable, collapse = ", ")
         stop("following variables are not available for bggCollection objects:\n",
              unavailable)
     }

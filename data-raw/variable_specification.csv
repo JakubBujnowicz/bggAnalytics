@@ -17,13 +17,13 @@ bggCollection;MaxPlayers;maxplayers;stats;maxplayers;number;TRUE;TRUE
 bggCollection;MinPlaytime;minplaytime;stats;minplaytime;number;TRUE;TRUE
 bggCollection;MaxPlaytime;maxplaytime;stats;maxplaytime;number;TRUE;TRUE
 bggCollection;Playingtime;playingtime;stats;playingtime;number;TRUE;TRUE
-bggCollection;NumOwned;numowned;numowned;value;number;TRUE;TRUE
-bggCollection;MyRating;rating;rating;value;number;TRUE;TRUE
-bggCollection;AvgRating;average;average;value;number;TRUE;TRUE
-bggCollection;BGGRating;baverage;bayesaverage;value;number;TRUE;TRUE
-bggCollection;RatingStdDev;stddev;stddev;value;number;TRUE;TRUE
-bggCollection;RatingVotes;usersrated;usersrated;value;number;TRUE;TRUE
-bggCollection;Rank;rank;rank[@name = 'boardgame'];value;number;TRUE;TRUE
+bggCollection;NumOwned;numowned;stats;numowned;number;TRUE;TRUE
+bggCollection;MyRating;rating;stats/rating;value;number;TRUE;TRUE
+bggCollection;AvgRating;average;stats/rating/average;value;number;TRUE;TRUE
+bggCollection;BGGRating;baverage;stats/rating/bayesaverage;value;number;TRUE;TRUE
+bggCollection;RatingStdDev;stddev;stats/rating/stddev;value;number;TRUE;TRUE
+bggCollection;RatingVotes;usersrated;stats/rating/usersrated;value;number;TRUE;TRUE
+bggCollection;Rank;rank;stats/rating/ranks/rank[@name = 'boardgame'];value;number;TRUE;TRUE
 bggGames;Name;name;name[@type = 'primary'];value;text;TRUE;FALSE
 bggGames;ImageURL;image;image;;text;TRUE;FALSE
 bggGames;ThumbnailURL;thumbnail;thumbnail;;text;TRUE;FALSE

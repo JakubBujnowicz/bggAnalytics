@@ -69,7 +69,7 @@ nodes2number <- function(xml, xpath) {
     assert_that(is.string(xpath), noNA(xpath))
 
     nodes <- lapply(xml, html_nodes, xpath = xpath)
-    values <- lapply(nodes, xml_double)
+    values <- suppressWarnings(lapply(nodes, xml_double))
 
     return (values)
 }
@@ -90,7 +90,7 @@ attr2number <- function(xml, xpath, attr) {
     # Assertions for xpath and attr made in attr2text
 
     values <- attr2text(xml = xml, xpath = xpath, attr = attr)
-    values <- lapply(values, as.numeric)
+    values <- suppressWarnings(lapply(values, as.numeric))
 
     return(values)
 }
