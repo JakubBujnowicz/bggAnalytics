@@ -26,16 +26,8 @@ private_getter <- function(slotname) {
     return(result)
 }
 
-expand_by <- function(data, xml, variable_names, params = NULL) {
-    assert_that(is.data.table(data))
-    assert_that(is.character(variable_names), noNA(variable_names))
 
-    for (var in variable_names) {
-        expand_function <- match.fun(paste0("expand_by_", var))
-        expand_function(data = data, xml = xml, params = params)
-    }
-}
-
+# Fetching #####################################################################
 #' Generalised fetch for every class
 #'
 #' It is a universal tool for fetching variables from XMLs, should be used
@@ -73,6 +65,8 @@ fetch_internal <- function(xml, variable_names, var_specs) {
         }
 
         if (scalar) {
+            emptys <- sapply(fetched, length) == 0
+            fetched[emptys] <- NA
             fetched <- unlist(fetched)
         }
 
@@ -116,4 +110,31 @@ fetch_external <- function(variable_names = NULL) {
 
     result <- fetch_internal(private$.xml, variable_names, var_specs)
     return(result)
+}
+
+
+# Expanding ####################################################################
+#' Generalised expand for every class
+#'
+#' It is a universal tool for fetching variables from XMLs and adding them
+#' to \code{data} slot data.table.
+#'
+#' @param variable_names Character vector of variable names.
+#' @param params List of parameters.
+#'
+#' @return Nothing, used for side effect.
+#' @keywords internal
+#'
+expand_by <- function(variable_names = NULL, params = NULL) {
+    if (!is.null(variable_names)) {
+        assert_that(is.character(variable_names),
+                    noNA(variable_names),
+                    not_empty(variable_names))
+    }
+
+    fetched <- self$fetch(variable_names)
+    var_names <- names(fetched)
+    for (i in seq_along(fetched)) {
+        set(private$.data, j = var_names[i], value = fetched[[i]])
+    }
 }

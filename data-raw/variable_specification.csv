@@ -35,15 +35,15 @@ bggGames;MinPlaytime;playingtime;playingtime;value;number;TRUE;FALSE
 bggGames;MaxPlaytime;minplaytime;minplaytime;value;number;TRUE;FALSE
 bggGames;Playingtime;maxplaytime;maxplaytime;value;number;TRUE;FALSE
 bggGames;MinAge;minage;minage;value;number;TRUE;FALSE
-bggGames;Weight;avgweight;averageweight;value;number;TRUE;TRUE
-bggGames;WeightVotes;weightvotes;numweights;value;number;TRUE;TRUE
-bggGames;NumOwned;numowned;owned;value;number;TRUE;TRUE
-bggGames;BGGRating;baverage;bayesaverage;value;number;TRUE;TRUE
-bggGames;AvgRating;average;average;value;number;TRUE;TRUE
-bggGames;RatingVotes;usersrated;usersrated;value;number;TRUE;TRUE
-bggGames;RatingStdDev;stddev;stddev;value;number;TRUE;TRUE
-bggGames;NumTrading;numtrading;numtrading;value;number;TRUE;TRUE
-bggGames;NumWanting;numwanting;numwanting;value;number;TRUE;TRUE
-bggGames;NumWishing;numwishing;numwishing;value;number;TRUE;TRUE
-bggGames;NumComments;numcomments;numcomments;value;number;TRUE;TRUE
-bggGames;Rank;rank;rank[@name = 'boardgame'];value;number;TRUE;TRUE
+bggGames;Weight;avgweight;statistics/ratings/averageweight;value;number;TRUE;TRUE
+bggGames;WeightVotes;weightvotes;statistics/ratings/numweights;value;number;TRUE;TRUE
+bggGames;NumOwned;numowned;statistics/ratings/owned;value;number;TRUE;TRUE
+bggGames;BGGRating;baverage;statistics/ratings/bayesaverage;value;number;TRUE;TRUE
+bggGames;AvgRating;average;statistics/ratings/average;value;number;TRUE;TRUE
+bggGames;RatingVotes;usersrated;statistics/ratings/usersrated;value;number;TRUE;TRUE
+bggGames;RatingStdDev;stddev;statistics/ratings/stddev;value;number;TRUE;TRUE
+bggGames;NumTrading;numtrading;statistics/ratings/trading;value;number;TRUE;TRUE
+bggGames;NumWanting;numwanting;statistics/ratings/wanting;value;number;TRUE;TRUE
+bggGames;NumWishing;numwishing;statistics/ratings/wishing;value;number;TRUE;TRUE
+bggGames;NumComments;numcomments;statistics/ratings/numcomments;value;number;TRUE;TRUE
+bggGames;Rank;rank;statistics/ratings/ranks/rank[@name = 'boardgame'];value;number;TRUE;TRUE

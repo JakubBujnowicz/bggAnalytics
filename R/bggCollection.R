@@ -136,7 +136,7 @@ function() {
     string <- paste0(
         "---- bggCollection ----",
         "\nUser collection data API.\n",
-        "\n* username: ", compress(private$.username,
+        "\n* Username: ", compress(private$.username,
                                     n_show = n_show),
         "\n* IDs: ", compress(private$.ids,
                               n_show = n_show),

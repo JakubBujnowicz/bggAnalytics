@@ -29,6 +29,7 @@ bggAPI <- R6::R6Class(
         data = private_getter("data")
     ),
     public = list(
-        fetch = fetch_external
+        fetch = fetch_external,
+        expand = expand_by
     )
 )
