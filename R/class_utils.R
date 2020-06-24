@@ -56,6 +56,10 @@ fetch_internal <- function(xml, variable_names, var_specs) {
         type <- var_data$Type
         scalar <- var_data$Scalar
 
+        if (node == "NULL") {
+            next
+        }
+
         if (attr != "") {
             fun <- match.fun(paste0("attr2", type))
             fetched <- fun(xml, node, attr)
@@ -72,7 +76,8 @@ fetch_internal <- function(xml, variable_names, var_specs) {
 
         result[[var_data$Variable]] <- fetched
     }
-    names(result) <- variable_names
+
+    names(result) <- variable_names[var_specs$Node != "NULL"]
     return(result)
 }
 

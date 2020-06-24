@@ -47,3 +47,6 @@ bggGames;NumWanting;numwanting;statistics/ratings/wanting;value;number;TRUE;TRUE
 bggGames;NumWishing;numwishing;statistics/ratings/wishing;value;number;TRUE;TRUE
 bggGames;NumComments;numcomments;statistics/ratings/numcomments;value;number;TRUE;TRUE
 bggGames;Rank;rank;statistics/ratings/ranks/rank[@name = 'boardgame'];value;number;TRUE;TRUE
+bggSearch;GameID;objectid;NULL;;number;TRUE;FALSE
+bggSearch;Name;name;name;value;text;TRUE;FALSE
+bggSearch;Year;yearpublished;yearpublished;value;number;TRUE;FALSE

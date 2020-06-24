@@ -2,6 +2,7 @@ load_all()
 
 cl <- bggCollection$new("Beo_")
 gm <- bggGames$new(ids = cl$ids)
+sr <- bggSearch$new(query = "Terraforming Mars")
 
 cl_fetch <- cl$fetch()
 gm_fetch <- gm$fetch()

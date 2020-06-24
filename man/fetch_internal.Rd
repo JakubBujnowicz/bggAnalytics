@@ -7,7 +7,7 @@
 \usage{
 fetch_internal(xml, variable_names, var_specs)
 
-fetch_external(variable_names)
+fetch_external(variable_names = NULL)
 }
 \arguments{
 \item{xml}{XML nodeset.}
