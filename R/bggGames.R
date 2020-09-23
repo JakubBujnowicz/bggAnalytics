@@ -6,48 +6,48 @@ bggGames <- R6Class(
         .ids = numeric()
     ),
     active = list(
-        ids = private_getter("ids")
+        ids = .private_getter("ids")
     )
 )
 
 # Initialize ###################################################################
 bggGames$set("public", "initialize",
-function(ids, stats = TRUE) {
-    # Assertions
-    assert_that(is.numeric(ids), not_empty(ids),
-                noNA(ids), all(ids %% 1 == 0), all(ids > 0))
-    assert_that(is.flag(stats), noNA(stats))
+function(ids, params = NULL) {
+    # Assertions ---------------------------------------------------------------
+    assert_that(.are_positive_integers(ids))
+    params <- .process_params(params, class = "bggGames")
 
     ids <- unique(ids)
 
-    # Getting full URL with params
-    api_url <- paste0(bgg_url("api"), "thing?id=",
-                      paste0(ids, collapse = ",")) %>%
-        path_add_flag(stats)
-
+    # Getting the API URL and XML
+    api_url <- paste0(.bgg_url("api"), "thing?id=",
+                      paste0(ids, collapse = ","))
+    api_url <- .extend_url_by_params(api_url, params, class = "bggGames")
     xml <- read_html(api_url) %>%
-        xml_expand
+        .xml_expand()
 
+    # Testing IDs
     xml_ids <- as.numeric(sapply(xml, xml_attr, attr = "id"))
-    missing <- setdiff(ids, xml_ids)
 
     # Check for any success
     ids <- intersect(ids, xml_ids)
     if (length(ids) == 0) {
-        stop("No ids were available through BGG API", call. = FALSE)
+        stop("None of the given 'ids' were available through BGG API",
+             call. = FALSE)
     }
 
     # Check for missing
+    missing <- setdiff(ids, xml_ids)
     if (length(missing) > 0) {
         warning("Following ids were not available through BGG API:\n",
-                paste0(missing, collapse = ", "), call. = FALSE)
+                toString(missing), call. = FALSE)
     }
 
     private$.ids <- ids
     private$.xml <- xml
     private$.api_url <- api_url
+    private$.params <- params
     private$.data <- data.table(objectid = ids, key = "objectid")
-    private$.params <- list(stats = stats)
 })
 
 
@@ -59,10 +59,10 @@ function() {
     string <- paste0(
         "---- bggGames ----",
         "\nGames data API.\n",
-        "\n* IDs: ", compress(private$.ids,
-                              n_show = n_show),
-        "\n* Variables: ", compress(names(private$.data),
-                                    n_show = n_show))
+        "\n* IDs: ", .compress(private$.ids,
+                               n_show = n_show),
+        "\n* Variables: ", .compress(names(private$.data),
+                                     n_show = n_show))
 
     cat(string)
 })

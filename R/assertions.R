@@ -107,8 +107,7 @@ NULL
 #'
 .normal_message <- function(message) {
     result <- function(call, env) {
-        string <- paste0(deparse(call$x),
-                         )
+        string <- paste0(deparse(call$x), message)
         return(string)
     }
 
@@ -173,5 +172,5 @@ on_failure(.is_boolean) <- .normal_message(
 on_failure(.are_booleans) <- .normal_message(
     " is not a non-empty logical vector without NAs")
 
-on_failure(.is_nodest) <- .normal_message(
+on_failure(.is_nodeset) <- .normal_message(
     " is not a XML nodeset")
