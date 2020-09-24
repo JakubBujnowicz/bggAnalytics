@@ -11,13 +11,16 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 Imports: assertthat, data.table, magrittr, pryr, R6, rvest, utils, xml2
+Depends: 
+    R (>= 2.10)
 Collate: 
+    'assertions.R'
     'class_utils.R'
     'bggAPI.R'
     'bggCollection.R'
     'bggGames.R'
+    'bggSearch.R'
     'html_utils.R'
+    'params_tools.R'
     'utils.R'
     'zzz.R'
-Depends: 
-    R (>= 2.10)

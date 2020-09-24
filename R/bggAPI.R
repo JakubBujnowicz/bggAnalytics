@@ -1,4 +1,9 @@
 # Definition ###################################################################
+#' @name bggApi
+#'
+#' @include class_utils.R
+#'
+
 bggAPI <- R6::R6Class(
     classname = "bggAPI",
     private = list(
@@ -8,9 +13,9 @@ bggAPI <- R6::R6Class(
         .params = NULL
     ),
     active = list(
-        xml = private_getter("xml"),
-        api_url = private_getter("api_url"),
-        data = private_getter("data")
+        xml = .private_getter("xml"),
+        api_url = .private_getter("api_url"),
+        data = .private_getter("data")
     ),
     public = list(
         fetch = fetch_external,
