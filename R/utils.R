@@ -1,3 +1,5 @@
+.to_string <- function(x) paste0("'", x, "'", collapse = ", ")
+
 #' Compress vector into single string
 #'
 #' Returns string which shows `n_show` first elements and `vec` and amount
@@ -10,11 +12,11 @@
 #' @return Single string.
 #' @keywords internal
 #'
-compress <- function(vec, n_show = 5, collapse = ", ") {
+.compress <- function(vec, n_show = 5, collapse = ", ") {
     # Assertions
     assert_that(is.atomic(vec))
-    assert_that(is.count(n_show))
-    assert_that(is.string(collapse))
+    assert_that(.is_positive_integer(n_show))
+    assert_that(.is_string(collapse))
 
     n <- length(vec)
     extra <- n - n_show
@@ -107,60 +109,4 @@ path_add_filter <- function(path, value) {
     }
 
     return(path)
-}
-
-# Assertions ###################################################################
-#' Assertions
-#'
-#' Check if \code{x} satisfies given conditions.
-#'
-#' @param x Object to check.
-#' @param limit Single positive integer, sets the upper bound of \code{x}. Does
-#' nothing if NULL
-#'
-#' @name assertions
-#'
-#' @return Logical vector of length one.
-#' @keywords internal
-#'
-NULL
-
-#' @describeIn assertions Checks if \code{x} is NULL or a single positive integer
-#' <= \code{limit} (if limit is not \code{NULL}).
-#'
-is_nullcount <- function(x, limit = NULL) {
-    null_x <- is.null(x)
-    result <- null_x || (is.count(x) & noNA(x))
-    if (!is.null(limit) & !null_x) {
-        assert_that(is.count(limit))
-
-        result <- result && x <= limit
-    }
-
-    return(result)
-}
-
-on_failure(is_nullcount) <- function(call, env) {
-    string <- paste0(deparse(call$x),
-                     " is not NULL or a single positive integer")
-    if (!is.null(call$limit)) {
-        string <- paste0(string, " smaller than or equal to ", deparse(call$limit))
-    }
-
-    return(string)
-}
-
-
-#' @describeIn assertions Checks if \code{x} is a single logical, not-NA value or
-#' NULL.
-#'
-is_nullflag <- function(x) {
-    result <- is.null(x) || (is.flag(x) & noNA(x))
-    return(result)
-}
-
-on_failure(is_nullflag) <- function(call, env) {
-    string <- paste0(deparse(call$x),
-                     " is not NULL or a flag (a length one logical vector)")
-    return(string)
 }

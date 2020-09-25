@@ -4,66 +4,30 @@ bggCollection <- R6Class(
     inherit = bggAPI,
     private = list(
         .username = character(),
-        .ids = numeric()
+        .ids = numeric(),
+        .bggGames = NULL
     ),
     active = list(
-        username = private_getter("username"),
-        ids = private_getter("ids")
+        username = .private_getter("username"),
+        ids = .private_getter("ids")
     )
 )
 
 # Initialize ###################################################################
 bggCollection$set("public", "initialize",
-function(username = NULL,
-         stats = TRUE,
-         brief = FALSE,
-         own = NULL,
-         rated = NULL,
-         played = NULL,
-         comment = NULL,
-         trade = NULL,
-         want = NULL,
-         wishlist = NULL,
-         wishlistpriority = NULL,
-         minrating = NULL,
-         rating = NULL) {
+function(username = NULL, params = NULL) {
 
     if (is.null(username)) {
         username <- getOption(".bggAnalytics.username")
     }
 
     # Assertions ---------------------------------------------------------------
-    assert_that(is.string(username), noNA(username))
-    # Flags
-    assert_that(is.flag(stats), noNA(stats))
-    assert_that(is.flag(brief), noNA(brief))
-    # Flags with null
-    assert_that(is_nullflag(own))
-    assert_that(is_nullflag(rated))
-    assert_that(is_nullflag(comment))
-    assert_that(is_nullflag(trade))
-    assert_that(is_nullflag(want))
-    assert_that(is_nullflag(wishlist))
-    # Value filters
-    assert_that(is_nullcount(wishlistpriority, limit = 5))
-    assert_that(is_nullcount(minrating, limit = 10))
-    assert_that(is_nullcount(rating, limit = 10))
+    assert_that(.is_string(username))
+    params <- .process_params(params, class = "bggCollection")
 
     # Connecting to API --------------------------------------------------------
-    api_url <- paste0(bgg_url("api"), "collection?username=",
-                      paste0(username, collapse = ",")) %>%
-        path_add_flag(stats) %>%
-        path_add_flag(brief) %>%
-        path_add_filter(own) %>%
-        path_add_filter(rated) %>%
-        path_add_filter(played) %>%
-        path_add_filter(comment) %>%
-        path_add_filter(trade) %>%
-        path_add_filter(want) %>%
-        path_add_filter(wishlist) %>%
-        path_add_filter(wishlistpriority) %>%
-        path_add_filter(minrating) %>%
-        path_add_filter(rating)
+    api_url <- paste0(.bgg_url("api"), "collection?username=", username)
+    api_url <- .extend_url_by_params(api_url, params, class = "bggCollection")
 
     xml <- read_html(api_url)
 
@@ -85,32 +49,26 @@ function(username = NULL,
         xml <- read_html(api_url)
         txt <- xml_text(xml)
     }
-    xml <- xml_expand(xml)
+    xml <- .xml_expand(xml)
 
-    # Setting params -----------------------------------------------------------
+    # Extract IDs --------------------------------------------------------------
     ids <- as.numeric(sapply(xml, xml_attr, attr = "objectid"))
 
     if (length(ids) == 0) {
         warning("this collection contains no games, perhaps the username is wrong?")
     }
 
+    # Getting bggGames extension -----------------------------------------------
+    if (params$extended) {
+        private$.bggGames <- bggGames$new(ids = ids)
+    }
+
     private$.username <- username
     private$.ids <- ids
     private$.xml <- xml
     private$.api_url <- api_url
+    private$.params <- params
     private$.data <- data.table(objectid = ids, key = "objectid")
-    private$.params <- list(stats = stats,
-                            brief = brief,
-                            own = own,
-                            rated = rated,
-                            played = played,
-                            comment = comment,
-                            trade = trade,
-                            want = want,
-                            wishlist = wishlist,
-                            wishlistpriority = wishlistpriority,
-                            minrating = minrating,
-                            rating = rating)
 })
 
 
@@ -122,11 +80,11 @@ function() {
     string <- paste0(
         "---- bggCollection ----",
         "\nUser collection data API.\n",
-        "\n* Username: ", compress(private$.username,
+        "\n* Username: ", .compress(private$.username,
                                     n_show = n_show),
-        "\n* IDs: ", compress(private$.ids,
+        "\n* IDs: ", .compress(private$.ids,
                               n_show = n_show),
-        "\n* Variables: ", compress(names(private$.data),
+        "\n* Variables: ", .compress(names(private$.data),
                                     n_show = n_show))
 
     cat(string)

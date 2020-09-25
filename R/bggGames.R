@@ -39,6 +39,7 @@ function(ids, params = NULL) {
     # Check for missing
     missing <- setdiff(ids, xml_ids)
     if (length(missing) > 0) {
+        ids <- setdiff(ids, missing)
         warning("Following ids were not available through BGG API:\n",
                 toString(missing), call. = FALSE)
     }

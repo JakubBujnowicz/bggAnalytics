@@ -8,9 +8,9 @@
 #' @return Function that extracts the private `slotname` slot from a R6 object.
 #' @keywords internal
 #'
-private_getter <- function(slotname) {
+.private_getter <- function(slotname) {
     # Assertion
-    assert_that(is.string(slotname))
+    assert_that(.is_string(slotname))
 
     # Closure
     result <- function(value) {
@@ -25,6 +25,7 @@ private_getter <- function(slotname) {
     result <- unenclose(result)
     return(result)
 }
+
 
 
 # Fetching #####################################################################
@@ -42,9 +43,9 @@ private_getter <- function(slotname) {
 #'         will be unlisted.
 #' @keywords internal
 #'
-fetch_internal <- function(xml, variable_names, var_specs) {
-    assert_that(inherits(xml, "xml_nodeset"))
-    assert_that(is.character(variable_names), noNA(variable_names))
+.fetch_internal <- function(xml, variable_names, var_specs) {
+    assert_that(.is_nodeset(xml))
+    assert_that(.are_strings(variable_names))
     assert_that(is.data.table(var_specs))
 
     result <- list()
@@ -61,10 +62,10 @@ fetch_internal <- function(xml, variable_names, var_specs) {
         }
 
         if (attr != "") {
-            fun <- match.fun(paste0("attr2", type))
+            fun <- match.fun(paste0(".attr2", type))
             fetched <- fun(xml, node, attr)
         } else {
-            fun <- match.fun(paste0("nodes2", type))
+            fun <- match.fun(paste0(".nodes2", type))
             fetched <- fun(xml, node)
         }
 
@@ -83,14 +84,12 @@ fetch_internal <- function(xml, variable_names, var_specs) {
 
 #' @describeIn fetch_internal This should be put in public slot of a class.
 #'
-fetch_external <- function(variable_names = NULL) {
+.fetch_external <- function(variable_names = NULL) {
     # Internal data
     var_specs <- var_specs[Class == class(self)[1]]
 
     if (!is.null(variable_names)) {
-        assert_that(is.character(variable_names),
-                    noNA(variable_names),
-                    not_empty(variable_names))
+        assert_that(.are_strings(variable_names))
     } else {
         variable_names <- var_specs$Variable
     }
@@ -113,7 +112,7 @@ fetch_external <- function(variable_names = NULL) {
         }
     }
 
-    result <- fetch_internal(private$.xml, variable_names, var_specs)
+    result <- .fetch_internal(private$.xml, variable_names, var_specs)
     return(result)
 }
 
@@ -130,11 +129,9 @@ fetch_external <- function(variable_names = NULL) {
 #' @return Nothing, used for side effect.
 #' @keywords internal
 #'
-expand_by <- function(variable_names = NULL, params = NULL) {
+.expand_by <- function(variable_names = NULL, params = NULL) {
     if (!is.null(variable_names)) {
-        assert_that(is.character(variable_names),
-                    noNA(variable_names),
-                    not_empty(variable_names))
+        assert_that(.are_strings(variable_names))
     }
 
     fetched <- self$fetch(variable_names)
