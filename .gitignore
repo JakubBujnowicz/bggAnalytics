@@ -1,6 +1,7 @@
 # My own
 package_building.R
 tars/
+.Rprofile
 
 # History files
 .Rhistory

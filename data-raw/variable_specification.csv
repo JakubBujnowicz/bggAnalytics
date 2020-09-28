@@ -1,57 +1,68 @@
-﻿Class;PrettyName;Variable;Node;Attribute;Type;Scalar;Stats;ValueToNA
-bggCollection;ID;objectid;NULL;;number;TRUE;FALSE;
-bggCollection;Name;name;name;;text;TRUE;FALSE;
-bggCollection;Type;type;;subtype;text;TRUE;FALSE;
-bggCollection;Year;yearpublished;yearpublished;;number;TRUE;FALSE;
-bggCollection;Rating;rating;stats/rating;value;number;TRUE;TRUE;
-bggCollection;TimesPlayed;numplays;numplays;;number;TRUE;FALSE;
-bggCollection;Rank;rank;stats/rating/ranks/rank[@name = 'boardgame'];value;number;TRUE;TRUE;
-bggCollection;AvgRating;average;stats/rating/average;value;number;TRUE;TRUE;
-bggCollection;BGGRating;baverage;stats/rating/bayesaverage;value;number;TRUE;TRUE;0
-bggCollection;RatingStdDev;stddev;stats/rating/stddev;value;number;TRUE;TRUE;
-bggCollection;RatingVotes;usersrated;stats/rating/usersrated;value;number;TRUE;TRUE;
-bggCollection;MinPlayers;minplayers;stats;minplayers;number;TRUE;TRUE;
-bggCollection;MaxPlayers;maxplayers;stats;maxplayers;number;TRUE;TRUE;
-bggCollection;Playingtime;playingtime;stats;playingtime;number;TRUE;TRUE;
-bggCollection;MinPlaytime;minplaytime;stats;minplaytime;number;TRUE;TRUE;
-bggCollection;MaxPlaytime;maxplaytime;stats;maxplaytime;number;TRUE;TRUE;
-bggCollection;NumOwned;numowned;stats;numowned;number;TRUE;TRUE;
-bggCollection;Owned;own;status;own;logical;TRUE;FALSE;
-bggCollection;PrevOwned;prevowned;status;prevowned;logical;TRUE;FALSE;
-bggCollection;ForTrade;fortrade;status;fortrade;logical;TRUE;FALSE;
-bggCollection;Want;want;status;want;logical;TRUE;FALSE;
-bggCollection;WantToPlay;wanttoplay;status;wanttoplay;logical;TRUE;FALSE;
-bggCollection;WantToBuy;wanttobuy;status;wanttobuy;logical;TRUE;FALSE;
-bggCollection;Wishlist;wishlist;status;wishlist;logical;TRUE;FALSE;
-bggCollection;Preordered;preordered;status;preordered;logical;TRUE;FALSE;
-bggCollection;ImageURL;image;image;;text;TRUE;FALSE;
-bggCollection;ThumbnailURL;thumbnail;thumbnail;;text;TRUE;FALSE;
-bggGames;ID;objectid;NULL;;number;TRUE;FALSE;
-bggGames;Name;name;name[@type = 'primary'];value;text;TRUE;FALSE;
-bggGames;Type;type;;type;text;TRUE;FALSE;
-bggGames;Year;yearpublished;yearpublished;value;number;TRUE;FALSE;0
-bggGames;Rank;rank;statistics/ratings/ranks/rank[@name = 'boardgame'];value;number;TRUE;TRUE;
-bggGames;BGGRating;baverage;statistics/ratings/bayesaverage;value;number;TRUE;TRUE;0
-bggGames;AvgRating;average;statistics/ratings/average;value;number;TRUE;TRUE;
-bggGames;RatingVotes;usersrated;statistics/ratings/usersrated;value;number;TRUE;TRUE;
-bggGames;RatingStdDev;stddev;statistics/ratings/stddev;value;number;TRUE;TRUE;
-bggGames;Weight;avgweight;statistics/ratings/averageweight;value;number;TRUE;TRUE;0
-bggGames;WeightVotes;weightvotes;statistics/ratings/numweights;value;number;TRUE;TRUE;
-bggGames;MinPlayers;minplayers;minplayers;value;number;TRUE;FALSE;
-bggGames;MaxPlayers;maxplayers;maxplayers;value;number;TRUE;FALSE;
-bggGames;Playingtime;maxplaytime;maxplaytime;value;number;TRUE;FALSE;0
-bggGames;MinPlaytime;playingtime;playingtime;value;number;TRUE;FALSE;0
-bggGames;MaxPlaytime;minplaytime;minplaytime;value;number;TRUE;FALSE;0
-bggGames;MinAge;minage;minage;value;number;TRUE;FALSE;
-bggGames;NumOwned;numowned;statistics/ratings/owned;value;number;TRUE;TRUE;
-bggGames;NumTrading;numtrading;statistics/ratings/trading;value;number;TRUE;TRUE;
-bggGames;NumWanting;numwanting;statistics/ratings/wanting;value;number;TRUE;TRUE;
-bggGames;NumWishing;numwishing;statistics/ratings/wishing;value;number;TRUE;TRUE;
-bggGames;NumComments;numcomments;statistics/ratings/numcomments;value;number;TRUE;TRUE;
-bggGames;ImageURL;image;image;;text;TRUE;FALSE;
-bggGames;ThumbnailURL;thumbnail;thumbnail;;text;TRUE;FALSE;
-bggGames;Description;description;description;;text;TRUE;FALSE;
-bggSearch;ID;objectid;;id;number;TRUE;FALSE;
-bggSearch;Name;name;name;value;text;TRUE;FALSE;
-bggSearch;Type;type;;type;text;TRUE;FALSE;
-bggSearch;Year;yearpublished;yearpublished;value;number;TRUE;FALSE;
+﻿Class;PrettyName;Variable;Node;Attribute;Type;Scalar;Stats;ValueToNA;Compression
+bggCollection;ID;objectid;.;objectid;number;TRUE;FALSE;;
+bggCollection;Name;name;name;;text;TRUE;FALSE;;
+bggCollection;Type;type;.;subtype;text;TRUE;FALSE;;
+bggCollection;Year;yearpublished;yearpublished;;number;TRUE;FALSE;;
+bggCollection;Rating;rating;stats/rating;value;number;TRUE;TRUE;;
+bggCollection;TimesPlayed;numplays;numplays;;number;TRUE;FALSE;;
+bggCollection;Rank;rank;stats/rating/ranks/rank[@name = 'boardgame'];value;number;TRUE;TRUE;;
+bggCollection;AvgRating;average;stats/rating/average;value;number;TRUE;TRUE;;
+bggCollection;BGGRating;baverage;stats/rating/bayesaverage;value;number;TRUE;TRUE;0;
+bggCollection;RatingStdDev;stddev;stats/rating/stddev;value;number;TRUE;TRUE;;
+bggCollection;RatingVotes;usersrated;stats/rating/usersrated;value;number;TRUE;TRUE;;
+bggCollection;MinPlayers;minplayers;stats;minplayers;number;TRUE;TRUE;;
+bggCollection;MaxPlayers;maxplayers;stats;maxplayers;number;TRUE;TRUE;;
+bggCollection;Playingtime;playingtime;stats;playingtime;number;TRUE;TRUE;;
+bggCollection;MinPlaytime;minplaytime;stats;minplaytime;number;TRUE;TRUE;;
+bggCollection;MaxPlaytime;maxplaytime;stats;maxplaytime;number;TRUE;TRUE;;
+bggCollection;NumOwned;numowned;stats;numowned;number;TRUE;TRUE;;
+bggCollection;Owned;own;status;own;logical;TRUE;FALSE;;
+bggCollection;Preordered;preordered;status;preordered;logical;TRUE;FALSE;;
+bggCollection;PrevOwned;prevowned;status;prevowned;logical;TRUE;FALSE;;
+bggCollection;ForTrade;fortrade;status;fortrade;logical;TRUE;FALSE;;
+bggCollection;Want;want;status;want;logical;TRUE;FALSE;;
+bggCollection;WantToPlay;wanttoplay;status;wanttoplay;logical;TRUE;FALSE;;
+bggCollection;WantToBuy;wanttobuy;status;wanttobuy;logical;TRUE;FALSE;;
+bggCollection;Wishlist;wishlist;status;wishlist;logical;TRUE;FALSE;;
+bggCollection;WishlistPriority;wishlistpriority;status;wishlistpriority;number;TRUE;FALSE;;
+bggCollection;ImageURL;image;image;;text;TRUE;FALSE;;
+bggCollection;ThumbnailURL;thumbnail;thumbnail;;text;TRUE;FALSE;;
+bggGames;ID;objectid;.;id;number;TRUE;FALSE;;
+bggGames;Name;name;name[@type = 'primary'];value;text;TRUE;FALSE;;
+bggGames;Type;type;.;type;text;TRUE;FALSE;;
+bggGames;Year;yearpublished;yearpublished;value;number;TRUE;FALSE;0;
+bggGames;Rank;rank;statistics/ratings/ranks/rank[@name = 'boardgame'];value;number;TRUE;TRUE;;
+bggGames;AvgRating;average;statistics/ratings/average;value;number;TRUE;TRUE;;
+bggGames;BGGRating;baverage;statistics/ratings/bayesaverage;value;number;TRUE;TRUE;0;
+bggGames;RatingStdDev;stddev;statistics/ratings/stddev;value;number;TRUE;TRUE;;
+bggGames;RatingVotes;usersrated;statistics/ratings/usersrated;value;number;TRUE;TRUE;;
+bggGames;Weight;avgweight;statistics/ratings/averageweight;value;number;TRUE;TRUE;0;
+bggGames;WeightVotes;weightvotes;statistics/ratings/numweights;value;number;TRUE;TRUE;;
+bggGames;MinPlayers;minplayers;minplayers;value;number;TRUE;FALSE;;
+bggGames;MaxPlayers;maxplayers;maxplayers;value;number;TRUE;FALSE;;
+bggGames;Playingtime;playingtime;playingtime;value;number;TRUE;FALSE;0;
+bggGames;MinPlaytime;minplaytime;minplaytime;value;number;TRUE;FALSE;0;
+bggGames;MaxPlaytime;maxplaytime;maxplaytime;value;number;TRUE;FALSE;0;
+bggGames;MinAge;minage;minage;value;number;TRUE;FALSE;;
+bggGames;NumOwned;numowned;statistics/ratings/owned;value;number;TRUE;TRUE;;
+bggGames;NumTrading;numtrading;statistics/ratings/trading;value;number;TRUE;TRUE;;
+bggGames;NumWanting;numwanting;statistics/ratings/wanting;value;number;TRUE;TRUE;;
+bggGames;NumWishing;numwishing;statistics/ratings/wishing;value;number;TRUE;TRUE;;
+bggGames;NumComments;numcomments;statistics/ratings/numcomments;value;number;TRUE;TRUE;;
+bggGames;ImageURL;image;image;;text;TRUE;FALSE;;
+bggGames;ThumbnailURL;thumbnail;thumbnail;;text;TRUE;FALSE;;
+bggGames;Description;description;description;;text;TRUE;FALSE;;
+bggGames;Designers;designers;link[@type = 'boardgamedesigner'];value;text;FALSE;FALSE;;toString
+bggGames;DesignersID;designersid;link[@type = 'boardgamedesigner'];id;number;FALSE;FALSE;;toString
+bggGames;Categories;category;link[@type = 'boardgamecategory'];value;text;FALSE;FALSE;;toString
+bggGames;CategoriesID;categoryid;link[@type = 'boardgamecategory'];id;number;FALSE;FALSE;;toString
+bggGames;Mechanics;mechanics;link[@type = 'boardgamemechanic'];value;text;FALSE;FALSE;;toString
+bggGames;MechanicsID;mechanicsid;link[@type = 'boardgamemechanic'];id;number;FALSE;FALSE;;toString
+bggGames;Publishers;publishers;link[@type = 'boardgamepublisher'];value;text;FALSE;FALSE;;toString
+bggGames;PublishersID;publishersid;link[@type = 'boardgamepublisher'];id;number;FALSE;FALSE;;toString
+bggGames;Expansions;expansions;link[@type = 'boardgameexpansion'];value;text;FALSE;FALSE;;toString
+bggGames;ExpansionsID;expansionsid;link[@type = 'boardgameexpansion'];id;number;FALSE;FALSE;;toString
+bggSearch;ID;objectid;.;id;number;TRUE;FALSE;;
+bggSearch;Name;name;name;value;text;TRUE;FALSE;;
+bggSearch;Type;type;.;type;text;TRUE;FALSE;;
+bggSearch;Year;yearpublished;yearpublished;value;number;TRUE;FALSE;;

@@ -52,55 +52,89 @@
 NULL
 
 #' @rdname extraction_functions
-.nodes2text <- function(xml, xpath)
+.nodes2text <- function(xml, xpath, scalar = TRUE)
 {
-    nodes <- html_node(xml, xpath = xpath)
-    values <- html_text(nodes, trim = TRUE)
+    if (scalar) {
+        nodes <- html_node(xml, xpath = xpath)
+        values <- html_text(nodes, trim = TRUE)
+    } else {
+        nodes <- lapply(xml, html_nodes, xpath = xpath)
+        values <- lapply(nodes, html_text, trim = TRUE)
+    }
 
     return (values)
 }
 
 #' @rdname extraction_functions
-.nodes2number <- function(xml, xpath)
+.nodes2number <- function(xml, xpath, scalar = TRUE)
 {
-    nodes <- html_node(xml, xpath = xpath)
-    values <- suppressWarnings(xml_double(nodes))
+    if (scalar) {
+        nodes <- html_node(xml, xpath = xpath)
+        values <- suppressWarnings(xml_double(nodes))
+    } else {
+        nodes <- lapply(xml, html_nodes, xpath = xpath)
+        values <- suppressWarnings(lapply(nodes, xml_double))
+    }
 
     return (values)
 }
 
 #' @rdname extraction_functions
-.nodes2logical <- function(xml, xpath)
+.nodes2logical <- function(xml, xpath, scalar = TRUE)
 {
-    values <- .nodes2number(xml, xpath = xpath)
-    values <- as.logical(values)
+    if (scalar) {
+        values <- .nodes2number(xml, xpath = xpath, scalar = scalar)
+        values <- as.logical(values)
+    } else {
+        values <- .nodes2number(xml, xpath = xpath, scalar = scalar)
+        values <- lapply(values, as.logical)
+    }
 
     return (values)
 }
 
 #' @rdname extraction_functions
-.attr2text <- function(xml, xpath, attr)
+.attr2text <- function(xml, xpath, attr, scalar = TRUE)
 {
-    nodes <- html_node(xml, xpath = xpath)
-    values <- xml_attr(nodes, attr = attr)
+    if (scalar) {
+        nodes <- html_node(xml, xpath = xpath)
+        values <- xml_attr(nodes, attr = attr)
+    } else {
+        nodes <- lapply(xml, html_nodes, xpath = xpath)
+        values <- lapply(nodes, xml_attr, attr = attr)
+    }
 
     return(values)
 }
 
 #' @rdname extraction_functions
-.attr2number <- function(xml, xpath, attr)
+.attr2number <- function(xml, xpath, attr, scalar = TRUE)
 {
-    values <- .attr2text(xml = xml, xpath = xpath, attr = attr)
-    values <- suppressWarnings(as.numeric(values))
+    if (scalar) {
+        values <- .attr2text(xml = xml, xpath = xpath, attr = attr,
+                             scalar = scalar)
+        values <- suppressWarnings(as.numeric(values))
+    } else {
+        values <- .attr2text(xml = xml, xpath = xpath, attr = attr,
+                             scalar = scalar)
+        values <- suppressWarnings(lapply(values, as.numeric))
+    }
 
     return(values)
 }
 
 #' @rdname extraction_functions
-.attr2logical <- function(xml, xpath, attr)
+.attr2logical <- function(xml, xpath, attr, scalar = TRUE)
 {
-    values <- .attr2number(xml = xml, xpath = xpath, attr = attr)
-    values <- as.logical(values)
+    if (scalar) {
+        values <- .attr2number(xml = xml, xpath = xpath, attr = attr,
+                               scalar = scalar)
+        values <- as.logical(values)
+    } else {
+        values <- .attr2number(xml = xml, xpath = xpath, attr = attr,
+                               scalar = scalar)
+        values <- lapply(values, as.logical)
+    }
 
     return(values)
 }

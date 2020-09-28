@@ -1,7 +1,7 @@
 load_all()
 
 cl <- bggCollection$new("Beo_", params = list(pretty_names = FALSE))
-gm <- bggGames$new(ids = cl$ids, params = list(pretty_names = FALSE))
+gm <- bggGames$new(ids = cl$ids, params = list(pretty_names = TRUE))
 sr <- bggSearch$new(query = "Terraforming Mars")
 
 cl_fetch <- cl$fetch()
@@ -23,13 +23,13 @@ sr$expand()
 
 cdata <- copy(cl$data)
 gdata <- copy(gm$data)
-
+sdata <- copy(sr$data)
 
 # Common cols
 cols <- intersect(names(cdata), names(gdata))
 all.equal(cdata[, ..cols], gdata[, ..cols])
 
-
+gm$fetch("designers", compress = TRUE)
 
 # Full data
 fdata <- bgg_merge(cdata, gdata)

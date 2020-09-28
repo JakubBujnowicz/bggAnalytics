@@ -108,12 +108,16 @@ NULL
 #' @describeIn fetches Internal implementation of variable extraction
 #'   (fetching).
 #'
-.fetch_internal <- function(xml, variable_names, var_specs)
+.fetch_internal <- function(xml, variable_names, var_specs,
+                            compress = FALSE)
 {
+    # Assertions
     assert_that(.is_nodeset(xml))
     assert_that(.are_strings(variable_names))
     assert_that(is.data.table(var_specs))
+    assert_that(.is_boolean(compress))
 
+    # Loop for every variable --------------------------------------------------
     result <- list()
     for (var in variable_names) {
         specs <- var_specs[Variable == var]
@@ -123,28 +127,32 @@ NULL
         type <- specs$Type
         scalar <- specs$Scalar
         val2na <- specs$ValueToNA
+        compression <- specs$Compression
 
+        # Skip - nothing to fetch
         if (node == "NULL") {
             next
         }
 
-        if (attr != "" && node != "") {
+        # Extract --------------------------------------------------------------
+        if (attr != "") {
             fun <- match.fun(paste0(".attr2", type))
-            fetched <- fun(xml, node, attr)
-        } else if (attr != "" && node == "") {
-            fetched <- lapply(xml, xml_attr, attr = attr)
+            fetched <- fun(xml = xml, xpath = node, attr = attr,
+                           scalar = scalar)
         } else {
             fun <- match.fun(paste0(".nodes2", type))
-            fetched <- fun(xml, node)
+            fetched <- fun(xml = xml, xpath = node, scalar = scalar)
         }
 
-        if (scalar) {
-            emptys <- sapply(fetched, length) == 0
-            fetched[emptys] <- NA
-            fetched <- unlist(fetched)
+        # Replace some values with NAs -----------------------------------------
+        if (!is.na(val2na)) {
+            fetched[fetched == val2na] <- NA
+        }
 
-            if (!is.null(val2na)) {
-                fetched[fetched == val2na] <- NA
+        # Compression ----------------------------------------------------------
+        if (compress) {
+            if (compression == "toString") {
+                fetched <- sapply(fetched, toString)
             }
         }
 
@@ -161,7 +169,7 @@ NULL
 
 #' @describeIn fetches This should be put in public slot of a class.
 #'
-.fetch_external <- function(variable_names = NULL)
+.fetch_external <- function(variable_names = NULL, ...)
 {
     # Internal data
     obj_class <- class(self)[1]
@@ -192,7 +200,8 @@ NULL
 
     result <- .fetch_internal(xml = private$.xml,
                               variable_names = variable_names,
-                              var_specs = specs)
+                              var_specs = specs,
+                              ...)
     return(result)
 }
 
@@ -213,6 +222,14 @@ NULL
 {
     if (!is.null(variable_names)) {
         assert_that(.are_strings(variable_names))
+
+        existing <- intersect(variable_names, names(private$.data))
+        if (length(existing) > 0) {
+            variable_names <- setdiff(variable_names, existing)
+            message("following variables already exist in the 'data' slot ",
+                    "and will be omitted:\n",
+                    .to_string(existing))
+        }
     } else {
         specs <- private$.get_varspecs()
         variable_names <- setdiff(specs$Variable, names(private$.data))
@@ -224,12 +241,12 @@ NULL
     }
 
     if (length(variable_names) != 0) {
-        fetched <- self$fetch(variable_names)
+        fetched <- self$fetch(variable_names, compress = TRUE)
         var_names <- names(fetched)
         for (i in seq_along(fetched)) {
             set(private$.data, j = var_names[i], value = fetched[[i]])
         }
     } else {
-        message("the 'data' slot contains all possible variables")
+        message("there was nothing to add to the 'data' slot")
     }
 }
