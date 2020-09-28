@@ -16,7 +16,8 @@ NULL
 
 #' @rdname assertions
 #'
-.is_number <- function(x, lb = NULL, ub = NULL) {
+.is_number <- function(x, lb = NULL, ub = NULL)
+{
     result <- is.numeric(x) && length(x) == 1 && !is.na(x)
 
     if (result && !is.null(lb)) {
@@ -31,37 +32,43 @@ NULL
 
 #' @rdname assertions
 #'
-.are_numbers <- function(x) {
+.are_numbers <- function(x)
+{
     is.numeric(x) && length(x) > 0 && !anyNA(x)
 }
 
 #' @rdname assertions
 #'
-.is_integer <- function(x, lb = NULL, ub = NULL) {
+.is_integer <- function(x, lb = NULL, ub = NULL)
+{
     .is_number(x, lb = lb, ub = ub) && trunc(x) == x
 }
 
 #' @rdname assertions
 #'
-.are_integers <- function(x) {
+.are_integers <- function(x)
+{
     .are_numbers(x) && all(trunc(x) == x)
 }
 
 #' @rdname assertions
 #'
-.is_positive_integer <- function(x, lb = NULL, ub = NULL) {
+.is_positive_integer <- function(x, lb = NULL, ub = NULL)
+{
     .is_integer(x, lb = lb, ub = ub) && x > 0
 }
 
 #' @rdname assertions
 #'
-.are_positive_integers <- function(x) {
+.are_positive_integers <- function(x)
+{
     .are_integers(x) && all(x > 0)
 }
 
 #' @rdname assertions
 #'
-.is_string <- function(x, allowed = NULL) {
+.is_string <- function(x, allowed = NULL)
+{
     result <- is.character(x) && length(x) == 1 & !is.na(x)
 
     if (result && !is.null(allowed)) {
@@ -72,7 +79,8 @@ NULL
 
 #' @rdname assertions
 #'
-.are_strings <- function(x, allowed = NULL) {
+.are_strings <- function(x, allowed = NULL)
+{
     result <- is.character(x) && length(x) > 0 & !anyNA(x)
 
     if (result && !is.null(allowed)) {
@@ -83,19 +91,22 @@ NULL
 
 #' @rdname assertions
 #'
-.is_boolean <- function(x) {
+.is_boolean <- function(x)
+{
     is.logical(x) && length(x) == 1 & !is.na(x)
 }
 
 #' @rdname assertions
 #'
-.are_booleans <- function(x) {
+.are_booleans <- function(x)
+{
     is.logical(x) && length(x) > 0 & !anyNA(x)
 }
 
 #' @rdname assertions
 #'
-.is_nodeset <- function(x) {
+.is_nodeset <- function(x)
+{
     inherits(x, what = "xml_nodeset")
 }
 
@@ -115,7 +126,8 @@ NULL
 
 #' @rdname assertion_messages
 #'
-.normal_message <- function(message) {
+.normal_message <- function(message)
+{
     result <- function(call, env) {
         string <- paste0("'", deparse(call$x), "'", message)
         return(string)
@@ -126,21 +138,22 @@ NULL
 
 #' @rdname assertion_messages
 #'
-.bounds_message <- function(message) {
+.bounds_message <- function(message)
+{
     result <- function(call, env) {
         string <- paste0("'", deparse(call$x), "'", message)
 
-        if (!is.null(call$lb) && !is.null(call$ub)) {
-            string <- paste0(string, " within the [", eval(call$lb),
-                             ", ", eval(call$ub), "] interval")
+        lb <- eval(call$lb, envir = env)
+        ub <- eval(call$ub, envir = env)
+
+        if (!is.null(lb) && !is.null(ub)) {
+            string <- paste0(string, " within the [", lb, ", ", ub, "] interval")
         } else {
-            if (!is.null(call$lb)) {
-                string <- paste0(string, " larger than or equal to ",
-                                 eval(call$lb))
+            if (!is.null(lb)) {
+                string <- paste0(string, " larger than or equal to ", lb)
             }
-            if (!is.null(call$ub)) {
-                string <- paste0(string, " smaller than or equal to ",
-                                 eval(call$ub))
+            if (!is.null(ub)) {
+                string <- paste0(string, " smaller than or equal to ", ub)
             }
         }
 
@@ -170,27 +183,33 @@ on_failure(.is_positive_integer) <- .bounds_message(
 on_failure(.are_positive_integers) <- .normal_message(
     " is not a non-empty vector of positive integers without NAs")
 
-on_failure(.is_string) <- function(call, env) {
-    if (is.null(call$allowed)) {
+on_failure(.is_string) <- function(call, env)
+{
+    allowed <- eval(call$allowed, envir = env)
+
+    if (is.null(allowed)) {
         string <- paste0("'", deparse(call$x), "'",
                          " is not a single string (not NA)")
     } else {
         string <- paste0("'", deparse(call$x), "'",
                          " is not one of the following strings: (",
-                         .to_string(eval(call$allowed)), ")")
+                         .to_string(allowed), ")")
     }
 
     return(string)
 }
 
-on_failure(.are_strings) <- function(call, env) {
+on_failure(.are_strings) <- function(call, env)
+{
+    allowed <- eval(call$allowed, envir = env)
+
     if (is.null(call$allowed)) {
         string <- paste0("'", deparse(call$x), "'",
                          " is not non-empty character vector without NAs")
     } else {
         string <- paste0("'", deparse(call$x), "'",
                          " is not a character vector made of the following strings: (",
-                         .to_string(eval(call$allowed)), ")")
+                         .to_string(allowed), ")")
     }
 
     return(string)

@@ -58,35 +58,36 @@ function(username = NULL, params = NULL) {
         warning("this collection contains no games, perhaps the username is wrong?")
     }
 
-    # Getting bggGames extension -----------------------------------------------
-    if (params$extended) {
-        private$.bggGames <- bggGames$new(ids = ids)
-    }
-
+    # Setting private variables ------------------------------------------------
     private$.username <- username
     private$.ids <- ids
     private$.xml <- xml
     private$.api_url <- api_url
     private$.params <- params
-    private$.data <- data.table(objectid = ids, key = "objectid")
+    private$.data <- data.table(objectid = ids)
+    setkey(private$.data, objectid)
+
+    if (params$pretty_names) {
+        self$switch_namestyle("pretty")
+    }
 })
 
 
 # Print ########################################################################
 bggCollection$set("public", "print",
-function() {
+function()
+{
     n_show <- getOption(".bggAnalytics.print")
+
+    nc <- ncol(private$.data)
+    nr <- nrow(private$.data)
 
     string <- paste0(
         "---- bggCollection ----",
-        "\nUser collection data API.\n",
-        "\n* Username: ", .compress(private$.username,
-                                    n_show = n_show),
-        "\n* IDs: ", .compress(private$.ids,
-                              n_show = n_show),
-        "\n* Variables: ", .compress(names(private$.data),
-                                    n_show = n_show))
-
+        "\nUser collection API of the following user: '", private$.username,
+        "'.\nThe data contains ", nr, " ", .plural("object", nr), " and ",
+        nc, " ", .plural("variable", nc), ".\n\n")
     cat(string)
+    print(private$.data, nrows = n_show, trunc.cols = TRUE)
 })
 

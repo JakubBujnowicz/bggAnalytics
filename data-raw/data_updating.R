@@ -4,12 +4,20 @@ devtools::load_all()
 param_specs <- list()
 
 param_specs$bggGames <- list(
+    pretty_names = list(
+        validator = ".is_boolean",
+        default = FALSE,
+        url_type = "null"),
     stats = list(
         validator = ".is_boolean",
         default = TRUE,
         url_type = "flag")
 )
 param_specs$bggSearch <- list(
+    pretty_names = list(
+        validator = ".is_boolean",
+        default = FALSE,
+        url_type = "null"),
     type = list(
         validator = ".are_strings",
         default = NULL,
@@ -23,11 +31,10 @@ param_specs$bggSearch <- list(
     )
 )
 param_specs$bggCollection <- list(
-    extension = list(
+    pretty_names = list(
         validator = ".is_boolean",
         default = FALSE,
-        url_type = "null"
-    ),
+        url_type = "null"),
     stats = list(
         validator = ".is_boolean",
         default = TRUE,
@@ -86,7 +93,6 @@ param_specs$bggCollection <- list(
 
 # Uploading --------------------------------------------------------------------
 var_specs <- fread("data-raw/variable_specification.csv")
-setkey(var_specs, Variable)
 
 # param_specs <- fread("data-raw/class_params.csv")
 # setkey(param_specs, Param)

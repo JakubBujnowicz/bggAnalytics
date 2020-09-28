@@ -27,9 +27,9 @@
 
 .are_positive_integers(x)
 
-.is_string(x)
+.is_string(x, allowed = NULL)
 
-.are_strings(x)
+.are_strings(x, allowed = NULL)
 
 .is_boolean(x)
 

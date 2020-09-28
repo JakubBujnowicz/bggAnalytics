@@ -4,17 +4,23 @@
 \alias{extraction_functions}
 \alias{.nodes2text}
 \alias{.nodes2number}
+\alias{.nodes2logical}
 \alias{.attr2text}
 \alias{.attr2number}
+\alias{.attr2logical}
 \title{Extraction functions}
 \usage{
 .nodes2text(xml, xpath)
 
 .nodes2number(xml, xpath)
 
+.nodes2logical(xml, xpath)
+
 .attr2text(xml, xpath, attr)
 
 .attr2number(xml, xpath, attr)
+
+.attr2logical(xml, xpath, attr)
 }
 \arguments{
 \item{xml}{XML item list.}

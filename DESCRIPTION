@@ -10,9 +10,9 @@ License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
-Imports: assertthat, data.table, magrittr, pryr, R6, rvest, utils, xml2
+Imports: assertthat, data.table, magrittr, pryr, rvest, stringr, utils, xml2
 Depends: 
-    R (>= 2.10)
+    R (>= 4.0.0), R6
 Collate: 
     'assertions.R'
     'class_utils.R'
@@ -20,7 +20,8 @@ Collate:
     'bggCollection.R'
     'bggGames.R'
     'bggSearch.R'
+    'bgg_tools.R'
     'html_utils.R'
-    'params_tools.R'
+    'params_utils.R'
     'utils.R'
     'zzz.R'

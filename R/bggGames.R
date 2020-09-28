@@ -44,26 +44,34 @@ function(ids, params = NULL) {
                 toString(missing), call. = FALSE)
     }
 
+    # Setting private variables ------------------------------------------------
     private$.ids <- ids
     private$.xml <- xml
     private$.api_url <- api_url
     private$.params <- params
-    private$.data <- data.table(objectid = ids, key = "objectid")
+    private$.data <- data.table(objectid = ids)
+    setkey(private$.data, objectid)
+
+    if (params$pretty_names) {
+        self$switch_namestyle("pretty")
+    }
 })
 
 
 # Print ########################################################################
 bggGames$set("public", "print",
-function() {
+function()
+{
     n_show <- getOption(".bggAnalytics.print")
+
+    nc <- ncol(private$.data)
+    nr <- nrow(private$.data)
 
     string <- paste0(
         "---- bggGames ----",
         "\nGames data API.\n",
-        "\n* IDs: ", .compress(private$.ids,
-                               n_show = n_show),
-        "\n* Variables: ", .compress(names(private$.data),
-                                     n_show = n_show))
-
+        "The data contains ", nr, " ", .plural("object", nr), " and ",
+        nc, " ", .plural("variable", nc), ".\n\n")
     cat(string)
+    print(private$.data, nrows = n_show, trunc.cols = TRUE)
 })

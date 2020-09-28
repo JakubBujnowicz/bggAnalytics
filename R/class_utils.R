@@ -1,19 +1,21 @@
 #' Getter for private slots of R6 objects
 #'
-#' This function returns another function which is able to extract private slots.
-#' It decreases redundant code and makes class definitions easier to read.
+#' This function returns another function which is able to extract private
+#' slots. It decreases redundant code and makes class definitions easier to
+#' read.
 #'
 #' @param slotname Single string, name of private slot.
 #'
 #' @return Function that extracts the private `slotname` slot from a R6 object.
 #' @keywords internal
 #'
-.private_getter <- function(slotname) {
+.private_getter <- function(slotname)
+{
     # Assertion
     assert_that(.is_string(slotname))
 
     # Closure
-    result <- function(value) {
+    result_fun <- function(value) {
         if (missing(value)) {
             return(private[[paste0(".", slotname)]])
         } else {
@@ -22,10 +24,66 @@
         }
     }
 
-    result <- unenclose(result)
-    return(result)
+    result_fun <- unenclose(result_fun)
+    return(result_fun)
 }
 
+
+#' Switch the style of object's data colnames
+#'
+#' This change between \code{PrettyName} and \code{Variable} names for variables
+#' in \code{bggAPI} objects.
+#'
+#' @param to a single string, style of names to switch to.
+#'
+#' @return Nothing, used for it's side effect.
+#' @keywords internal
+#'
+.switch_names <- function(to)
+{
+    assert_that(.is_string(to, allowed = c("pretty", "normal")))
+
+    specs <- var_specs[Class == class(self)[1]]
+    current <- names(private$.data)
+
+    if (to == "pretty") {
+        new <- specs$PrettyName
+        old <- specs$Variable
+
+        private$.params$pretty_names <- TRUE
+    } else if (to == "normal") {
+        new <- specs$Variable
+        old <- specs$PrettyName
+
+        private$.params$pretty_names <- FALSE
+    }
+
+    replacement <- new[match(current, old)]
+    setnames(private$.data, old = current, new = replacement)
+}
+
+
+#' Get variable specification table for a given class
+#'
+#' This can be used within \code{bggAPI} methods to extract rows for a proper
+#' class. This also handles the 'pretty names'.
+#'
+#' @return The data.table with variable specifications
+#' @keywords internal
+#'
+.get_varspecs <- function()
+{
+    obj_cl <- class(self)[1]
+
+    specs <- var_specs[Class == obj_cl]
+
+    if (private$.params$pretty_names) {
+        specs <- specs[, -"Variable"]
+        setnames(specs, old = "PrettyName", new = "Variable")
+    }
+
+    return(specs)
+}
 
 
 # Fetching #####################################################################
@@ -39,31 +97,42 @@
 #' @param variable_names Character vector of variable names to extract.
 #' @param var_specs Data.table with parameter specification.
 #'
-#' @return List of variables. Variables marked as 'scalar' in param specification
-#'         will be unlisted.
+#' @name fetches
+#'
+#' @return List of variables. Variables marked as 'scalar' in param
+#'   specification will be unlisted.
 #' @keywords internal
 #'
-.fetch_internal <- function(xml, variable_names, var_specs) {
+NULL
+
+#' @describeIn fetches Internal implementation of variable extraction
+#'   (fetching).
+#'
+.fetch_internal <- function(xml, variable_names, var_specs)
+{
     assert_that(.is_nodeset(xml))
     assert_that(.are_strings(variable_names))
     assert_that(is.data.table(var_specs))
 
     result <- list()
     for (var in variable_names) {
-        var_data <- var_specs[.(var)]
+        specs <- var_specs[Variable == var]
 
-        node <- var_data$Node
-        attr <- var_data$Attribute
-        type <- var_data$Type
-        scalar <- var_data$Scalar
+        node <- specs$Node
+        attr <- specs$Attribute
+        type <- specs$Type
+        scalar <- specs$Scalar
+        val2na <- specs$ValueToNA
 
         if (node == "NULL") {
             next
         }
 
-        if (attr != "") {
+        if (attr != "" && node != "") {
             fun <- match.fun(paste0(".attr2", type))
             fetched <- fun(xml, node, attr)
+        } else if (attr != "" && node == "") {
+            fetched <- lapply(xml, xml_attr, attr = attr)
         } else {
             fun <- match.fun(paste0(".nodes2", type))
             fetched <- fun(xml, node)
@@ -73,46 +142,57 @@
             emptys <- sapply(fetched, length) == 0
             fetched[emptys] <- NA
             fetched <- unlist(fetched)
+
+            if (!is.null(val2na)) {
+                fetched[fetched == val2na] <- NA
+            }
         }
 
-        result[[var_data$Variable]] <- fetched
+        result[[specs$Variable]] <- fetched
     }
 
-    names(result) <- variable_names[var_specs$Node != "NULL"]
+    # Naming
+    res_names <- var_specs[Node != "NULL" & Variable %in% variable_names,
+                           Variable]
+    names(result) <- res_names
+
     return(result)
 }
 
-#' @describeIn fetch_internal This should be put in public slot of a class.
+#' @describeIn fetches This should be put in public slot of a class.
 #'
-.fetch_external <- function(variable_names = NULL) {
+.fetch_external <- function(variable_names = NULL)
+{
     # Internal data
-    var_specs <- var_specs[Class == class(self)[1]]
+    obj_class <- class(self)[1]
+    specs <- private$.get_varspecs()
 
     if (!is.null(variable_names)) {
         assert_that(.are_strings(variable_names))
     } else {
-        variable_names <- var_specs$Variable
+        variable_names <- specs$Variable
     }
 
-    if (!all(variable_names %in% var_specs$Variable)) {
-        unavailable <- setdiff(variable_names, var_specs$Variable)
-        unavailable <- paste0(unavailable, collapse = ", ")
-        stop("following variables are not available for bggCollection objects:\n",
-             unavailable)
+    if (!all(variable_names %in% specs$Variable)) {
+        unavailable <- setdiff(variable_names, specs$Variable)
+        stop("following variables are not available for '", obj_class,
+             "' objects:\n", .to_string(unavailable))
     }
 
-    if (!private$.params$stats) {
-        stats_vars <- var_specs[Stats == TRUE, Variable]
+    stats_param <- private$.params$stats
+    if (!is.null(stats_param) && !stats_param) {
+        stats_vars <- specs[Stats == TRUE, Variable]
         unavailable <- intersect(stats_vars, variable_names)
         if (length(unavailable) > 0) {
-            unavailable <- paste0(unavailable, collapse = ", ")
             stop("following variables are not available without stats module:\n",
-                 unavailable,
+                 .to_string(unavailable),
                  ",\nconsider setting 'stats = TRUE' when creating an object")
         }
     }
 
-    result <- .fetch_internal(private$.xml, variable_names, var_specs)
+    result <- .fetch_internal(xml = private$.xml,
+                              variable_names = variable_names,
+                              var_specs = specs)
     return(result)
 }
 
@@ -120,8 +200,8 @@
 # Expanding ####################################################################
 #' Generalised expand for every class
 #'
-#' It is a universal tool for fetching variables from XMLs and adding them
-#' to \code{data} slot data.table.
+#' It is a universal tool for fetching variables from XMLs and adding them to
+#' \code{data} slot data.table.
 #'
 #' @param variable_names Character vector of variable names.
 #' @param params List of parameters.
@@ -129,14 +209,27 @@
 #' @return Nothing, used for side effect.
 #' @keywords internal
 #'
-.expand_by <- function(variable_names = NULL, params = NULL) {
+.expand_by <- function(variable_names = NULL, params = NULL)
+{
     if (!is.null(variable_names)) {
         assert_that(.are_strings(variable_names))
+    } else {
+        specs <- private$.get_varspecs()
+        variable_names <- setdiff(specs$Variable, names(private$.data))
+
+        if (length(variable_names) > 0) {
+            message("expanding by all the missing variables:\n",
+                    .to_string(variable_names))
+        }
     }
 
-    fetched <- self$fetch(variable_names)
-    var_names <- names(fetched)
-    for (i in seq_along(fetched)) {
-        set(private$.data, j = var_names[i], value = fetched[[i]])
+    if (length(variable_names) != 0) {
+        fetched <- self$fetch(variable_names)
+        var_names <- names(fetched)
+        for (i in seq_along(fetched)) {
+            set(private$.data, j = var_names[i], value = fetched[[i]])
+        }
+    } else {
+        message("the 'data' slot contains all possible variables")
     }
 }

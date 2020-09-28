@@ -5,10 +5,11 @@
 #' @param params NULL or a list with params.
 #' @param class a single string, class name.
 #'
-#' @return
+#' @return List with checked ans assigned parameters.
 #' @keywords internal
 #'
-.process_params <- function(params, class) {
+.process_params <- function(params, class)
+{
     # Assertions
     assert_that(is.null(params) || is.list(params))
     assert_that(.is_string(class))
@@ -40,8 +41,7 @@
 
         # Otherwise
         msg <- gsub("params[[p]]", p, input, fixed = TRUE)
-        msg <- gsub("Error: ", "", msg)
-        stop(msg, call. = FALSE)
+        stop("parameter ", msg, call. = FALSE)
     }
 
     # Validate
@@ -55,7 +55,7 @@
             test <- validate_that(
                 validator(params[[p]],
                           allowed = specs[[p]]$allowed))
-
+            .stop_on_error(test)
 
         } else if (valid_str == ".is_positive_integer") {
             test <- validate_that(
@@ -83,10 +83,11 @@
 #' @param params NULL or a list with params.
 #' @param class a single string
 #'
-#' @return
+#' @return A single string with extended URL.
 #' @keywords internal
 #'
-.extend_url_by_params <- function(url, params, class) {
+.extend_url_by_params <- function(url, params, class)
+{
     # Assertions
     assert_that(.is_string(url))
     assert_that(is.null(params) || is.list(params))

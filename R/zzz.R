@@ -6,9 +6,9 @@
 #' @importFrom pryr unenclose
 #' @import R6
 #' @import rvest
+#' @import stringr
 #' @importFrom utils globalVariables
 #' @import xml2
-#'
 #'
 NULL
 
@@ -16,8 +16,8 @@ NULL
 globalVariables(
     # Due to R6
     c("self", "private",
-      # Due to data.table
-      ".", "Class", "Stats", "Variable"))
+      # Due to data.table and var_specs
+      ".", "Class", "Stats", "Variable", "Node"))
 
 # Options ######################################################################
 # Amount of elements to print

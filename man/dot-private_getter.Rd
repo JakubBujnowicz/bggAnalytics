@@ -13,7 +13,8 @@
 Function that extracts the private `slotname` slot from a R6 object.
 }
 \description{
-This function returns another function which is able to extract private slots.
-It decreases redundant code and makes class definitions easier to read.
+This function returns another function which is able to extract private
+slots. It decreases redundant code and makes class definitions easier to
+read.
 }
 \keyword{internal}
