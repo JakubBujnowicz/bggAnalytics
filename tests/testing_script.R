@@ -1,7 +1,7 @@
 load_all()
 
-cl <- bggCollection$new("Beo_")
-gm <- bggGames$new(ids = cl$ids)
+cl <- bggCollection$new("Beo_", params = list(pretty_names = FALSE))
+gm <- bggGames$new(ids = cl$ids, params = list(pretty_names = FALSE))
 sr <- bggSearch$new(query = "Terraforming Mars")
 
 cl_fetch <- cl$fetch()
@@ -13,9 +13,23 @@ n_games <- length(cl$ids)
 length(gm$ids) == n_games
 
 # Any empty
-sapply(cl_fetch, length) == n_games
-sapply(gm_fetch, length) == n_games
+Filter(function(x) length(x) != n_games, cl_fetch)
+Filter(function(x) length(x) != n_games, gm_fetch)
 
 # Expansion
 cl$expand()
 gm$expand()
+sr$expand()
+
+cdata <- copy(cl$data)
+gdata <- copy(gm$data)
+
+
+# Common cols
+cols <- intersect(names(cdata), names(gdata))
+all.equal(cdata[, ..cols], gdata[, ..cols])
+
+
+
+# Full data
+fdata <- bgg_merge(cdata, gdata)

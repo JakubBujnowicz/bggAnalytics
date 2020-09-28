@@ -7,69 +7,68 @@ bggSearch <- R6Class(
         .ids = numeric()
     ),
     active = list(
-        query = private_getter("query"),
-        ids = private_getter("ids")
+        query = .private_getter("query"),
+        ids = .private_getter("ids")
     )
 )
 
 # Initialize ###################################################################
 bggSearch$set("public", "initialize",
-function(query, type = NULL, exact = FALSE) {
-    assert_that(is.character(query), noNA(query), not_empty(query))
-    assert_that(is.flag(exact), noNA(exact))
-    if (!is.null(type)) {
-        assert_that(is.character(type), noNA(type))
+function(query, params = NULL) {
+    # Assertions
+    assert_that(.are_strings(query))
+    params <- .process_params(params, class = "bggSearch")
 
-        type_str <- paste0(type, collapse = ",")
-        type_str <- paste0("&type=", type)
-    } else {
-        type_str <- ""
-    }
-
+    # Connecting to API --------------------------------------------------------
     query_str <- gsub("[[:space:]]", "%20", query)
     query_str <- paste0(query_str, collapse = "%20")
 
-    api_url <- paste0(bgg_url("api"), "search?query=", query_str, type_str) %>%
-        path_add_flag(exact)
+    api_url <- paste0(.bgg_url("api"), "search?query=", query_str)
+    api_url <- .extend_url_by_params(api_url, params, class = "bggSearch")
 
     xml <- read_html(api_url) %>%
-        xml_expand()
+        .xml_expand()
 
+
+    # Preparing data -----------------------------------------------------------
     ids <- as.numeric(sapply(xml, xml_attr, attr = "id"))
+    uniq <- !duplicated(ids)
+    # uniq <- rep(TRUE, length(ids))
+    data <- data.table(objectid = ids[uniq])
+    setkey(data, objectid)
 
-    var_specs <- var_specs[Class == "bggSearch"]
-    data <- fetch_internal(xml, var_specs$Variable, var_specs)
-    data <- data.table(objectid = ids, as.data.table(data))
-    duplicates <- duplicated(data)
 
+    # Setting private variables ------------------------------------------------
     private$.query <- query
-    private$.ids <- ids[!duplicates]
-    private$.xml <- xml[!duplicates]
     private$.api_url <- api_url
-    private$.data <- data[!duplicates]
-    private$.params <- list(type = type,
-                            exact = exact)
+    private$.ids <- ids[uniq]
+    private$.xml <- xml[uniq]
+    private$.data <- data
+    private$.params <- params
+
+    if (params$pretty_names) {
+        self$switch_namestyle("pretty")
+    }
+
+    self$expand(c("name", "yearpublished"))
 })
 
 
 # Print ########################################################################
 bggSearch$set("public", "print",
-function() {
+function()
+{
     n_show <- getOption(".bggAnalytics.print")
-    n <- nrow(private$.data)
 
-    if (n <= n_show) {
-        result_str <- "Full result table:\n"
-    } else {
-        result_str <- paste0("Showing first ", n_show, " results:\n")
-    }
+    nc <- ncol(private$.data)
+    nr <- nrow(private$.data)
 
     string <- paste0(
         "---- bggSearch ----",
         "\nSearch API with the following query: '",
-            paste0(private$.query, collapse = " "), "'.\n",
-        "Found ", n, " results.\n\n",
-        result_str)
+        paste0(private$.query, collapse = " "), "'.\n",
+        "The data contains ", nr, " ", .plural("object", nr), " and ",
+        nc, " ", .plural("variable", nc), ".\n\n")
     cat(string)
-    print(head(private$.data, n_show))
+    print(private$.data, nrows = n_show, trunc.cols = TRUE)
 })
