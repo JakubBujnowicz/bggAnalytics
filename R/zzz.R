@@ -17,7 +17,8 @@ globalVariables(
     # Due to R6
     c("self", "private",
       # Due to data.table and var_specs
-      ".", "Class", "Stats", "Variable", "Node"))
+      ".", "Class", "Stats", "Variable", "Node",
+      "Compression", "Scalar"))
 
 # Options ######################################################################
 # Amount of elements to print

@@ -12,7 +12,8 @@
 #' @export
 #'
 #' @references
-#' \code{\link{https://boardgamegeek.com/thread/953084/whats-your-h-index}}
+#' \href{https://boardgamegeek.com/thread/953084/whats-your-h-index}{BGG thread
+#' about H-Index}
 #'
 #' @examples
 #' h_index(0)

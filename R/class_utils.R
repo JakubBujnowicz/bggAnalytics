@@ -128,6 +128,7 @@ NULL
         scalar <- specs$Scalar
         val2na <- specs$ValueToNA
         compression <- specs$Compression
+        custom <- specs$Custom
 
         # Skip - nothing to fetch
         if (node == "NULL") {
@@ -135,7 +136,10 @@ NULL
         }
 
         # Extract --------------------------------------------------------------
-        if (attr != "") {
+        if (custom) {
+            fun <- match.fun(paste0(".fetch_", var))
+            fetched <- fun(xml)
+        } else if (attr != "") {
             fun <- match.fun(paste0(".attr2", type))
             fetched <- fun(xml = xml, xpath = node, attr = attr,
                            scalar = scalar)
@@ -169,7 +173,7 @@ NULL
 
 #' @describeIn fetches This should be put in public slot of a class.
 #'
-.fetch_external <- function(variable_names = NULL, ...)
+.fetch_external <- function(variable_names = NULL, compress = FALSE)
 {
     # Internal data
     obj_class <- class(self)[1]
@@ -201,7 +205,7 @@ NULL
     result <- .fetch_internal(xml = private$.xml,
                               variable_names = variable_names,
                               var_specs = specs,
-                              ...)
+                              compress = compress)
     return(result)
 }
 
@@ -220,32 +224,48 @@ NULL
 #'
 .expand_by <- function(variable_names = NULL, params = NULL)
 {
+    specs <- private$.get_varspecs()
+
     if (!is.null(variable_names)) {
         assert_that(.are_strings(variable_names))
 
+        # Already present and omitted
         existing <- intersect(variable_names, names(private$.data))
         if (length(existing) > 0) {
             variable_names <- setdiff(variable_names, existing)
-            message("following variables already exist in the 'data' slot ",
-                    "and will be omitted:\n",
-                    .to_string(existing))
+            msg <- paste0("following variables already exist in the 'data' slot ",
+                          "and will be omitted:\n",
+                          .to_string(existing))
         }
     } else {
-        specs <- private$.get_varspecs()
-        variable_names <- setdiff(specs$Variable, names(private$.data))
+        available <- specs[Scalar == TRUE | Compression != "NULL", Variable]
+        variable_names <- setdiff(available, names(private$.data))
 
+        # Which are added automatically
         if (length(variable_names) > 0) {
-            message("expanding by all the missing variables:\n",
-                    .to_string(variable_names))
+            msg <- paste0("expanding by all the available variables:\n",
+                          .to_string(variable_names))
         }
     }
 
+    # Non-scalar and can't be compressed
+    non_scalars <- specs[Scalar == FALSE & Compression == "NULL", Variable]
+    nonsc_vars <- intersect(non_scalars, variable_names)
+    if (length(nonsc_vars) > 0) {
+        stop("following variables are non-scalar and cannot be used within ",
+             "the 'expand' method (use 'fetch' instead):\n",
+             .to_string(nonsc_vars))
+    }
+
+    # Expanding
     if (length(variable_names) != 0) {
         fetched <- self$fetch(variable_names, compress = TRUE)
         var_names <- names(fetched)
         for (i in seq_along(fetched)) {
             set(private$.data, j = var_names[i], value = fetched[[i]])
         }
+
+        message(msg)
     } else {
         message("there was nothing to add to the 'data' slot")
     }

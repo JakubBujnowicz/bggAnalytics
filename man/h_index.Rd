@@ -27,5 +27,6 @@ h_index(c(2, 3, 5, 100))
 
 }
 \references{
-\code{\link{https://boardgamegeek.com/thread/953084/whats-your-h-index}}
+\href{https://boardgamegeek.com/thread/953084/whats-your-h-index}{BGG Thread
+About H-Index}
 }
