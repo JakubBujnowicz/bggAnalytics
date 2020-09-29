@@ -34,3 +34,12 @@ bgg_topgames <- function(n = 100)
     result <- unlist(result)[seq_len(n)]
     return(result)
 }
+
+bgg_gameurl <- function(ids)
+{
+    # Assertions
+    assert_that(.are_positive_integers(ids))
+
+    result <- paste0(.bgg_url("boardgame"), ids)
+    return (result)
+}

@@ -10,17 +10,17 @@
 \alias{.attr2logical}
 \title{Extraction functions}
 \usage{
-.nodes2text(xml, xpath)
+.nodes2text(xml, xpath, scalar = TRUE)
 
-.nodes2number(xml, xpath)
+.nodes2number(xml, xpath, scalar = TRUE)
 
-.nodes2logical(xml, xpath)
+.nodes2logical(xml, xpath, scalar = TRUE)
 
-.attr2text(xml, xpath, attr)
+.attr2text(xml, xpath, attr, scalar = TRUE)
 
-.attr2number(xml, xpath, attr)
+.attr2number(xml, xpath, attr, scalar = TRUE)
 
-.attr2logical(xml, xpath, attr)
+.attr2logical(xml, xpath, attr, scalar = TRUE)
 }
 \arguments{
 \item{xml}{XML item list.}

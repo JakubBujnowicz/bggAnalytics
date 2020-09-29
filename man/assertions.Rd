@@ -17,15 +17,15 @@
 \usage{
 .is_number(x, lb = NULL, ub = NULL)
 
-.are_numbers(x)
+.are_numbers(x, lb = NULL, ub = NULL)
 
 .is_integer(x, lb = NULL, ub = NULL)
 
-.are_integers(x)
+.are_integers(x, lb = NULL, ub = NULL)
 
 .is_positive_integer(x, lb = NULL, ub = NULL)
 
-.are_positive_integers(x)
+.are_positive_integers(x, lb = NULL, ub = NULL)
 
 .is_string(x, allowed = NULL)
 

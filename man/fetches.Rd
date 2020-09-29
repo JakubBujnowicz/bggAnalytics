@@ -6,9 +6,9 @@
 \alias{.fetch_external}
 \title{Generalised fetch for every class}
 \usage{
-.fetch_internal(xml, variable_names, var_specs)
+.fetch_internal(xml, variable_names, var_specs, compress = FALSE)
 
-.fetch_external(variable_names = NULL)
+.fetch_external(variable_names = NULL, ...)
 }
 \arguments{
 \item{xml}{XML nodeset.}

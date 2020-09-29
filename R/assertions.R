@@ -32,9 +32,18 @@ NULL
 
 #' @rdname assertions
 #'
-.are_numbers <- function(x)
+.are_numbers <- function(x, lb = NULL, ub = NULL)
 {
-    is.numeric(x) && length(x) > 0 && !anyNA(x)
+    result <- is.numeric(x) && length(x) > 0 && !anyNA(x)
+
+    if (result && !is.null(lb)) {
+        result <- all(x >= lb)
+    }
+    if (result && !is.null(ub)) {
+        result <- all(x <= ub)
+    }
+
+    return (result)
 }
 
 #' @rdname assertions
@@ -46,9 +55,9 @@ NULL
 
 #' @rdname assertions
 #'
-.are_integers <- function(x)
+.are_integers <- function(x, lb = NULL, ub = NULL)
 {
-    .are_numbers(x) && all(trunc(x) == x)
+    .are_numbers(x, lb = lb, ub = ub) && all(trunc(x) == x)
 }
 
 #' @rdname assertions
@@ -60,9 +69,9 @@ NULL
 
 #' @rdname assertions
 #'
-.are_positive_integers <- function(x)
+.are_positive_integers <- function(x, lb = NULL, ub = NULL)
 {
-    .are_integers(x) && all(x > 0)
+    .are_integers(x, lb = lb, ub = ub) && all(x > 0)
 }
 
 #' @rdname assertions
@@ -168,19 +177,19 @@ NULL
 on_failure(.is_number) <- .bounds_message(
     " is not a single number (not NA)")
 
-on_failure(.are_numbers) <- .normal_message(
+on_failure(.are_numbers) <- .bounds_message(
     " is not a non-empty numeric vector without NAs")
 
 on_failure(.is_integer) <- .bounds_message(
     " is not a single integer (not NA)")
 
-on_failure(.are_integers) <- .normal_message(
+on_failure(.are_integers) <- .bounds_message(
     " is not a non-empty integer vector without NAs")
 
 on_failure(.is_positive_integer) <- .bounds_message(
     " is not a single integer (not NA)")
 
-on_failure(.are_positive_integers) <- .normal_message(
+on_failure(.are_positive_integers) <- .bounds_message(
     " is not a non-empty vector of positive integers without NAs")
 
 on_failure(.is_string) <- function(call, env)

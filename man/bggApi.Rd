@@ -32,7 +32,7 @@ Main class for BGG XML API2
 \if{latex}{\out{\hypertarget{method-fetch}{}}}
 \subsection{Method \code{fetch()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bggAPI$fetch(variable_names = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{bggAPI$fetch(variable_names = NULL, ...)}\if{html}{\out{</div>}}
 }
 
 }
