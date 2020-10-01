@@ -39,6 +39,7 @@ function(query, params = NULL) {
 
 
     # Setting private variables ------------------------------------------------
+    private$.timestamp <- Sys.time()
     private$.query <- query
     private$.api_url <- api_url
     private$.ids <- ids[uniq]
@@ -64,11 +65,13 @@ function()
     nr <- nrow(private$.data)
 
     string <- paste0(
-        "---- bggSearch ----",
+        "----- bggSearch -----",
         "\nSearch API with the following query: '",
         paste0(private$.query, collapse = " "), "'.\n",
+        "Creation timestamp: ", private$.timestamp, ".\n",
         "The data contains ", nr, " ", .plural("object", nr), " and ",
         nc, " ", .plural("variable", nc), ".\n\n")
     cat(string)
+    cat("------- Data --------\n")
     print(private$.data, nrows = n_show, trunc.cols = TRUE)
 })

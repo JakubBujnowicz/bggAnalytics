@@ -52,13 +52,19 @@ function(username = NULL, params = NULL) {
     xml <- .xml_expand(xml)
 
     # Extract IDs --------------------------------------------------------------
-    ids <- as.numeric(sapply(xml, xml_attr, attr = "objectid"))
+    ids <- .attr2number(xml, xpath = ".", attr = "objectid")
 
     if (length(ids) == 0) {
         warning("this collection contains no games, perhaps the username is wrong?")
     }
 
+    # Sorting IDs and XML
+    ids_order <- order(ids)
+    ids <- ids[ids_order]
+    xml <- xml[ids_order]
+
     # Setting private variables ------------------------------------------------
+    private$.timestamp <- Sys.time()
     private$.username <- username
     private$.ids <- ids
     private$.xml <- xml
@@ -83,11 +89,13 @@ function()
     nr <- nrow(private$.data)
 
     string <- paste0(
-        "---- bggCollection ----",
+        "----- bggCollection -----",
         "\nUser collection API of the following user: '", private$.username,
-        "'.\nThe data contains ", nr, " ", .plural("object", nr), " and ",
+        "'.\nCreation timestamp: ", private$.timestamp,
+        ".\nThe data contains ", nr, " ", .plural("object", nr), " and ",
         nc, " ", .plural("variable", nc), ".\n\n")
     cat(string)
+    cat("--------- Data ----------\n")
     print(private$.data, nrows = n_show, trunc.cols = TRUE)
 })
 

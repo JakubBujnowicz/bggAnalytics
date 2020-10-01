@@ -27,7 +27,7 @@ function(ids, params = NULL) {
         .xml_expand()
 
     # Testing IDs
-    xml_ids <- as.numeric(sapply(xml, xml_attr, attr = "id"))
+    xml_ids <- .attr2number(xml, xpath = ".", attr = "id")
 
     # Check for any success
     ids <- intersect(ids, xml_ids)
@@ -39,12 +39,18 @@ function(ids, params = NULL) {
     # Check for missing
     missing <- setdiff(ids, xml_ids)
     if (length(missing) > 0) {
-        ids <- setdiff(ids, missing)
         warning("Following ids were not available through BGG API:\n",
                 toString(missing), call. = FALSE)
     }
 
+    # Sorting
+    # Sorting IDs and XML
+    ids_order <- order(xml_ids)
+    ids <- xml_ids[ids_order]
+    xml <- xml[ids_order]
+
     # Setting private variables ------------------------------------------------
+    private$.timestamp <- Sys.time()
     private$.ids <- ids
     private$.xml <- xml
     private$.api_url <- api_url
@@ -68,10 +74,12 @@ function()
     nr <- nrow(private$.data)
 
     string <- paste0(
-        "---- bggGames ----",
+        "----- bggGames -----",
         "\nGames data API.\n",
-        "The data contains ", nr, " ", .plural("object", nr), " and ",
+        "Creation timestamp: ", private$.timestamp,
+        ".\nThe data contains ", nr, " ", .plural("object", nr), " and ",
         nc, " ", .plural("variable", nc), ".\n\n")
     cat(string)
+    cat("------- Data -------\n")
     print(private$.data, nrows = n_show, trunc.cols = TRUE)
 })
