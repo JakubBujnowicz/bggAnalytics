@@ -18,7 +18,7 @@ globalVariables(
     c("self", "private",
       # Due to data.table and var_specs
       ".", "Class", "Stats", "Variable", "Node",
-      "Compression", "Scalar"))
+      "Compression", "Scalar", "PrettyName"))
 
 # Options ######################################################################
 # Amount of elements to print

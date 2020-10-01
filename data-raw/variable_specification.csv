@@ -40,6 +40,8 @@ bggGames;Weight;avgweight;statistics/ratings/averageweight;value;number;TRUE;TRU
 bggGames;WeightVotes;weightvotes;statistics/ratings/numweights;value;number;TRUE;TRUE;;;FALSE
 bggGames;MinPlayers;minplayers;minplayers;value;number;TRUE;FALSE;;;FALSE
 bggGames;MaxPlayers;maxplayers;maxplayers;value;number;TRUE;FALSE;;;FALSE
+bggGames;RecPlayers;recplayers;;;text;FALSE;FALSE;;squeeze;TRUE
+bggGames;BestPlayers;bestplayers;;;text;FALSE;FALSE;;squeeze;TRUE
 bggGames;Playingtime;playingtime;playingtime;value;number;TRUE;FALSE;0;;FALSE
 bggGames;MinPlaytime;minplaytime;minplaytime;value;number;TRUE;FALSE;0;;FALSE
 bggGames;MaxPlaytime;maxplaytime;maxplaytime;value;number;TRUE;FALSE;0;;FALSE
@@ -54,6 +56,8 @@ bggGames;ThumbnailURL;thumbnail;thumbnail;;text;TRUE;FALSE;;;FALSE
 bggGames;Description;description;description;;text;TRUE;FALSE;;;FALSE
 bggGames;Designers;designers;link[@type = 'boardgamedesigner'];value;text;FALSE;FALSE;;toString;FALSE
 bggGames;DesignersID;designersid;link[@type = 'boardgamedesigner'];id;number;FALSE;FALSE;;toString;FALSE
+bggGames;Artists;artists;link[@type = 'boardgameartist'];value;text;FALSE;FALSE;;toString;FALSE
+bggGames;ArtistsID;artistsid;link[@type = 'boardgameartist'];id;number;FALSE;FALSE;;toString;FALSE
 bggGames;Categories;category;link[@type = 'boardgamecategory'];value;text;FALSE;FALSE;;toString;FALSE
 bggGames;CategoriesID;categoryid;link[@type = 'boardgamecategory'];id;number;FALSE;FALSE;;toString;FALSE
 bggGames;Mechanics;mechanics;link[@type = 'boardgamemechanic'];value;text;FALSE;FALSE;;toString;FALSE
@@ -63,6 +67,8 @@ bggGames;PublishersID;publishersid;link[@type = 'boardgamepublisher'];id;number;
 bggGames;Expansions;expansions;link[@type = 'boardgameexpansion'];value;text;FALSE;FALSE;;toString;FALSE
 bggGames;ExpansionsID;expansionsid;link[@type = 'boardgameexpansion'];id;number;FALSE;FALSE;;toString;FALSE
 bggGames;PollPlayers;pollplayers;;;table;FALSE;FALSE;;NULL;TRUE
+bggGames;PollAge;pollage;;;table;FALSE;FALSE;;NULL;TRUE
+bggGames;PollLanguage;polllanguage;;;table;FALSE;FALSE;;NULL;TRUE
 bggSearch;ID;objectid;.;id;number;TRUE;FALSE;;;FALSE
 bggSearch;Name;name;name;value;text;TRUE;FALSE;;;FALSE
 bggSearch;Type;type;.;type;text;TRUE;FALSE;;;FALSE

@@ -41,17 +41,23 @@
 #'
 .switch_names <- function(to)
 {
-    assert_that(.is_string(to, allowed = c("pretty", "normal")))
+    assert_that(.is_string(to, allowed = c("pretty", "classic")))
 
     specs <- var_specs[Class == class(self)[1]]
     current <- names(private$.data)
+
+    has_pn <- private$.params$pretty_names
+    pn_str <- fifelse(has_pn, "pretty", "classic")
+    if (pn_str == to) {
+        return(invisible(FALSE))
+    }
 
     if (to == "pretty") {
         new <- specs$PrettyName
         old <- specs$Variable
 
         private$.params$pretty_names <- TRUE
-    } else if (to == "normal") {
+    } else if (to == "classic") {
         new <- specs$Variable
         old <- specs$PrettyName
 
@@ -60,6 +66,8 @@
 
     replacement <- new[match(current, old)]
     setnames(private$.data, old = current, new = replacement)
+
+    return(invisible(TRUE))
 }
 
 
@@ -157,6 +165,10 @@ NULL
         if (compress) {
             if (compression == "toString") {
                 fetched <- sapply(fetched, toString)
+            }
+            if (compression == "squeeze") {
+                fetched <- suppressWarnings(lapply(fetched, as.numeric))
+                fetched <- sapply(fetched, squeeze)
             }
         }
 
@@ -265,8 +277,13 @@ NULL
             set(private$.data, j = var_names[i], value = fetched[[i]])
         }
 
-        message(msg)
+        if (exists("msg", inherits = FALSE)) {
+            message(msg)
+        }
+
+        return(invisible(TRUE))
     } else {
         message("there was nothing to add to the 'data' slot")
+        return(invisible(FALSE))
     }
 }
