@@ -22,7 +22,7 @@ Another step would be to fetch some data - everything (from the set of currently
 ```r
 my_collection$fetch()
 # Or
-my_colelction$fetch(c("name", "yearpublished"))
+my_collection$fetch(c("name", "yearpublished"))
 ```
 
 Method called `extend` can be used in the same manner to extend object's `data` slot by given variables.
@@ -44,10 +44,9 @@ Naturally, multiple IDs may be supplied to `bggGames` object. One can always ext
 
 ## Roadmap
 #### Nearest future
-1. Add support for non-scalar variables from XML API.
-2. Create a functional hybrid of bggGames and bggCollection. 
-4. Supply a viewing-friendly version of fetched data along with interactive app in Shiny - [prototype here](https://bujnowiczapps.shinyapps.io/boardgamecollection/).
-1. Provide documentation for all classes and exported functions.
+1. Provide the documentation for all classes and exported functions.
+2. Provide a method for users to easily check available variables and parameters of every class (function/data?).
+3. Supply a viewing-friendly version of fetched data along with interactive app in Shiny - [prototype here](https://bujnowiczapps.shinyapps.io/boardgamecollection/).
 
 #### Long-term plans
 1. Add support for other structures from BGG XML API.
