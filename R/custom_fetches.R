@@ -101,6 +101,7 @@ NULL
 # Multipurpose #################################################################
 .playerpoll_outcome <- function(xml, category)
 {
+    # Assertions
     types <- c("best", "recommended", "notrecommended")
     assert_that(.is_string(category, allowed = types))
 
@@ -115,7 +116,7 @@ NULL
                             get(category) == res$most,   TRUE,
                             default = FALSE)]
 
-    res <- res[, .(outcome = get("numplayers")[get("outcome")]), by = "i"]
+    res <- res[, list(outcome = get("numplayers")[get("outcome")]), by = "i"]
     res <- split(res$outcome, factor(res$i, levels = seq_along(xml)))
     res <- unname(res)
     return(res)

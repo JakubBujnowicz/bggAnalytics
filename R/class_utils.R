@@ -41,7 +41,11 @@
 #'
 .switch_names <- function(to)
 {
+    # Assertions
     assert_that(.is_string(to, allowed = c("pretty", "classic")))
+
+    # Assign to avoid NOTEs while checking the package
+    Class <- NULL
 
     specs <- var_specs[Class == class(self)[1]]
     current <- names(private$.data)
@@ -81,6 +85,9 @@
 #'
 .get_varspecs <- function()
 {
+    # Assign to avoid NOTEs while checking the package
+    Class <- NULL
+
     obj_cl <- class(self)[1]
 
     specs <- var_specs[Class == obj_cl]
@@ -124,6 +131,10 @@ NULL
     assert_that(.are_strings(variable_names))
     assert_that(is.data.table(var_specs))
     assert_that(.is_boolean(compress))
+
+    # Assign to avoid NOTEs while checking the package
+    Variable <- NULL
+    Node <- NULL
 
     # Loop for every variable --------------------------------------------------
     result <- list()
@@ -187,6 +198,10 @@ NULL
 #'
 .fetch_external <- function(variable_names = NULL, compress = FALSE)
 {
+    # Assign to avoid NOTEs while checking the package
+    Variable <- NULL
+    Stats <- NULL
+
     # Internal data
     obj_class <- class(self)[1]
     specs <- private$.get_varspecs()
@@ -229,13 +244,17 @@ NULL
 #' \code{data} slot data.table.
 #'
 #' @param variable_names Character vector of variable names.
-#' @param params List of parameters.
 #'
 #' @return Nothing, used for side effect.
 #' @keywords internal
 #'
-.expand_by <- function(variable_names = NULL, params = NULL)
+.expand_by <- function(variable_names = NULL)
 {
+    # Assign to avoid NOTEs while checking the package
+    Variable <- NULL
+    Scalar <- NULL
+    Compression <- NULL
+
     specs <- private$.get_varspecs()
 
     if (!is.null(variable_names)) {

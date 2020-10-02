@@ -1,10 +1,10 @@
 #' H-Index
 #'
-#' Calculate H-Index from the number of game plays. H-Index measure the variety
-#' of games one plays. It rises only when one plays many different games
-#' multiple times. It tries to distinguish players who play a few games really
-#' often and these who try every game once and leave it on the shelf from those
-#' who have the broad collection of high-count plays.
+#' Calculate H-Index from the number of game plays. H-Index measures the
+#' experience of a player based on reported play counts. It rises only when one
+#' plays many different games multiple times. It tries to distinguish players
+#' who play a few games really often and these who try every game once and leave
+#' it on the shelf from those who have the broad collection of high-count plays.
 #'
 #' @param num_plays a numeric vector of non-negative integers.
 #'
@@ -12,8 +12,10 @@
 #' @export
 #'
 #' @references
+#' \href{https://en.wikipedia.org/wiki/H-index}{H-Index in Wikipedia}
 #' \href{https://boardgamegeek.com/thread/953084/whats-your-h-index}{BGG thread
 #' about H-Index}
+#'
 #'
 #' @examples
 #' h_index(0)

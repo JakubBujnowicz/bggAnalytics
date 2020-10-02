@@ -15,10 +15,7 @@ NULL
 # To remove notes from CMD Check
 globalVariables(
     # Due to R6
-    c("self", "private",
-      # Due to data.table and var_specs
-      ".", "Class", "Stats", "Variable", "Node",
-      "Compression", "Scalar", "PrettyName"))
+    c("self", "private"))
 
 # Options ######################################################################
 # Amount of elements to print

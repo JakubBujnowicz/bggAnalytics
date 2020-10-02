@@ -41,7 +41,7 @@ Main class for BGG XML API2
 \if{latex}{\out{\hypertarget{method-expand}{}}}
 \subsection{Method \code{expand()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bggAPI$expand(variable_names = NULL, params = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{bggAPI$expand(variable_names = NULL)}\if{html}{\out{</div>}}
 }
 
 }

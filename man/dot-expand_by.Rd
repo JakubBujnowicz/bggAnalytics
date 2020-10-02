@@ -4,12 +4,10 @@
 \alias{.expand_by}
 \title{Generalised expand for every class}
 \usage{
-.expand_by(variable_names = NULL, params = NULL)
+.expand_by(variable_names = NULL)
 }
 \arguments{
 \item{variable_names}{Character vector of variable names.}
-
-\item{params}{List of parameters.}
 }
 \value{
 Nothing, used for side effect.

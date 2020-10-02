@@ -32,4 +32,4 @@ all.equal(cdata[, ..cols], gdata[, ..cols])
 gm$fetch("designers", compress = TRUE)
 
 # Full data
-fdata <- bgg_merge(cdata, gdata)
+fdata <- bgg_merge(cl, gm)
