@@ -19,8 +19,8 @@
         if (missing(value)) {
             return(private[[paste0(".", slotname)]])
         } else {
-            stop(slotname, " is a private field and cannot be manually overwritten",
-                 call. = FALSE)
+            stop("'", slotname, "' is a private field and cannot be manually ",
+                 "overwritten", call. = FALSE)
         }
     }
 

@@ -26,7 +26,7 @@
 detect_namestyle <- function(dt)
 {
     # Assertions
-    assert_that(is.data.table(dt))
+    assert_that(is.data.frame(dt))
 
     dt_names <- names(dt)
     cl_names <- var_specs$Variable
@@ -41,10 +41,12 @@ detect_namestyle <- function(dt)
                     pt_count > cl_count, "pretty",
                     default =            "zeros")
 
+    dt_name <- deparse(substitute(dt))
+
     if (result == "zeros") {
-        stop("no 'pretty' nor 'classic' names found in 'dt'")
+        stop("no 'pretty' nor 'classic' names found in '", dt_name, "'")
     } else if (result == "both") {
-        stop("found both 'pretty' and 'classic' names in 'dt'")
+        stop("found both 'pretty' and 'classic' names in '", dt_name, "'")
     }
 
     return(result)

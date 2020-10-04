@@ -9,9 +9,9 @@ bggAPI <- R6::R6Class(
     classname = "bggAPI",
     private = list(
         # Slots
+        .data = NULL,
         .xml = NULL,
         .api_url = NULL,
-        .data = NULL,
         .params = NULL,
         .timestamp = NULL,
 
@@ -21,9 +21,18 @@ bggAPI <- R6::R6Class(
     active = list(
         xml = .private_getter("xml"),
         api_url = .private_getter("api_url"),
-        data = .private_getter("data"),
         params = .private_getter("params"),
-        timestamp = .private_getter("timestamp")
+        timestamp = .private_getter("timestamp"),
+        data = function(value)
+        {
+            # Manual so that a copy is returned
+            if (missing(value)) {
+                return(copy(private$.data))
+            } else {
+                stop("'data' is a private field and cannot be manually overwritten",
+                     call. = FALSE)
+            }
+        }
     ),
     public = list(
         fetch = .fetch_external,
