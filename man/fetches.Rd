@@ -3,12 +3,9 @@
 \name{fetches}
 \alias{fetches}
 \alias{.fetch_internal}
-\alias{.fetch_external}
 \title{Generalised fetch for every class}
 \usage{
 .fetch_internal(xml, variable_names, var_specs, compress = FALSE)
-
-.fetch_external(variable_names = NULL, compress = FALSE)
 }
 \arguments{
 \item{xml}{XML nodeset.}
@@ -16,6 +13,8 @@
 \item{variable_names}{Character vector of variable names to extract.}
 
 \item{var_specs}{Data.table with parameter specification.}
+
+\item{compress}{a logical value, whether variables should be compressed.}
 }
 \value{
 List of variables. Variables marked as 'scalar' in param
@@ -26,12 +25,4 @@ It is a universal tool for fetching variables from XMLs, should be used
 within fetch methods from every bgg* class. It uses internal variable
 parameter specification to extract data.
 }
-\section{Functions}{
-\itemize{
-\item \code{.fetch_internal}: Internal implementation of variable extraction
-(fetching).
-
-\item \code{.fetch_external}: This should be put in public slot of a class.
-}}
-
 \keyword{internal}

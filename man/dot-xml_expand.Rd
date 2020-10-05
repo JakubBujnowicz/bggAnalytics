@@ -7,13 +7,14 @@
 .xml_expand(xml)
 }
 \arguments{
-\item{xml}{XML Nodeset.}
+\item{xml}{an XML nodeset.}
 }
 \value{
-XML Nodeset.
+XML nodeset.
 }
 \description{
-This function expands xml_nodeset to all 'item' children. It allows to use
-`lapply(., f)` per Game ID.
+This function expands \code{xml_nodeset} objects to all 'item' children. It
+allows to use \code{lapply(., f)} per object (corresponding to one row in
+\code{data}).
 }
 \keyword{internal}

@@ -20,12 +20,13 @@
 
 #' Get all 'items' nodes from XML Nodeset
 #'
-#' This function expands xml_nodeset to all 'item' children. It allows to use
-#' `lapply(., f)` per Game ID.
+#' This function expands \code{xml_nodeset} objects to all 'item' children. It
+#' allows to use \code{lapply(., f)} per object (corresponding to one row in
+#' \code{data}).
 #'
-#' @param xml XML Nodeset.
+#' @param xml an XML nodeset.
 #'
-#' @return XML Nodeset.
+#' @return XML nodeset.
 #' @keywords internal
 #'
 .xml_expand <- function(xml)
@@ -34,6 +35,7 @@
         xml_children()
     return (result)
 }
+
 
 # Extraction ###################################################################
 #' Extraction functions
