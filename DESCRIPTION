@@ -27,7 +27,6 @@ Collate:
     'html_utils.R'
     'params_utils.R'
     'squeeze.R'
-    'tools.R'
     'utils.R'
     'zzz.R'
 Suggests: 

@@ -2,8 +2,8 @@
 
 export(bgg_gameurl)
 export(bgg_merge)
+export(bgg_namestyle)
 export(bgg_topgames)
-export(detect_namestyle)
 export(h_index)
 export(squeeze)
 export(unsqueeze)
