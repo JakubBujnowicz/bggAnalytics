@@ -45,7 +45,7 @@ API2}
 \subsection{Method \code{new()}}{
 Object initialization.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bggGames$new(ids, params = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{bggGames$new(ids, chunk_size = 500, params = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -53,6 +53,11 @@ Object initialization.
 \describe{
 \item{\code{ids}}{a numeric vector of positive integers, IDs of games/things to
 include in the object.}
+
+\item{\code{chunk_size}}{a positive integer, the maximum length of a chunk that
+\code{ids} are split into. All chunks connect to BGG's API separately,
+so lowering this number increases computation time. On the other hand
+if a chunk is too long, URL might be too long to fetch.}
 
 \item{\code{params}}{a list of object parameters. If not all the parameters are
 included in the list, default values are used (\code{NULL} instead of

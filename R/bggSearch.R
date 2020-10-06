@@ -60,8 +60,8 @@ bggSearch <- R6Class(
         api_url <- paste0(.bgg_url("api"), "search?query=", query_str)
         api_url <- .extend_url_by_params(api_url, params, class = "bggSearch")
 
-        xml <- read_html(api_url) %>%
-            .xml_expand()
+        xml <- read_html(api_url)
+        xml <- .xml_expand(xml)
 
 
         # Preparing data -------------------------------------------------------

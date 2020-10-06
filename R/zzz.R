@@ -2,7 +2,6 @@
 #'
 #' @import assertthat
 #' @import data.table
-#' @importFrom magrittr `%>%`
 #' @importFrom pryr unenclose
 #' @import R6
 #' @import rvest

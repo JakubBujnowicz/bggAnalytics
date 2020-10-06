@@ -1,3 +1,44 @@
+#' Safely scrap HTML website
+#'
+#' Opens the connection with \code{curl} and closes in case of error. Returns
+#' more unambiguous error messages.
+#'
+#' @param url a single string, an URL to a given website.
+#' @param ... other arguments passed to \code{read_html}.
+#'
+#' @return A parsed XML.
+#' @keywords internal
+#'
+.bgg_readurl <- function(url, ...)
+{
+    assert_that(.is_string(url))
+
+    .http_error <- function(e)
+    {
+        close(con)
+        ec <- as.character(e)
+
+        has_http_err <- grepl("HTTP error ", ec)
+        if (has_http_err) {
+            code <- str_extract(ec, "[0-9]+\\.\\n$")
+            code <- str_remove(code, "\\.\\n$")
+            stop("unable to open the connection with '",
+                 url, "' due to the HTTP error ",
+                 code, call. = FALSE)
+        } else {
+            stop("unable to open the connection with '",
+                 url, "'", call. = FALSE)
+        }
+    }
+
+    con <- curl(url)
+
+    result <- tryCatch(read_html(con),
+                       error = .http_error)
+    return(result)
+}
+
+
 #' Return a given BGG URL
 #'
 #' Get hyperlinks to given pages of BoardGameGeek site.
@@ -31,9 +72,31 @@
 #'
 .xml_expand <- function(xml)
 {
-    result <- html_node(xml, "items") %>%
-        xml_children()
-    return (result)
+    result <- html_node(xml, "items")
+    result <- xml_children(result)
+    return(result)
+}
+
+
+#' Concatenate XML nodesets from a list
+#'
+#' Take a list of XML nodesets (e.g. outputs of \code{.xml_expand}) and combine
+#' them together.
+#'
+#' @param xml_list a list of XML nodesets.
+#'
+#' @return An XML nodeset.
+#' @keywords internal
+#'
+.xml_concatenate <- function(xml_list)
+{
+    for (i in seq_along(xml_list)[-1]) {
+        n <- length(xml_list[[1]])
+        vec <- seq_along(xml_list[[i]])
+        xml_list[[1]][n + vec] <- xml_list[[i]]
+    }
+
+    return(xml_list[[1]])
 }
 
 
@@ -64,7 +127,7 @@ NULL
         values <- lapply(nodes, html_text, trim = TRUE)
     }
 
-    return (values)
+    return(values)
 }
 
 #' @rdname extraction_functions
@@ -78,7 +141,7 @@ NULL
         values <- suppressWarnings(lapply(nodes, xml_double))
     }
 
-    return (values)
+    return(values)
 }
 
 #' @rdname extraction_functions
@@ -92,7 +155,7 @@ NULL
         values <- lapply(values, as.logical)
     }
 
-    return (values)
+    return(values)
 }
 
 #' @rdname extraction_functions

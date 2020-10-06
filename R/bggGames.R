@@ -27,6 +27,10 @@ bggGames <- R6Class(
     #'
     #' @param ids a numeric vector of positive integers, IDs of games/things to
     #'   include in the object.
+    #' @param chunk_size a positive integer, the maximum length of a chunk that
+    #'   \code{ids} are split into. All chunks connect to BGG's API separately,
+    #'   so lowering this number increases computation time. On the other hand
+    #'   if a chunk is too long, URL might be too long to fetch.
     #' @param params a list of object parameters. If not all the parameters are
     #'   included in the list, default values are used (\code{NULL} instead of
     #'   the list is possible for all the default parameters). \cr
@@ -39,7 +43,7 @@ bggGames <- R6Class(
     #'       ranking and rating stats be included for every item. Note that some
     #'       variables require that \code{stats} is \code{TRUE}.}
     #'   }
-    initialize = function(ids, params = NULL)
+    initialize = function(ids, chunk_size = 500, params = NULL)
     {
         # Assertions -----------------------------------------------------------
         assert_that(.are_positive_integers(ids))
@@ -47,19 +51,29 @@ bggGames <- R6Class(
 
         ids <- unique(ids)
 
-        # Getting the API URL and XML
-        api_url <- paste0(.bgg_url("api"), "thing?id=",
-                          paste0(ids, collapse = ","))
-        api_url <- .extend_url_by_params(api_url, params, class = "bggGames")
-        xml <- read_html(api_url) %>%
-            .xml_expand()
+        # Split into chunks
+        chunks <- (seq_along(ids) - 1) %/% chunk_size
+        chunks <- split(ids, chunks)
+
+        # Getting the API URL
+        .get_base_gameurl <- function(x)
+        {
+            paste0(.bgg_url("api"), "thing?id=", paste0(x, collapse = ","))
+        }
+        api_url <- lapply(chunks, .get_base_gameurl)
+        api_url <- sapply(api_url, .extend_url_by_params, params = params,
+                          class = "bggGames")
+        api_url <- unname(api_url)
+
+        # Fetch XMLs
+        xml <- lapply(api_url, function(x) .xml_expand(read_html(x)))
+        xml <- .xml_concatenate(xml)
 
         # Testing IDs
         xml_ids <- .attr2number(xml, xpath = ".", attr = "id")
 
         # Check for any success
-        ids <- intersect(ids, xml_ids)
-        if (length(ids) == 0) {
+        if (length(intersect(ids, xml_ids)) == 0) {
             stop("None of the given 'ids' were available through BGG API",
                  call. = FALSE)
         }
@@ -68,10 +82,9 @@ bggGames <- R6Class(
         missing <- setdiff(ids, xml_ids)
         if (length(missing) > 0) {
             warning("Following ids were not available through BGG API:\n",
-                    toString(missing), call. = FALSE)
+                    squeeze(missing), call. = FALSE)
         }
 
-        # Sorting
         # Sorting IDs and XML
         ids_order <- order(xml_ids)
         ids <- xml_ids[ids_order]

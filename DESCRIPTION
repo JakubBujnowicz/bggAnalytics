@@ -3,7 +3,7 @@ Type: Package
 Title: BGG's Board Game Data Analysis Tools
 Description: Tools for analysing board game data. Mainly focused on providing 
     an interface for BGG's XML API2 through R6 class system objects.
-Version: 0.1.0.9002
+Version: 0.1.0.9003
 Author: Jakub Bujnowicz [aut, cre]
 Maintainer: Jakub Bujnowicz <bujnowiczgithub@gmail.com>
 URL: https://github.com/JakubBujnowicz/bggAnalytics
@@ -11,7 +11,7 @@ License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
-Imports: assertthat, magrittr, pryr, rvest, stringr, utils, xml2
+Imports: assertthat, pryr, rvest, stringr, utils, xml2
 Depends: 
     R (>= 4.0.0), data.table, R6
 Collate: 
