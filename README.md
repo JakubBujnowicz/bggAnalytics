@@ -1,8 +1,8 @@
 # bggAnalytics
-R package for simple downloading and organisation of board game data using BoardGameGeek's [XML API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2). Users of R programming language should have no problems extracting data about their BGG games collection, or in fact, any games from BGG. This should allow for automatisation of the collection exporting task, which has to be done manually on the BGG website.
+R package for simple downloading and organisation of board game data using BoardGameGeek's [XML API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2). Users of R programming language should have no problems extracting their BGG games collection data, or in fact, the information about any games from BGG. This allows for automatisation of the collection exporting task, which has to be done manually on the BGG website.
 
 ## Installation
-The package will be uploaded to CRAN in the future. In the meanwhile, it can be installed using `devtools` package.
+The package will be uploaded to CRAN in the future. In the meanwhile, it can be installed using the `devtools` package.
 ```r
 library(devtools)
 install_github("JakubBujnowicz/bggAnalytics")
@@ -41,13 +41,3 @@ games$extend()
 games$data
 ```
 Naturally, multiple IDs may be supplied to `bggGames` object. One can always extract IDs from a collection by `my_collection$ids`.
-
-## Roadmap
-#### Nearest future
-1. Provide the documentation for all classes and exported functions.
-2. Provide a method for users to easily check available variables and parameters of every class (function/data?).
-3. Supply a viewing-friendly version of fetched data along with interactive app in Shiny - [prototype here](https://bujnowiczapps.shinyapps.io/boardgamecollection/).
-
-#### Long-term plans
-1. Add support for other structures from BGG XML API.
-2. Upload the package to CRAN.
