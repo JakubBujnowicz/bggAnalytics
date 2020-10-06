@@ -99,11 +99,6 @@
         compression <- specs$Compression
         custom <- specs$Custom
 
-        # Skip - nothing to fetch
-        if (node == "NULL") {
-            next
-        }
-
         # Extract --------------------------------------------------------------
         if (custom) {
             fun <- match.fun(paste0(".fetch_", var))
@@ -137,10 +132,7 @@
     }
 
     # Naming
-    res_names <- var_specs[Node != "NULL" & Variable %in% variable_names,
-                           Variable]
-    names(result) <- res_names
-
+    names(result) <- variable_names
     return(result)
 }
 
