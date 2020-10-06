@@ -120,7 +120,8 @@ bggAPI <- R6::R6Class(
 
     # Expand ---------------------------------------------------------------
     #' @description Expands the \code{data} table by given \code{variable_names}
-    #'   by reference.
+    #'   by reference. For the list of available variables for every object
+    #'   check the \code{\link{bgg_variables}} dataset.
     #'
     #' @param variable_names a character vector with names of variables to add
     #'   to \code{data}.

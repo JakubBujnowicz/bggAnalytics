@@ -1,7 +1,12 @@
 #' All variables that are available for fetching through bggAPI objects
 #'
-#' Contains names and specification of variables that can be used in \code{fetch}
-#' and \code{expand} methods of classes that inherit from \code{bggAPI}.
+#' Contains names and specification of variables that can be used in
+#' \code{fetch} and \code{expand} methods of classes that inherit from
+#' \code{bggAPI}.
+#'
+#' A variable can be used by the object's \code{extend} method if it's
+#' \code{Scalar} value is \code{TRUE} or \code{Compression} is not equal to
+#' \code{"NULL"}.
 #'
 #' @format A data.table with the following columns:
 #' \describe{

@@ -15,7 +15,7 @@ A data.table with the following columns:
     \item{\code{Scalar}}{a logical vector, whether the variable is scalar,
     i.e. does the length of a fetched variable vector is equal to the length
     of object's \code{ids} field. Every scalar variable may be used in
-    \code{expand} methods.}
+    the \code{expand} methods.}
     \item{\code{Stats}}{a logical vector, whether the object needs the
     parameter \code{stats = TRUE} to fetch this variable.}
     \item{\code{Compression}}{a character vector, names of functions that are
@@ -28,7 +28,13 @@ A data.table with the following columns:
 bgg_variables
 }
 \description{
-Contains names and specification of variables that can be used in \code{fetch}
-and \code{expand} methods of classes that inherit from \code{bggAPI}.
+Contains names and specification of variables that can be used in
+\code{fetch} and \code{expand} methods of classes that inherit from
+\code{bggAPI}.
+}
+\details{
+A variable can be used by the object's \code{extend} method if it's
+\code{Scalar} value is \code{TRUE} or \code{Compression} is not equal to
+\code{"NULL"}.
 }
 \keyword{datasets}
