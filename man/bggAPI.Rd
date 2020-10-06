@@ -77,7 +77,8 @@ should be compress into a scalar form (if possible).}
 \if{latex}{\out{\hypertarget{method-expand}{}}}
 \subsection{Method \code{expand()}}{
 Expands the \code{data} table by given \code{variable_names}
-  by reference.
+  by reference. For the list of available variables for every object
+  check the \code{\link{bgg_variables}} dataset.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{bggAPI$expand(variable_names = NULL)}\if{html}{\out{</div>}}
 }

@@ -3,7 +3,7 @@ Type: Package
 Title: BGG's Board Game Data Analysis Tools
 Description: Tools for analysing board game data. Mainly focused on providing 
     an interface for BGG's XML API2 through R6 class system objects.
-Version: 0.1.0.9003
+Version: 0.1.0
 Author: Jakub Bujnowicz [aut, cre]
 Maintainer: Jakub Bujnowicz <bujnowiczgithub@gmail.com>
 URL: https://github.com/JakubBujnowicz/bggAnalytics

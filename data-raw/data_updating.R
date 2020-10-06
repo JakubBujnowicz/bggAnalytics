@@ -97,7 +97,7 @@ bgg_variables <- var_specs[, c("Class", "PrettyName", "Variable",
                                "Scalar", "Stats", "Compression")]
 setnames(bgg_variables, old = "Variable", new = "ClassicName")
 
-usethis::use_data(bgg_variables)
+usethis::use_data(bgg_variables, overwrite = TRUE)
 usethis::use_data(var_specs, param_specs,
                   internal = TRUE, overwrite = TRUE)
 rm(var_specs, param_specs, bgg_variables)
