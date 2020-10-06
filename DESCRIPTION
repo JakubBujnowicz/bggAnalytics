@@ -24,6 +24,7 @@ Collate:
     'bggSearch.R'
     'bgg_tools.R'
     'custom_fetches.R'
+    'data.R'
     'h_index.R'
     'html_utils.R'
     'params_utils.R'

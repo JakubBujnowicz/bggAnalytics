@@ -31,7 +31,7 @@
         }
     }
 
-    con <- curl(url)
+    con <- url(url)
 
     result <- tryCatch(read_html(con),
                        error = .http_error)

@@ -93,13 +93,14 @@ param_specs$bggCollection <- list(
 
 # Uploading --------------------------------------------------------------------
 var_specs <- fread("data-raw/variable_specification.csv")
+bgg_variables <- var_specs[, c("Class", "PrettyName", "Variable",
+                               "Scalar", "Stats", "Compression")]
+setnames(bgg_variables, old = "Variable", new = "ClassicName")
 
-# param_specs <- fread("data-raw/class_params.csv")
-# setkey(param_specs, Param)
-
+usethis::use_data(bgg_variables)
 usethis::use_data(var_specs, param_specs,
                   internal = TRUE, overwrite = TRUE)
-rm(var_specs, param_specs)
+rm(var_specs, param_specs, bgg_variables)
 
 devtools::load_all()
 
