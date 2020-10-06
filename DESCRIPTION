@@ -18,6 +18,7 @@ Collate:
     'assertions.R'
     'class_utils.R'
     'bggAPI.R'
+    'bggAnalytics-package.R'
     'bggCollection.R'
     'bggGames.R'
     'bggSearch.R'

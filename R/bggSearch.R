@@ -11,6 +11,7 @@
 #' @references \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BGG XML
 #' API2}
 #'
+#' @export
 #' @include bggAPI.R
 #'
 bggSearch <- R6Class(

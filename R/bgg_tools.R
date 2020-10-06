@@ -36,6 +36,7 @@ bgg_gameurl <- function(ids)
 #' @export
 #'
 #' @examples
+#'
 #' sr <- bggSearch$new("Terraforming Mars")
 #' gm <- bggGames$new(sr$ids)
 #'

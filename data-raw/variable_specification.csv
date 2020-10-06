@@ -7,7 +7,7 @@ bggCollection;Rating;rating;stats/rating;value;number;TRUE;TRUE;;;FALSE
 bggCollection;TimesPlayed;numplays;numplays;;number;TRUE;FALSE;;;FALSE
 bggCollection;Rank;rank;stats/rating/ranks/rank[@name = 'boardgame'];value;number;TRUE;TRUE;;;FALSE
 bggCollection;AvgRating;average;stats/rating/average;value;number;TRUE;TRUE;;;FALSE
-bggCollection;BGGRating;baverage;stats/rating/bayesaverage;value;number;TRUE;TRUE;0;;FALSE
+bggCollection;GeekRating;baverage;stats/rating/bayesaverage;value;number;TRUE;TRUE;0;;FALSE
 bggCollection;RatingStdDev;stddev;stats/rating/stddev;value;number;TRUE;TRUE;;;FALSE
 bggCollection;RatingVotes;usersrated;stats/rating/usersrated;value;number;TRUE;TRUE;;;FALSE
 bggCollection;MinPlayers;minplayers;stats;minplayers;number;TRUE;TRUE;;;FALSE
@@ -33,7 +33,7 @@ bggGames;Type;type;.;type;text;TRUE;FALSE;;;FALSE
 bggGames;Year;yearpublished;yearpublished;value;number;TRUE;FALSE;0;;FALSE
 bggGames;Rank;rank;statistics/ratings/ranks/rank[@name = 'boardgame'];value;number;TRUE;TRUE;;;FALSE
 bggGames;AvgRating;average;statistics/ratings/average;value;number;TRUE;TRUE;;;FALSE
-bggGames;BGGRating;baverage;statistics/ratings/bayesaverage;value;number;TRUE;TRUE;0;;FALSE
+bggGames;GeekRating;baverage;statistics/ratings/bayesaverage;value;number;TRUE;TRUE;0;;FALSE
 bggGames;RatingStdDev;stddev;statistics/ratings/stddev;value;number;TRUE;TRUE;;;FALSE
 bggGames;RatingVotes;usersrated;statistics/ratings/usersrated;value;number;TRUE;TRUE;;;FALSE
 bggGames;Weight;avgweight;statistics/ratings/averageweight;value;number;TRUE;TRUE;0;;FALSE

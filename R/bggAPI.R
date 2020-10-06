@@ -9,6 +9,7 @@
 #' @references \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BGG XML
 #' API2}
 #'
+#' @export
 #' @include class_utils.R
 #'
 bggAPI <- R6::R6Class(
