@@ -8,3 +8,4 @@ tests/
 .Rprofile
 LICENSE
 cran-comments.md
+^CRAN-RELEASE$
