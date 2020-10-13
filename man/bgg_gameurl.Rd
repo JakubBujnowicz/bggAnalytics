@@ -2,7 +2,7 @@
 % Please edit documentation in R/bgg_tools.R
 \name{bgg_gameurl}
 \alias{bgg_gameurl}
-\title{Get BGG URLs for games with given IDs}
+\title{Get BoardGameGeek URLs for games with given IDs}
 \usage{
 bgg_gameurl(ids)
 }

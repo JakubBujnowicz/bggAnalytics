@@ -5,19 +5,19 @@
 \title{API for Games and Things}
 \description{
 This class provides an interface for games, expansions,
-  accessories and other things listed on BGG. The official documentation
-  describes `things` as every physical, tangible item.See
+  accessories and other things listed on BoardGameGeek. The official
+  documentation describes `things` as every physical, tangible item.See
   \code{\link{bggAPI}} for more details on inherited slots and methods.
 }
 \details{
 Although this class is named `bggGames`, it inherits it's
-  functionality from the BGG XML API2 `Things` (see References). The name is
-  motivated by the fact that the whole BGG's site as well as this package is
-  mainly focused on board games.
+  functionality from the BoardGameGeek XML API2 `Things` (see References).
+  The name is motivated by the fact that the whole BoardGameGeek's site as
+  well as this package is mainly focused on board games.
 }
 \references{
-\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BGG XML
-API2}
+\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
+  API2}
 }
 \section{Super class}{
 \code{\link[bggAnalytics:bggAPI]{bggAnalytics::bggAPI}} -> \code{bggGames}
@@ -55,9 +55,9 @@ Object initialization.
 include in the object.}
 
 \item{\code{chunk_size}}{a positive integer, the maximum length of a chunk that
-\code{ids} are split into. All chunks connect to BGG's API separately,
-so lowering this number increases computation time. On the other hand
-if a chunk is too long, URL might be too long to fetch.}
+\code{ids} are split into. All chunks connect to BoardGameGeek's API
+separately, so lowering this number increases computation time. On the
+other hand if a chunk is too long, URL might be too long to fetch.}
 
 \item{\code{params}}{a list of object parameters. If not all the parameters are
 included in the list, default values are used (\code{NULL} instead of

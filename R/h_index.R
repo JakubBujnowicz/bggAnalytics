@@ -13,8 +13,8 @@
 #'
 #' @references
 #' \href{https://en.wikipedia.org/wiki/H-index}{H-Index in Wikipedia}
-#' \href{https://boardgamegeek.com/thread/953084/whats-your-h-index}{BGG thread
-#' about H-Index}
+#' \href{https://boardgamegeek.com/thread/953084/whats-your-h-index}{BoardGameGeek
+#' thread about H-Index}
 #'
 #'
 #' @examples

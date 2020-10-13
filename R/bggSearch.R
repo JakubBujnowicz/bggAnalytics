@@ -1,15 +1,16 @@
 # Definition ###################################################################
-#' API for BGG search engine
+#' API for BoardGameGeek search engine
 #'
-#' @description Search for items on the BGG with a given query. See
+#' @description Search for items on the BoardGameGeek with a given query. See
 #'   \code{\link{bggAPI}} for more details on inherited slots and methods.
 #'
 #' @details Note that the result is trimmed to items with unique IDs. Due to
 #' XML API2 `Search` returning multiple items for a single ID with different
 #' types, variable \code{'type'} might be not accurately represented.
 #'
-#' @references \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BGG XML
-#' API2}
+#' @references
+#'   \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
+#'   API2}
 #'
 #' @export
 #' @include bggAPI.R

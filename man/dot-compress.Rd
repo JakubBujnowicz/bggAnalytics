@@ -17,7 +17,7 @@
 Single string.
 }
 \description{
-Returns string which shows `n_show` first elements and `vec` and amount
-of truncated elements.
+Returns string which shows \code{n_show} first elements and \code{vec} and
+amount of truncated elements.
 }
 \keyword{internal}

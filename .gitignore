@@ -1,6 +1,7 @@
 # My own
 package_building.R
 tars/
+manuals/
 tests/testing_script.R
 .Rprofile
 

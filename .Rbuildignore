@@ -3,6 +3,7 @@
 
 package_building.R
 tars/
+manuals/
 data-raw/
 tests/
 .Rprofile

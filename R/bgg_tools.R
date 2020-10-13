@@ -1,4 +1,4 @@
-#' Get BGG URLs for games with given IDs
+#' Get BoardGameGeek URLs for games with given IDs
 #'
 #' This function is a simple wrapper that returns URLs to given games by using
 #' their IDs.
@@ -19,7 +19,7 @@ bgg_gameurl <- function(ids)
     assert_that(.are_positive_integers(ids))
 
     result <- paste0(.bgg_url("boardgame"), ids)
-    return (result)
+    return(result)
 }
 
 
@@ -127,10 +127,10 @@ bgg_namestyle <- function(dt)
 }
 
 
-#' Get IDs of top rated games on BGG
+#' Get IDs of top rated games on BoardGameGeek
 #'
-#' This function scraps BGG website for IDs of games with given \code{places}
-#' in the games ranking.
+#' This function scraps BoardGameGeek website for IDs of games with given
+#' \code{places} in the games ranking.
 #'
 #' @param places a numeric vector of positive integers.
 #'

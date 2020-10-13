@@ -1,7 +1,9 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Removed the LICENSE file from the package
+* Changed all BGG acronyms to BoardGameGeek in descriptions,
+* Added the link to the BoardGameGeek's API Wiki in 'Description' section
+of the DESCRIPTION file.
 
 ## Test environments
 * local Windows 10, R 4.0.2

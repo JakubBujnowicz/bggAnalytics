@@ -8,8 +8,8 @@ Access the data of a given user's collection. See
   \code{\link{bggAPI}} for more details on inherited slots and methods.
 }
 \references{
-\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BGG XML
-API2}
+\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
+  API2}
 }
 \section{Super class}{
 \code{\link[bggAnalytics:bggAPI]{bggAnalytics::bggAPI}} -> \code{bggCollection}
@@ -51,7 +51,7 @@ Object initialization.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{username}}{a single string with a BGG name of a user whose
+\item{\code{username}}{a single string with a BoardGameGeek name of a user whose
 collection is to be fetched.}
 
 \item{\code{params}}{a list of object parameters. If not all the parameters are

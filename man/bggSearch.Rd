@@ -2,9 +2,9 @@
 % Please edit documentation in R/bggSearch.R
 \name{bggSearch}
 \alias{bggSearch}
-\title{API for BGG search engine}
+\title{API for BoardGameGeek search engine}
 \description{
-Search for items on the BGG with a given query. See
+Search for items on the BoardGameGeek with a given query. See
   \code{\link{bggAPI}} for more details on inherited slots and methods.
 }
 \details{
@@ -13,8 +13,8 @@ XML API2 `Search` returning multiple items for a single ID with different
 types, variable \code{'type'} might be not accurately represented.
 }
 \references{
-\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BGG XML
-API2}
+\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
+  API2}
 }
 \section{Super class}{
 \code{\link[bggAnalytics:bggAPI]{bggAnalytics::bggAPI}} -> \code{bggSearch}
