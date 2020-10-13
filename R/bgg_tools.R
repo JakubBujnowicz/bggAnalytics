@@ -158,20 +158,21 @@ bgg_topgames <- function(places = 1:100)
 
     page_no <- as.numeric(names(pages))
 
-    result <- numeric()
+    result <- character()
     for (i in seq_along(pages)) {
         page <- page_no[i]
 
         xml <- read_html(paste0(.bgg_url("ranking"), "/page/", page))
-        xml <- xml_nodes(xml, xpath = "//*[@class = 'primary']")
+        xml <- xml_find_all(xml, xpath = "//*[@class = 'primary']")
 
         hrefs <- xml_attr(xml, "href")
-        ids <- as.numeric(str_extract(hrefs, "[0-9]+"))
+        ids <- str_extract(hrefs, "[0-9]+")
         select <- pages[[i]] - (page - 1) * 100
 
         result <- c(result, ids[select])
     }
 
     result <- result[match(unlist(pages), places)]
+    result <- as.numeric(result)
     return(result)
 }

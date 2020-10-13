@@ -17,8 +17,8 @@ NULL
 #'
 .fetch_pollplayers <- function(xml)
 {
-    polls <- html_node(xml, xpath = "poll[@name = 'suggested_numplayers']")
-    polls <- lapply(polls, html_nodes, xpath = "results")
+    polls <- xml_find_first(xml, xpath = "poll[@name = 'suggested_numplayers']")
+    polls <- lapply(polls, xml_find_all, xpath = "results")
 
     numplayers <- lapply(polls, .attr2text, xpath = ".",
                          attr = "numplayers", scalar = TRUE)
@@ -40,15 +40,15 @@ NULL
                                   notrecommended = not_recc[[i]])
     }
 
-    return (result)
+    return(result)
 }
 
 #' @describeIn custom_fetches Method for pollage of bggGames.
 #'
 .fetch_pollage <- function(xml)
 {
-    polls <- html_node(xml, xpath = "poll[@name = 'suggested_playerage']")
-    polls <- lapply(polls, html_nodes, xpath = "results/result")
+    polls <- xml_find_first(xml, xpath = "poll[@name = 'suggested_playerage']")
+    polls <- lapply(polls, xml_find_all, xpath = "results/result")
 
     age <- lapply(polls, .attr2text, xpath = ".",
                   attr = "value", scalar = TRUE)
@@ -68,8 +68,8 @@ NULL
 #'
 .fetch_polllanguage <- function(xml)
 {
-    polls <- html_node(xml, xpath = "poll[@name = 'language_dependence']")
-    polls <- lapply(polls, html_nodes, xpath = "results/result")
+    polls <- xml_find_first(xml, xpath = "poll[@name = 'language_dependence']")
+    polls <- lapply(polls, xml_find_all, xpath = "results/result")
 
     description <- lapply(polls, .attr2text, xpath = ".",
                           attr = "value", scalar = TRUE)

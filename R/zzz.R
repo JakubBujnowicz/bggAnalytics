@@ -4,7 +4,6 @@
 #' @import data.table
 #' @importFrom pryr unenclose
 #' @import R6
-#' @import rvest
 #' @import stringr
 #' @importFrom utils globalVariables
 #' @import xml2
