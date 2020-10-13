@@ -39,11 +39,11 @@
 }
 
 
-#' Return a given BGG URL
+#' Return a given BoardGameGeek URL
 #'
 #' Get hyperlinks to given pages of BoardGameGeek site.
 #'
-#' @param of Single string, either "api", "ranking" or "boardgame".
+#' @param of Single string, either `api`, "ranking" or "boardgame".
 #'
 #' @return Single string with a page URL.
 #' @keywords internal

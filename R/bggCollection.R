@@ -4,8 +4,9 @@
 #' @description Access the data of a given user's collection. See
 #'   \code{\link{bggAPI}} for more details on inherited slots and methods.
 #'
-#' @references \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BGG XML
-#' API2}
+#' @references
+#'   \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
+#'   API2}
 #'
 #' @export
 #' @include bggAPI.R
@@ -28,7 +29,7 @@ bggCollection <- R6Class(
     # Initialize ---------------------------------------------------------------
     #' @description Object initialization.
     #'
-    #' @param username a single string with a BGG name of a user whose
+    #' @param username a single string with a BoardGameGeek name of a user whose
     #'   collection is to be fetched.
     #' @param params a list of object parameters. If not all the parameters are
     #'   included in the list, default values are used (\code{NULL} instead of

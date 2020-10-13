@@ -2,7 +2,7 @@
 % Please edit documentation in R/bgg_tools.R
 \name{bgg_topgames}
 \alias{bgg_topgames}
-\title{Get IDs of top rated games on BGG}
+\title{Get IDs of top rated games on BoardGameGeek}
 \usage{
 bgg_topgames(places = 1:100)
 }
@@ -13,8 +13,8 @@ bgg_topgames(places = 1:100)
 Numeric vector of IDs.
 }
 \description{
-This function scraps BGG website for IDs of games with given \code{places}
-in the games ranking.
+This function scraps BoardGameGeek website for IDs of games with given
+\code{places} in the games ranking.
 }
 \examples{
 bgg_topgames()

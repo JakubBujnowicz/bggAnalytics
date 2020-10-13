@@ -2,31 +2,31 @@
 % Please edit documentation in R/bggAPI.R
 \name{bggAPI}
 \alias{bggAPI}
-\title{Interface for BGG's XML API2}
+\title{Interface for BoardGameGeek's XML API2}
 \description{
-This is a class that works as a main interface to BGG's API. All
-  other \code{bgg*} classes inherit from \code{bggAPI}. Furthermore, there is
-  no initialization method for \code{bggAPI} as it serves just as a super
-  class for other classes.
+This is a class that works as a main interface to
+  BoardGameGeek's API. All other \code{bgg*} classes inherit from
+  \code{bggAPI}. Furthermore, there is no initialization method for
+  \code{bggAPI} as it serves just as a super class for other classes.
 }
 \references{
-\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BGG XML
-API2}
+\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
+  API2}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{ids}}{Numeric vector of positive integers. Contains IDs of all
-BGG objects that were requested and are present in \code{data}.
-The vector is sorted by default.}
+BoardGameGeek items that were requested and are present in
+\code{data}. The vector is sorted by default.}
 
 \item{\code{data}}{Data.table with currently fetched variables from the
 object's XML. It has a row count equal to the length of \code{ids}.
 Note that the copy is returned, so no modification of \code{data}
 is possible outside of class methods.}
 
-\item{\code{xml}}{An XML nodeset obtained through the BGG's API. It's length
-is equal to the length of \code{ids}.}
+\item{\code{xml}}{An XML nodeset obtained through the BoardGameGeek's API.
+It's length is equal to the length of \code{ids}.}
 
 \item{\code{api_url}}{A character vector of one or more strings with URLs
 used to fetch XMLs.}
@@ -98,8 +98,8 @@ to \code{data}.}
 \subsection{Method \code{switch_namestyle()}}{
 Switches between two styles of naming the variables:
   \code{'classic'} and \code{'pretty'}. The former is a default value and
-  uses code names concordant with BGG's naming convention in the XMLs.
-  The latter is more intuitive and uses UpperCamelCase.
+  uses code names concordant with BoardGameGeek's naming convention in
+  the XMLs. The latter is more intuitive and uses UpperCamelCase.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{bggAPI$switch_namestyle(to)}\if{html}{\out{</div>}}
 }

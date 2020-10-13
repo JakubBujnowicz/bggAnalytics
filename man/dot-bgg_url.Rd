@@ -2,12 +2,12 @@
 % Please edit documentation in R/html_utils.R
 \name{.bgg_url}
 \alias{.bgg_url}
-\title{Return a given BGG URL}
+\title{Return a given BoardGameGeek URL}
 \usage{
 .bgg_url(of)
 }
 \arguments{
-\item{of}{Single string, either "api", "ranking" or "boardgame".}
+\item{of}{Single string, either `api`, "ranking" or "boardgame".}
 }
 \value{
 Single string with a page URL.
