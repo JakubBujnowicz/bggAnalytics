@@ -27,6 +27,7 @@ bggCollection;Wishlist;wishlist;status;wishlist;logical;TRUE;FALSE;;;
 bggCollection;WishlistPriority;wishlistpriority;status;wishlistpriority;number;TRUE;FALSE;;;
 bggCollection;ImageURL;image;image;;text;TRUE;FALSE;;;
 bggCollection;ThumbnailURL;thumbnail;thumbnail;;text;TRUE;FALSE;;;
+bggCollection;Families;families;stats/rating/ranks/rank[@type = 'family'];friendlyname;text;FALSE;TRUE;rmv_fam_sffx;toString;
 bggCollection;Ranks;ranks;;;table;FALSE;TRUE;;NULL;ranks_cllctn
 bggGames;ID;objectid;.;id;number;TRUE;FALSE;;;
 bggGames;Name;name;name[@type = 'primary'];value;text;TRUE;FALSE;;;
@@ -59,7 +60,7 @@ bggGames;Designers;designers;link[@type = 'boardgamedesigner'];value;text;FALSE;
 bggGames;DesignersID;designersid;link[@type = 'boardgamedesigner'];id;number;FALSE;FALSE;;toString;
 bggGames;Artists;artists;link[@type = 'boardgameartist'];value;text;FALSE;FALSE;;toString;
 bggGames;ArtistsID;artistsid;link[@type = 'boardgameartist'];id;number;FALSE;FALSE;;toString;
-bggGames;Families;families;statistics/ratings/ranks/rank[@type = 'family'];friendlyname;text;FALSE;TRUE;remove_ranks;toString;
+bggGames;Families;families;statistics/ratings/ranks/rank[@type = 'family'];friendlyname;text;FALSE;TRUE;rmv_fam_sffx;toString;
 bggGames;Categories;category;link[@type = 'boardgamecategory'];value;text;FALSE;FALSE;;toString;
 bggGames;CategoriesID;categoryid;link[@type = 'boardgamecategory'];id;number;FALSE;FALSE;;toString;
 bggGames;Mechanics;mechanics;link[@type = 'boardgamemechanic'];value;text;FALSE;FALSE;;toString;

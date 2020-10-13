@@ -28,6 +28,7 @@ Collate:
     'h_index.R'
     'html_utils.R'
     'params_utils.R'
+    'postprocessing.R'
     'squeeze.R'
     'utils.R'
     'zzz.R'

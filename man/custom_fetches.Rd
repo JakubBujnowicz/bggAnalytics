@@ -5,6 +5,8 @@
 \alias{.fetch_pollplayers}
 \alias{.fetch_pollage}
 \alias{.fetch_polllanguage}
+\alias{.fetch_ranks_gms}
+\alias{.fetch_ranks_cllctn}
 \alias{.fetch_bestplayers}
 \alias{.fetch_recplayers}
 \alias{.fetch_notrecplayers}
@@ -15,6 +17,10 @@
 .fetch_pollage(xml)
 
 .fetch_polllanguage(xml)
+
+.fetch_ranks_gms(xml)
+
+.fetch_ranks_cllctn(xml)
 
 .fetch_bestplayers(xml)
 
@@ -40,6 +46,10 @@ name within \code{.fetch_internal}.
 \item \code{.fetch_pollage}: Method for pollage of bggGames.
 
 \item \code{.fetch_polllanguage}: Method for polllanguage of bggGames.
+
+\item \code{.fetch_ranks_gms}: Method for ranks of bggGames.
+
+\item \code{.fetch_ranks_cllctn}: Method for ranks of bggCollection.
 
 \item \code{.fetch_bestplayers}: Method for bestplayers of bggGames.
 

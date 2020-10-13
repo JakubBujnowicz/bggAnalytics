@@ -98,16 +98,6 @@ NULL
 .fetch_ranks_cllctn <- function(xml)
     .fetch_ranks(xml, "stats/rating/ranks")
 
-#' @describeIn custom_fetches Method for families of bggGames.
-#'
-.fetch_families_gms <- function(xml)
-    .fetch_families(xml, "statistics/ratings/ranks")
-
-#' @describeIn custom_fetches Method for families of bggCollection.
-#'
-.fetch_families_cllctn <- function(xml)
-    .fetch_families(xml, "stats/rating/ranks")
-
 #' @describeIn custom_fetches Method for bestplayers of bggGames.
 #'
 .fetch_bestplayers <- function(xml) .playerpoll_outcome(xml, "best")
@@ -117,6 +107,8 @@ NULL
 #' @describeIn custom_fetches Method for bestplayers of bggGames.
 #'
 .fetch_notrecplayers <- function(xml) .playerpoll_outcome(xml, "notrecommended")
+
+
 
 # Multipurpose #################################################################
 .playerpoll_outcome <- function(xml, category)
@@ -140,16 +132,6 @@ NULL
     res <- split(res$outcome, factor(res$i, levels = seq_along(xml)))
     res <- unname(res)
     return(res)
-}
-
-.fetch_families <- function(xml, families_xpath)
-{
-    xpath <- paste0(families_xpath, "/rank[@type = 'family']")
-    fams <- lapply(xml, xml_find_all, xpath = xpath)
-    fams <- lapply(fams, function(x)
-        str_remove(xml_attr(x, attr = "friendlyname"),
-                   pattern = " Rank$"))
-    return(fams)
 }
 
 .fetch_ranks <- function(xml, ranks_xpath)

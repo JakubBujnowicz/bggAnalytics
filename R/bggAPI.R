@@ -66,7 +66,7 @@ bggAPI <- R6::R6Class(
     ),
 
     public = list(
-    # Fetch ----------------------------------------------------------------
+    # Fetch --------------------------------------------------------------------
     #' @description Fetches variables with given \code{variable_names} from the
     #'   object's \code{xml}. Returns them as a list. This is a main method of
     #'   getting non-scalar variables (as they are hard to fit into a
@@ -76,8 +76,8 @@ bggAPI <- R6::R6Class(
     #'   fetch.
     #' @param compress a logical value, decides whether the fetched variables
     #'   should be compress into a scalar form (if possible).
-    fetch = .fetch_external <- function(variable_names = NULL,
-                                        compress = FALSE)
+    fetch = function(variable_names = NULL,
+                     compress = FALSE)
     {
         # Assign to avoid NOTEs while checking the package
         Variable <- NULL
@@ -110,10 +110,57 @@ bggAPI <- R6::R6Class(
             }
         }
 
-        result <- .fetch_internal(xml = private$.xml,
-                                  variable_names = variable_names,
-                                  var_specs = specs,
-                                  compress = compress)
+        # Loop for every variable ----------------------------------------------
+        xml <- private$.xml
+
+        result <- list()
+        for (var in variable_names) {
+            vs <- specs[Variable == var]
+
+            # Extract ----------------------------------------------------------
+            if (vs$Custom != "") {
+                fun <- match.fun(paste0(".fetch_", vs$Custom))
+                fetched <- fun(xml)
+            } else if (vs$Attribute != "") {
+                fun <- match.fun(paste0(".attr2", vs$Type))
+                fetched <- fun(xml = xml,
+                               xpath = vs$Node,
+                               attr = vs$Attribute,
+                               scalar = vs$Scalar)
+            } else {
+                fun <- match.fun(paste0(".nodes2", vs$Type))
+                fetched <- fun(xml = xml,
+                               xpath = vs$Node,
+                               scalar = vs$Scalar)
+            }
+
+            # Apply postprocessing function ------------------------------------
+            if (vs$Postprocessing != "") {
+                post_fun <- match.fun(paste0(".", vs$Postprocessing))
+
+                if (vs$Scalar) {
+                    fetched <- post_fun(fetched)
+                } else {
+                    fetched <- lapply(fetched, post_fun)
+                }
+            }
+
+            # Compression ------------------------------------------------------
+            if (vs$Compression != "") {
+                if (vs$Compression == "toString") {
+                    fetched <- sapply(fetched, toString)
+                }
+                if (vs$Compression == "squeeze") {
+                    fetched <- suppressWarnings(lapply(fetched, as.numeric))
+                    fetched <- sapply(fetched, squeeze)
+                }
+            }
+
+            result[[vs$Variable]] <- fetched
+        }
+
+        # Naming
+        names(result) <- variable_names
         return(result)
     },
 
