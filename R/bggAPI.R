@@ -147,7 +147,7 @@ bggAPI <- R6::R6Class(
             }
 
             # Compression ------------------------------------------------------
-            if (vs$Compression != "") {
+            if (compress) {
                 if (vs$Compression == "toString") {
                     fetched <- sapply(fetched, toString)
                 }

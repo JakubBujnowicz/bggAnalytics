@@ -43,7 +43,7 @@ NULL
                          best = best,
                          recommended = recommended,
                          notrecommended = not_recc)
-    result <- split(result, rep(seq_along(polls), lengths(polls)))
+    result <- .split_acc2list(result, polls)
 
     return(result)
 }
@@ -68,7 +68,7 @@ NULL
     # Split results by IDs
     result <- data.table(age = age,
                          votes = votes)
-    result <- split(result, rep(seq_along(polls), lengths(polls)))
+    result <- .split_acc2list(result, polls)
 
     return(result)
 }
@@ -98,7 +98,7 @@ NULL
     result <- data.table(level = level,
                          description = description,
                          votes = votes)
-    result <- split(result, rep(seq_along(polls), lengths(polls)))
+    result <- .split_acc2list(result, polls)
 
     return(result)
 }
@@ -174,7 +174,6 @@ NULL
                   id = NULL)]
 
     # Split results per ID once again
-    result <- split(result, rep(seq_along(tabs), lengths(tabs)))
-    result <- unname(result)
+    result <- .split_acc2list(result, tabs)
     return(result)
 }

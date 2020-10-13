@@ -29,7 +29,7 @@
         string <- paste0(string, "... (", extra, " more)")
     }
 
-    return (string)
+    return(string)
 }
 
 
@@ -53,6 +53,28 @@
         string <- paste0(string, "s")
     }
 
-    return (string)
+    return(string)
 }
 
+#' Split according to a list
+#'
+#' This splits \code{x} using \code{\link[base]{split}} by making sure that
+#' the returned list is of the same length as \code{list} and every element
+#' is of the same length as \code{list}'s elements.
+#'
+#' @param x an \code{R} object to split.
+#' @param list a list.
+#'
+#' @return A list.
+#' @keywords internal
+#'
+.split_acc2list <- function(x, list)
+{
+    assert_that(is.list(list))
+
+    vec <- seq_along(list)
+    lens <- lengths(list)
+    splitter <- factor(rep(vec, lens), levels = vec)
+    result <- unname(split(x, splitter))
+    return(result)
+}
