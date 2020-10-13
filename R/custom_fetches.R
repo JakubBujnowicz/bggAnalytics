@@ -19,26 +19,31 @@ NULL
 {
     polls <- xml_find_first(xml, xpath = "poll[@name = 'suggested_numplayers']")
     polls <- lapply(polls, xml_find_all, xpath = "results")
+    lng_polls <- .xml_concatenate(polls)
 
-    numplayers <- lapply(polls, .attr2text, xpath = ".",
-                         attr = "numplayers", scalar = TRUE)
-    best <- lapply(polls, .attr2number,
-                   xpath = "result[@value = 'Best']",
-                   attr = "numvotes", scalar = TRUE)
-    recommended <- lapply(polls, .attr2number,
-                          xpath = "result[@value = 'Recommended']",
-                          attr = "numvotes", scalar = TRUE)
-    not_recc <- lapply(polls, .attr2number,
-                       xpath = "result[@value = 'Not Recommended']",
-                       attr = "numvotes", scalar = TRUE)
+    numplayers <- .attr2text(lng_polls,
+                             xpath = ".",
+                             attr = "numplayers",
+                             scalar = TRUE)
+    best <- .attr2number(lng_polls,
+                         xpath = "result[@value = 'Best']",
+                         attr = "numvotes",
+                         scalar = TRUE)
+    recommended <- .attr2number(lng_polls,
+                                xpath = "result[@value = 'Recommended']",
+                                attr = "numvotes",
+                                scalar = TRUE)
+    not_recc <- .attr2number(lng_polls,
+                             xpath = "result[@value = 'Not Recommended']",
+                             attr = "numvotes",
+                             scalar = TRUE)
 
-    result <- list()
-    for (i in seq_along(polls)) {
-        result[[i]] <- data.table(numplayers = numplayers[[i]],
-                                  best = best[[i]],
-                                  recommended = recommended[[i]],
-                                  notrecommended = not_recc[[i]])
-    }
+    # Split result back by IDs
+    result <- data.table(numplayers = numplayers,
+                         best = best,
+                         recommended = recommended,
+                         notrecommended = not_recc)
+    result <- split(result, rep(seq_along(polls), lengths(polls)))
 
     return(result)
 }
@@ -49,17 +54,21 @@ NULL
 {
     polls <- xml_find_first(xml, xpath = "poll[@name = 'suggested_playerage']")
     polls <- lapply(polls, xml_find_all, xpath = "results/result")
+    lng_polls <- .xml_concatenate(polls)
 
-    age <- lapply(polls, .attr2text, xpath = ".",
-                  attr = "value", scalar = TRUE)
-    votes <- lapply(polls, .attr2number, xpath = ".",
-                    attr = "numvotes", scalar = TRUE)
+    age <- .attr2text(lng_polls,
+                      xpath = ".",
+                      attr = "value",
+                      scalar = TRUE)
+    votes <- .attr2number(lng_polls,
+                          xpath = ".",
+                          attr = "numvotes",
+                          scalar = TRUE)
 
-    result <- list()
-    for (i in seq_along(polls)) {
-        result[[i]] <- data.table(age = age[[i]],
-                                  votes = votes[[i]])
-    }
+    # Split results by IDs
+    result <- data.table(age = age,
+                         votes = votes)
+    result <- split(result, rep(seq_along(polls), lengths(polls)))
 
     return(result)
 }
@@ -70,20 +79,26 @@ NULL
 {
     polls <- xml_find_first(xml, xpath = "poll[@name = 'language_dependence']")
     polls <- lapply(polls, xml_find_all, xpath = "results/result")
+    lng_polls <- .xml_concatenate(polls)
 
-    description <- lapply(polls, .attr2text, xpath = ".",
-                          attr = "value", scalar = TRUE)
-    level <- lapply(polls, .attr2number, xpath = ".",
-                    attr = "level", scalar = TRUE)
-    votes <- lapply(polls, .attr2number, xpath = ".",
-                    attr = "numvotes", scalar = TRUE)
+    description <- .attr2text(lng_polls,
+                              xpath = ".",
+                              attr = "value",
+                              scalar = TRUE)
+    level <- .attr2number(lng_polls,
+                          xpath = ".",
+                          attr = "level",
+                          scalar = TRUE)
+    votes <- .attr2number(lng_polls,
+                          xpath = ".",
+                          attr = "numvotes",
+                          scalar = TRUE)
 
-    result <- list()
-    for (i in seq_along(polls)) {
-        result[[i]] <- data.table(level = level[[i]],
-                                  description = description[[i]],
-                                  votes = votes[[i]])
-    }
+    # Split results by IDs
+    result <- data.table(level = level,
+                         description = description,
+                         votes = votes)
+    result <- split(result, rep(seq_along(polls), lengths(polls)))
 
     return(result)
 }
