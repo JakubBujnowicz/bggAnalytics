@@ -95,7 +95,7 @@
         attr <- specs$Attribute
         type <- specs$Type
         scalar <- specs$Scalar
-        val2na <- specs$ValueToNA
+        postpr <- specs$Postprocessing
         compression <- specs$Compression
         custom <- specs$Custom
 
@@ -105,16 +105,26 @@
             fetched <- fun(xml)
         } else if (attr != "") {
             fun <- match.fun(paste0(".attr2", type))
-            fetched <- fun(xml = xml, xpath = node, attr = attr,
+            fetched <- fun(xml = xml,
+                           xpath = node,
+                           attr = attr,
                            scalar = scalar)
         } else {
             fun <- match.fun(paste0(".nodes2", type))
-            fetched <- fun(xml = xml, xpath = node, scalar = scalar)
+            fetched <- fun(xml = xml,
+                           xpath = node,
+                           scalar = scalar)
         }
 
-        # Replace some values with NAs -----------------------------------------
-        if (!is.na(val2na)) {
-            fetched[fetched == val2na] <- NA
+        # Apply postprocessing function ----------------------------------------
+        if (postpr != "") {
+            post_fun <- match.fun(paste0(".", postpr))
+
+            if (scalar) {
+                fetched <- post_fun(fetched)
+            } else {
+                fetched <- lapply(fetched, post_fun)
+            }
         }
 
         # Compression ----------------------------------------------------------
