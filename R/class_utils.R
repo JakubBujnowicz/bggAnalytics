@@ -82,7 +82,7 @@
     assert_that(is.data.table(var_specs))
     assert_that(.is_boolean(compress))
 
-    # Assign to avoid NOTEs while checking the package
+    # Assignment to avoid NOTEs while checking the package
     Variable <- NULL
     Node <- NULL
 
@@ -100,8 +100,8 @@
         custom <- specs$Custom
 
         # Extract --------------------------------------------------------------
-        if (custom) {
-            fun <- match.fun(paste0(".fetch_", var))
+        if (custom != "") {
+            fun <- match.fun(paste0(".fetch_", custom))
             fetched <- fun(xml)
         } else if (attr != "") {
             fun <- match.fun(paste0(".attr2", type))

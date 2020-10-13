@@ -88,6 +88,16 @@ NULL
     return(result)
 }
 
+#' @describeIn custom_fetches Method for ranks of bggGames.
+#'
+.fetch_ranks_games <- function(xml)
+    .fetch_ranks(xml, "statistics/ratings/ranks")
+
+#' @describeIn custom_fetches Method for bestplayers of bggCollection.
+#'
+.fetch_ranks_cllctn <- function(xml)
+    .fetch_ranks(xml, "stats/rating/ranks")
+
 #' @describeIn custom_fetches Method for bestplayers of bggGames.
 #'
 .fetch_bestplayers <- function(xml) .playerpoll_outcome(xml, "best")
@@ -120,4 +130,34 @@ NULL
     res <- split(res$outcome, factor(res$i, levels = seq_along(xml)))
     res <- unname(res)
     return(res)
+}
+
+.fetch_ranks <- function(xml, ranks_xpath)
+{
+    ranks <- xml_find_first(xml, xpath = ranks_xpath)
+    tabs <- lapply(ranks, function(x) xml_attrs(
+        xml_find_all(x, xpath = "./rank")))
+
+    # Assignment to avoid NOTEs while checking the package
+    friendlyname <- NULL
+    value <- NULL
+    bayesaverage <- NULL
+
+    # Join all ranks into one data.table
+    result <- rbindlist(lapply(unlist(tabs, recursive = FALSE), as.list))
+    result[, ":="(friendlyname = str_remove(friendlyname, " Rank$"),
+                  value = as.numeric(
+                      fifelse(value == "Not Ranked",
+                              NA_character_,
+                              value)),
+                  bayesaverage = as.numeric(
+                      fifelse(bayesaverage == "Not Ranked",
+                              NA_character_,
+                              bayesaverage)),
+                  id = NULL)]
+
+    # Split results per ID once again
+    result <- split(result, rep(seq_along(tabs), lengths(tabs)))
+    result <- unname(result)
+    return(result)
 }
