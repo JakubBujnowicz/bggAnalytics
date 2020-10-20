@@ -56,6 +56,7 @@
     return(string)
 }
 
+
 #' Split according to a list
 #'
 #' This splits \code{x} using \code{\link[base]{split}} by making sure that
@@ -77,4 +78,19 @@
     splitter <- factor(rep(vec, lens), levels = vec)
     result <- unname(split(x, splitter))
     return(result)
+}
+
+#' Get one of the internal functions from the package
+#'
+#' This makes sure internal functions from this package can be accessed which
+#' sometimes fails when using \code{match.fun}.
+#'
+#' @param fun_name a single string.
+#'
+#' @return A function.
+#' @keywords internal
+#'
+.internal_fun <- function(fun_name)
+{
+    get(fun_name, envir = asNamespace("bggAnalytics"))
 }

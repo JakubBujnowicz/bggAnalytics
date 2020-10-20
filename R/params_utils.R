@@ -49,7 +49,7 @@
         if (is.null(params[[p]])) next
 
         valid_str <- specs[[p]]$validator
-        validator <- match.fun(valid_str)
+        validator <- .internal_fun(valid_str)
 
         if (valid_str == ".are_strings" && !is.null(specs[[p]]$allowed)) {
             test <- validate_that(

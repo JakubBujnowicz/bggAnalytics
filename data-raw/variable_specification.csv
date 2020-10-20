@@ -47,7 +47,7 @@ bggGames;BestPlayers;bestplayers;;;text;FALSE;FALSE;;squeeze;bestplayers
 bggGames;Playingtime;playingtime;playingtime;value;number;TRUE;FALSE;zero2NA;;
 bggGames;MinPlaytime;minplaytime;minplaytime;value;number;TRUE;FALSE;zero2NA;;
 bggGames;MaxPlaytime;maxplaytime;maxplaytime;value;number;TRUE;FALSE;zero2NA;;
-bggGames;MinAge;minage;minage;value;number;TRUE;FALSE;;;
+bggGames;MinAge;minage;minage;value;number;TRUE;FALSE;zero2NA;;
 bggGames;NumOwned;numowned;statistics/ratings/owned;value;number;TRUE;TRUE;;;
 bggGames;NumTrading;numtrading;statistics/ratings/trading;value;number;TRUE;TRUE;;;
 bggGames;NumWanting;numwanting;statistics/ratings/wanting;value;number;TRUE;TRUE;;;

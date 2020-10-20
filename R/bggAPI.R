@@ -120,16 +120,16 @@ bggAPI <- R6::R6Class(
 
             # Extract ----------------------------------------------------------
             if (vs$Custom != "") {
-                fun <- match.fun(paste0(".fetch_", vs$Custom))
+                fun <- .internal_fun(paste0(".fetch_", vs$Custom))
                 fetched <- fun(xml)
             } else if (vs$Attribute != "") {
-                fun <- match.fun(paste0(".attr2", vs$Type))
+                fun <- .internal_fun(paste0(".attr2", vs$Type))
                 fetched <- fun(xml = xml,
                                xpath = vs$Node,
                                attr = vs$Attribute,
                                scalar = vs$Scalar)
             } else {
-                fun <- match.fun(paste0(".nodes2", vs$Type))
+                fun <- .internal_fun(paste0(".nodes2", vs$Type))
                 fetched <- fun(xml = xml,
                                xpath = vs$Node,
                                scalar = vs$Scalar)
@@ -137,7 +137,7 @@ bggAPI <- R6::R6Class(
 
             # Apply postprocessing function ------------------------------------
             if (vs$Postprocessing != "") {
-                post_fun <- match.fun(paste0(".", vs$Postprocessing))
+                post_fun <- .internal_fun(paste0(".", vs$Postprocessing))
 
                 if (vs$Scalar) {
                     fetched <- post_fun(fetched)
