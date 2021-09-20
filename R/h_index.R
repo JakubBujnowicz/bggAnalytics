@@ -26,7 +26,9 @@
 h_index <- function(num_plays)
 {
     # Assertions
-    assert_that(.are_integers(num_plays, lb = 0))
+    assert_integerish(num_plays, lower = 0,
+                      any.missing = FALSE,
+                      min.len = 1)
 
     x <- num_plays[order(num_plays, decreasing = TRUE)]
     vec <- seq_along(x)

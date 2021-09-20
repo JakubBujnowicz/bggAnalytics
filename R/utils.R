@@ -16,9 +16,9 @@
 .compress <- function(vec, n_show = 5, collapse = ", ")
 {
     # Assertions
-    assert_that(is.atomic(vec))
-    assert_that(.is_positive_integer(n_show))
-    assert_that(.is_string(collapse))
+    assert_atomic(vec)
+    assert_count(n_show)
+    assert_string(collapse)
 
     n <- length(vec)
     extra <- n - n_show
@@ -46,8 +46,8 @@
 .plural <- function(string, count)
 {
     # Assertions
-    assert_that(.is_string(string))
-    assert_that(.is_integer(count))
+    assert_string(string)
+    assert_integerish(count, lower = 0)
 
     if (count > 1) {
         string <- paste0(string, "s")
@@ -71,7 +71,7 @@
 #'
 .split_acc2list <- function(x, list)
 {
-    assert_that(is.list(list))
+    assert_list(list)
 
     vec <- seq_along(list)
     lens <- lengths(list)

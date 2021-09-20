@@ -23,8 +23,7 @@
 squeeze <- function(integers)
 {
     # Assertions
-    assert_that(is.numeric(integers),
-                all(integers == trunc(integers), na.rm = TRUE))
+    assert_integerish(integers)
 
     # Get sorted integer vector
     ints <- integers[!is.na(integers)]
@@ -78,8 +77,8 @@ squeeze <- function(integers)
 unsqueeze <- function(strings, strict = FALSE)
 {
     # Assertions
-    assert_that(.are_strings(strings))
-    assert_that(.is_boolean(strict))
+    assert_character(strings)
+    assert_flag(strict)
 
     # Functions
     .mat2num <- function(x)
