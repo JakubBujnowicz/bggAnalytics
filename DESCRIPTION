@@ -18,7 +18,6 @@ Imports: checkmate, pryr, stringr, utils, xml2
 Depends: 
     R (>= 4.0.0), data.table, R6
 Collate: 
-    'assertions.R'
     'class_utils.R'
     'bggAPI.R'
     'bggAnalytics-package.R'
