@@ -80,12 +80,7 @@ unsqueeze <- function(strings, strict = FALSE)
     assert_flag(strict)
 
     # Functions
-    .mat2num <- function(x)
-    {
-        suppressWarnings(mode(x) <- "numeric")
-        return(x)
-    }
-    .unfold <- function(x, y)
+    .unfold_seq <- function(x, y)
     {
         if (is.na(y)) {
             return(x)
@@ -94,13 +89,24 @@ unsqueeze <- function(strings, strict = FALSE)
         }
     }
 
+    .unsqueeze <- function(x)
+    {
+        res <- str_split_fixed(x, pattern = "-", n = 2)
+        suppressWarnings(mode(res) <- "numeric")
+        res <- mapply(.unfold_seq,
+                      x = res[, 1],
+                      y = res[, 2],
+                      SIMPLIFY = FALSE)
+        res <- unlist(res)
+        return(res)
+    }
+
     res <- str_split(strings, pattern = ", ")
-    res <- lapply(res, str_split_fixed, pattern = "-", n = 2)
-    res <- lapply(res, .mat2num)
-    res <- lapply(res,
-                  function(m) unlist(mapply(.unfold,
-                                            x = m[, 1],
-                                            y = m[, 2])))
+    res <- lapply(res, .unsqueeze)
+
+    if (length(names(strings)) == length(res)) {
+        names(res) <- names(strings)
+    }
 
     if (!strict && length(res) == 1) {
         res <- unlist(res)
