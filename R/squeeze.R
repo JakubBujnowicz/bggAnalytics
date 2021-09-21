@@ -40,7 +40,6 @@ squeeze <- function(integers)
         return("")
     }
 
-
     dff <- diff(ints)
     seqs <- rle(dff)
 

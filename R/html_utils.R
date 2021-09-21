@@ -199,3 +199,17 @@ NULL
 
     return(values)
 }
+
+#' @rdname extraction_functions
+.attr2datetime <- function(xml, xpath, attr, scalar = TRUE)
+{
+    if (scalar) {
+        nodes <- xml_find_first(xml, xpath = xpath)
+        values <- as.POSIXct(xml_attr(nodes, attr = attr))
+    } else {
+        nodes <- lapply(xml, xml_find_all, xpath = xpath)
+        values <- lapply(nodes, function(x) as.POSIXct(xml_attr(x, attr = attr)))
+    }
+
+    return(values)
+}
