@@ -89,7 +89,10 @@ bggAPI <- R6::R6Class(
         specs <- private$.get_varspecs()
 
         if (!is.null(variable_names)) {
-            assert_that(.are_strings(variable_names))
+            assert_character(variable_names,
+                             any.missing = FALSE,
+                             min.len = 1,
+                             unique = TRUE)
         } else {
             variable_names <- specs$Variable
         }
@@ -183,7 +186,10 @@ bggAPI <- R6::R6Class(
         specs <- private$.get_varspecs()
 
         if (!is.null(variable_names)) {
-            assert_that(.are_strings(variable_names))
+            assert_character(variable_names,
+                             any.missing = FALSE,
+                             min.len = 1,
+                             unique = TRUE)
 
             # Already present and omitted
             existing <- intersect(variable_names, names(private$.data))
@@ -246,7 +252,7 @@ bggAPI <- R6::R6Class(
     switch_namestyle = function(to)
     {
         # Assertions
-        assert_that(.is_string(to, allowed = c("pretty", "classic")))
+        assert_choice(to, choices = c("pretty", "classic"))
 
         # Assign to avoid NOTEs while checking the package
         Class <- NULL

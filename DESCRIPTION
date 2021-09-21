@@ -5,16 +5,16 @@ Description: Tools for analysing board game data. Mainly focused on providing
     an interface for BoardGameGeek's XML API2 through R6 class system objects.
     More details about the BoardGameGeek's API can be obtained here
     <https://boardgamegeek.com/wiki/page/BGG_XML_API2>.
-Version: 0.2.0.9000
+Version: 0.2.0.9100
 Author: Jakub Bujnowicz [aut, cre]
 Maintainer: Jakub Bujnowicz <bujnowiczgithub@gmail.com>
 URL: https://github.com/JakubBujnowicz/bggAnalytics
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Language: en-GB
-Imports: assertthat, pryr, stringr, utils, xml2
+Imports: checkmate, pryr, stringr, utils, xml2
 Depends: 
     R (>= 4.0.0), data.table, R6
 Collate: 

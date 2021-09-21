@@ -47,7 +47,10 @@ bggGames <- R6Class(
     initialize = function(ids, chunk_size = 500, params = NULL)
     {
         # Assertions -----------------------------------------------------------
-        assert_that(.are_positive_integers(ids))
+        assert_integerish(ids, lower = 1, min.len = 1,
+                          any.missing = FALSE)
+        assert_count(chunk_size)
+
         params <- .process_params(params, class = "bggGames")
 
         ids <- unique(ids)

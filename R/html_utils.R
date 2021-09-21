@@ -11,7 +11,7 @@
 #'
 .bgg_readurl <- function(url, ...)
 {
-    assert_that(.is_string(url))
+    assert_string(url)
 
     .http_error <- function(e)
     {

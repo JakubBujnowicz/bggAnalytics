@@ -16,7 +16,7 @@
 bgg_gameurl <- function(ids)
 {
     # Assertions
-    assert_that(.are_positive_integers(ids))
+    assert_integerish(ids, lower = 1, min.len = 1)
 
     result <- paste0(.bgg_url("boardgame"), ids)
     return(result)
@@ -47,12 +47,8 @@ bgg_gameurl <- function(ids)
 bgg_merge <- function(x, y, ...)
 {
     # Assertions
-    assert_that(inherits(x, "bggAPI"))
-    assert_that(inherits(y, "bggAPI"))
-
-    # Assign to avoid NOTEs while checking the package
-    Variable <- NULL
-    PrettyName <- NULL
+    assert_class(x, "bggAPI")
+    assert_class(y, "bggAPI")
 
     # Use pretty names?
     pn <- x$params$pretty_names
@@ -100,7 +96,7 @@ bgg_merge <- function(x, y, ...)
 bgg_namestyle <- function(dt)
 {
     # Assertions
-    assert_that(is.data.frame(dt))
+    assert_data_frame(dt)
 
     dt_names <- names(dt)
     cl_names <- var_specs$Variable
@@ -151,7 +147,7 @@ bgg_namestyle <- function(dt)
 bgg_topgames <- function(places = 1:100)
 {
     # Assertions
-    assert_that(.are_positive_integers(places))
+    assert_integerish(places, lower = 1, min.len = 1)
 
     pages <- ceiling(places / 100)
     pages <- split(places, pages)

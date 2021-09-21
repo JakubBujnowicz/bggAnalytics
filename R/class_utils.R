@@ -12,7 +12,7 @@
 .private_getter <- function(slotname)
 {
     # Assertion
-    assert_that(.is_string(slotname))
+    assert_string(slotname)
 
     # Closure
     result_fun <- function(value) {

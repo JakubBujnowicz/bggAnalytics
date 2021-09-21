@@ -1,6 +1,6 @@
 #' @keywords internal
 #'
-#' @import assertthat
+#' @import checkmate
 #' @import data.table
 #' @importFrom pryr unenclose
 #' @import R6

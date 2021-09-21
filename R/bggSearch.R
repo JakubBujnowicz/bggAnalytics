@@ -51,7 +51,9 @@ bggSearch <- R6Class(
     initialize = function(query, params = NULL)
     {
         # Assertions -----------------------------------------------------------
-        assert_that(.are_strings(query))
+        assert_character(query, any.missing = FALSE,
+                         min.len = 1)
+
         params <- .process_params(params, class = "bggSearch")
 
         # Connecting to API ----------------------------------------------------

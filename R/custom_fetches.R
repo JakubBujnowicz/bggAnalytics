@@ -130,7 +130,7 @@ NULL
 {
     # Assertions
     types <- c("best", "recommended", "notrecommended")
-    assert_that(.is_string(category, allowed = types))
+    assert_choice(category, choices = types)
 
     res <- .fetch_pollplayers(xml)
 

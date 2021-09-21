@@ -63,7 +63,7 @@ bggCollection <- R6Class(
         }
 
         # Assertions -----------------------------------------------------------
-        assert_that(.is_string(username))
+        assert_string(username)
         params <- .process_params(params, class = "bggCollection")
 
         # Connecting to API ----------------------------------------------------
