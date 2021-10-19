@@ -51,7 +51,9 @@ bggSearch <- R6Class(
     initialize = function(query, params = NULL)
     {
         # Assertions -----------------------------------------------------------
-        assert_that(.are_strings(query))
+        assert_character(query, any.missing = FALSE,
+                         min.len = 1)
+
         params <- .process_params(params, class = "bggSearch")
 
         # Connecting to API ----------------------------------------------------
@@ -61,17 +63,15 @@ bggSearch <- R6Class(
         api_url <- paste0(.bgg_url("api"), "search?query=", query_str)
         api_url <- .extend_url_by_params(api_url, params, class = "bggSearch")
 
-        xml <- read_html(api_url)
+        xml <- read_xml(api_url)
         xml <- .xml_expand(xml)
 
-
         # Preparing data -------------------------------------------------------
-        ids <- as.numeric(sapply(xml, xml_attr, attr = "id"))
+        ids <- as.numeric(xml_attr(xml, attr = "id"))
         uniq <- !duplicated(ids)
         # uniq <- rep(TRUE, length(ids))
         data <- data.table(objectid = ids[uniq])
         setkey(data, objectid)
-
 
         # Setting private variables --------------------------------------------
         private$.timestamp <- Sys.time()

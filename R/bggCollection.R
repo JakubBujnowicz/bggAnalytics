@@ -58,13 +58,12 @@ bggCollection <- R6Class(
     #'   }
     initialize = function(username = NULL, params = NULL)
     {
-
         if (is.null(username)) {
             username <- getOption(".bggAnalytics.username")
         }
 
         # Assertions -----------------------------------------------------------
-        assert_that(.is_string(username))
+        assert_string(username)
         params <- .process_params(params, class = "bggCollection")
 
         # Connecting to API ----------------------------------------------------
@@ -72,14 +71,15 @@ bggCollection <- R6Class(
         api_url <- .extend_url_by_params(api_url, params,
                                          class = "bggCollection")
 
-        xml <- read_html(api_url)
-
         # Check if the request has been processed
+        xml <- read_xml(api_url)
         txt <- xml_text(xml)
+
         processing_message <-
             "request for this collection has been accepted and will be processed."
+
         messages <- getOption(".bggAnalytics.verbose")
-        while (xml_length(xml) == 1 && grepl(processing_message, txt)) {
+        while (grepl(processing_message, txt)) {
             if (messages) {
                 message("Server needs time to process the request...")
                 messages <- FALSE
@@ -89,13 +89,13 @@ bggCollection <- R6Class(
             Sys.sleep(1)
 
             # Try again
-            xml <- read_html(api_url)
+            xml <- read_xml(api_url)
             txt <- xml_text(xml)
         }
         xml <- .xml_expand(xml)
 
         # Extract IDs ----------------------------------------------------------
-        ids <- .attr2number(xml, xpath = ".", attr = "objectid")
+        ids <- as.numeric(xml_attr(xml, attr = "objectid"))
 
         if (length(ids) == 0) {
             warning("this collection contains no games, perhaps the ",

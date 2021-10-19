@@ -10,3 +10,5 @@ tests/
 LICENSE
 cran-comments.md
 ^CRAN-RELEASE$
+^cran-comments\.md$
+^revdep$

@@ -23,8 +23,7 @@
 squeeze <- function(integers)
 {
     # Assertions
-    assert_that(is.numeric(integers),
-                all(integers == trunc(integers), na.rm = TRUE))
+    assert_integerish(integers)
 
     # Get sorted integer vector
     ints <- integers[!is.na(integers)]
@@ -40,7 +39,6 @@ squeeze <- function(integers)
     } else if (length(ints) == 0) {
         return("")
     }
-
 
     dff <- diff(ints)
     seqs <- rle(dff)
@@ -78,16 +76,11 @@ squeeze <- function(integers)
 unsqueeze <- function(strings, strict = FALSE)
 {
     # Assertions
-    assert_that(.are_strings(strings))
-    assert_that(.is_boolean(strict))
+    assert_character(strings)
+    assert_flag(strict)
 
     # Functions
-    .mat2num <- function(x)
-    {
-        suppressWarnings(mode(x) <- "numeric")
-        return(x)
-    }
-    .unfold <- function(x, y)
+    .unfold_seq <- function(x, y)
     {
         if (is.na(y)) {
             return(x)
@@ -96,13 +89,24 @@ unsqueeze <- function(strings, strict = FALSE)
         }
     }
 
+    .unsqueeze <- function(x)
+    {
+        res <- str_split_fixed(x, pattern = "-", n = 2)
+        suppressWarnings(mode(res) <- "numeric")
+        res <- mapply(.unfold_seq,
+                      x = res[, 1],
+                      y = res[, 2],
+                      SIMPLIFY = FALSE)
+        res <- unlist(res)
+        return(res)
+    }
+
     res <- str_split(strings, pattern = ", ")
-    res <- lapply(res, str_split_fixed, pattern = "-", n = 2)
-    res <- lapply(res, .mat2num)
-    res <- lapply(res,
-                  function(m) unlist(mapply(.unfold,
-                                            x = m[, 1],
-                                            y = m[, 2])))
+    res <- lapply(res, .unsqueeze)
+
+    if (length(names(strings)) == length(res)) {
+        names(res) <- names(strings)
+    }
 
     if (!strict && length(res) == 1) {
         res <- unlist(res)

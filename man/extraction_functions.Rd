@@ -8,6 +8,7 @@
 \alias{.attr2text}
 \alias{.attr2number}
 \alias{.attr2logical}
+\alias{.attr2datetime}
 \title{Extraction functions}
 \usage{
 .nodes2text(xml, xpath, scalar = TRUE)
@@ -21,6 +22,8 @@
 .attr2number(xml, xpath, attr, scalar = TRUE)
 
 .attr2logical(xml, xpath, attr, scalar = TRUE)
+
+.attr2datetime(xml, xpath, attr, scalar = TRUE)
 }
 \arguments{
 \item{xml}{XML item list.}

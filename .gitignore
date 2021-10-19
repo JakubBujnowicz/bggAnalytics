@@ -4,6 +4,8 @@ tars/
 manuals/
 tests/testing_script.R
 .Rprofile
+CRAN-RELEASE
+
 
 # History files
 .Rhistory

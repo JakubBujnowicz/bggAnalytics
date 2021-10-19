@@ -12,7 +12,7 @@
 .private_getter <- function(slotname)
 {
     # Assertion
-    assert_that(.is_string(slotname))
+    assert_string(slotname)
 
     # Closure
     result_fun <- function(value) {
@@ -53,86 +53,3 @@
 
     return(specs)
 }
-
-
-# Fetching #####################################################################
-#' Generalised fetch for every class
-#'
-#' It is a universal tool for fetching variables from XMLs, should be used
-#' within fetch methods from every bgg* class. It uses internal variable
-#' parameter specification to extract data.
-#'
-#' @param xml XML nodeset.
-#' @param variable_names Character vector of variable names to extract.
-#' @param var_specs Data.table with parameter specification.
-#' @param compress a logical value, whether variables should be compressed.
-#'
-#' @name fetches
-#'
-#' @return List of variables. Variables marked as 'scalar' in param
-#'   specification will be unlisted.
-#' @keywords internal
-#'
-.fetch_internal <- function(xml, variable_names, var_specs,
-                            compress = FALSE)
-{
-    # Assertions
-    assert_that(.is_nodeset(xml))
-    assert_that(.are_strings(variable_names))
-    assert_that(is.data.table(var_specs))
-    assert_that(.is_boolean(compress))
-
-    # Assign to avoid NOTEs while checking the package
-    Variable <- NULL
-    Node <- NULL
-
-    # Loop for every variable --------------------------------------------------
-    result <- list()
-    for (var in variable_names) {
-        specs <- var_specs[Variable == var]
-
-        node <- specs$Node
-        attr <- specs$Attribute
-        type <- specs$Type
-        scalar <- specs$Scalar
-        val2na <- specs$ValueToNA
-        compression <- specs$Compression
-        custom <- specs$Custom
-
-        # Extract --------------------------------------------------------------
-        if (custom) {
-            fun <- match.fun(paste0(".fetch_", var))
-            fetched <- fun(xml)
-        } else if (attr != "") {
-            fun <- match.fun(paste0(".attr2", type))
-            fetched <- fun(xml = xml, xpath = node, attr = attr,
-                           scalar = scalar)
-        } else {
-            fun <- match.fun(paste0(".nodes2", type))
-            fetched <- fun(xml = xml, xpath = node, scalar = scalar)
-        }
-
-        # Replace some values with NAs -----------------------------------------
-        if (!is.na(val2na)) {
-            fetched[fetched == val2na] <- NA
-        }
-
-        # Compression ----------------------------------------------------------
-        if (compress) {
-            if (compression == "toString") {
-                fetched <- sapply(fetched, toString)
-            }
-            if (compression == "squeeze") {
-                fetched <- suppressWarnings(lapply(fetched, as.numeric))
-                fetched <- sapply(fetched, squeeze)
-            }
-        }
-
-        result[[specs$Variable]] <- fetched
-    }
-
-    # Naming
-    names(result) <- variable_names
-    return(result)
-}
-

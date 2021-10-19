@@ -11,8 +11,8 @@
 .process_params <- function(params, class)
 {
     # Assertions
-    assert_that(is.null(params) || is.list(params))
-    assert_that(.is_string(class))
+    assert_list(params, null.ok = TRUE)
+    assert_string(class)
 
     specs <- param_specs[[class]]
 
@@ -33,40 +33,27 @@
     params <- c(to_add, params)
     params <- params[match(names(params), names(specs))]
 
-    # Error function
-    .stop_on_error <- function(input) {
-        if (isTRUE(input)) {
-            return(TRUE)
-        }
-
-        # Otherwise
-        msg <- gsub("params[[p]]", p, input, fixed = TRUE)
-        stop("parameter ", msg, call. = FALSE)
-    }
-
     # Validate
     for (p in names(params)) {
         if (is.null(params[[p]])) next
 
         valid_str <- specs[[p]]$validator
-        validator <- match.fun(valid_str)
 
-        if (valid_str == ".are_strings" && !is.null(specs[[p]]$allowed)) {
-            test <- validate_that(
-                validator(params[[p]],
-                          allowed = specs[[p]]$allowed))
-            .stop_on_error(test)
+        if (valid_str == "subset") {
+            assert_subset(params[[p]], choices = specs[[p]]$allowed,
+                          .var.name = p)
 
-        } else if (valid_str == ".is_positive_integer") {
-            test <- validate_that(
-                validator(params[[p]],
-                          lb = specs[[p]]$min,
-                          ub = specs[[p]]$max))
-            .stop_on_error(test)
-
+        } else if (valid_str == "count") {
+            assert_integerish(params[[p]],
+                              lower = specs[[p]]$min,
+                              upper = specs[[p]]$max,
+                              len = 1,
+                              .var.name = p)
         } else {
-            test <- validate_that(validator(params[[p]]))
-            .stop_on_error(test)
+            validator <- get(paste0("assert_", valid_str),
+                             envir = asNamespace("checkmate"))
+
+            validator(params[[p]], .var.name = p)
         }
     }
 
@@ -89,9 +76,9 @@
 .extend_url_by_params <- function(url, params, class)
 {
     # Assertions
-    assert_that(.is_string(url))
-    assert_that(is.null(params) || is.list(params))
-    assert_that(.is_string(class))
+    assert_string(url)
+    assert_list(params, null.ok = TRUE)
+    assert_string(class)
 
     specs <- param_specs[[class]]
 
@@ -125,5 +112,5 @@
 
     # Adding to url
     url <- paste0(url, paste0(unlist(params), collapse = ""))
-    return (url)
+    return(url)
 }

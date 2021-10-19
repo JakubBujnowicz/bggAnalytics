@@ -11,7 +11,7 @@
 #'
 .bgg_readurl <- function(url, ...)
 {
-    assert_that(.is_string(url))
+    assert_string(url)
 
     .http_error <- function(e)
     {
@@ -72,8 +72,7 @@
 #'
 .xml_expand <- function(xml)
 {
-    result <- html_node(xml, "items")
-    result <- xml_children(result)
+    result <- xml_find_all(xml, xpath = "item")
     return(result)
 }
 
@@ -120,11 +119,11 @@ NULL
 .nodes2text <- function(xml, xpath, scalar = TRUE)
 {
     if (scalar) {
-        nodes <- html_node(xml, xpath = xpath)
-        values <- html_text(nodes, trim = TRUE)
+        nodes <- xml_find_first(xml, xpath = xpath)
+        values <- xml_text(nodes, trim = TRUE)
     } else {
-        nodes <- lapply(xml, html_nodes, xpath = xpath)
-        values <- lapply(nodes, html_text, trim = TRUE)
+        nodes <- lapply(xml, xml_find_all, xpath = xpath)
+        values <- lapply(nodes, xml_text, trim = TRUE)
     }
 
     return(values)
@@ -134,10 +133,10 @@ NULL
 .nodes2number <- function(xml, xpath, scalar = TRUE)
 {
     if (scalar) {
-        nodes <- html_node(xml, xpath = xpath)
+        nodes <- xml_find_first(xml, xpath = xpath)
         values <- suppressWarnings(xml_double(nodes))
     } else {
-        nodes <- lapply(xml, html_nodes, xpath = xpath)
+        nodes <- lapply(xml, xml_find_all, xpath = xpath)
         values <- suppressWarnings(lapply(nodes, xml_double))
     }
 
@@ -148,11 +147,11 @@ NULL
 .nodes2logical <- function(xml, xpath, scalar = TRUE)
 {
     if (scalar) {
-        values <- .nodes2number(xml, xpath = xpath, scalar = scalar)
-        values <- as.logical(values)
+        nodes <- xml_find_first(xml, xpath = xpath)
+        values <- xml_text(nodes, trim = TRUE) == "1"
     } else {
-        values <- .nodes2number(xml, xpath = xpath, scalar = scalar)
-        values <- lapply(values, as.logical)
+        nodes <- lapply(xml, xml_find_all, xpath = xpath)
+        values <- lapply(nodes, function(x) xml_text(x, trim = TRUE) == "1")
     }
 
     return(values)
@@ -162,10 +161,10 @@ NULL
 .attr2text <- function(xml, xpath, attr, scalar = TRUE)
 {
     if (scalar) {
-        nodes <- html_node(xml, xpath = xpath)
+        nodes <- xml_find_first(xml, xpath = xpath)
         values <- xml_attr(nodes, attr = attr)
     } else {
-        nodes <- lapply(xml, html_nodes, xpath = xpath)
+        nodes <- lapply(xml, xml_find_all, xpath = xpath)
         values <- lapply(nodes, xml_attr, attr = attr)
     }
 
@@ -176,13 +175,12 @@ NULL
 .attr2number <- function(xml, xpath, attr, scalar = TRUE)
 {
     if (scalar) {
-        values <- .attr2text(xml = xml, xpath = xpath, attr = attr,
-                             scalar = scalar)
+        nodes <- xml_find_first(xml, xpath = xpath)
+        values <- xml_attr(nodes, attr = attr)
         values <- suppressWarnings(as.numeric(values))
     } else {
-        values <- .attr2text(xml = xml, xpath = xpath, attr = attr,
-                             scalar = scalar)
-        values <- suppressWarnings(lapply(values, as.numeric))
+        nodes <- lapply(xml, xml_find_all, xpath = xpath)
+        values <- lapply(nodes, function(x) as.numeric(xml_attr(x, attr = attr)))
     }
 
     return(values)
@@ -192,13 +190,25 @@ NULL
 .attr2logical <- function(xml, xpath, attr, scalar = TRUE)
 {
     if (scalar) {
-        values <- .attr2number(xml = xml, xpath = xpath, attr = attr,
-                               scalar = scalar)
-        values <- as.logical(values)
+        nodes <- xml_find_first(xml, xpath = xpath)
+        values <- xml_attr(nodes, attr = attr) == "1"
     } else {
-        values <- .attr2number(xml = xml, xpath = xpath, attr = attr,
-                               scalar = scalar)
-        values <- lapply(values, as.logical)
+        nodes <- lapply(xml, xml_find_all, xpath = xpath)
+        values <- lapply(nodes, function(x) xml_attr(x, attr = attr) == "1")
+    }
+
+    return(values)
+}
+
+#' @rdname extraction_functions
+.attr2datetime <- function(xml, xpath, attr, scalar = TRUE)
+{
+    if (scalar) {
+        nodes <- xml_find_first(xml, xpath = xpath)
+        values <- as.POSIXct(xml_attr(nodes, attr = attr))
+    } else {
+        nodes <- lapply(xml, xml_find_all, xpath = xpath)
+        values <- lapply(nodes, function(x) as.POSIXct(xml_attr(x, attr = attr)))
     }
 
     return(values)

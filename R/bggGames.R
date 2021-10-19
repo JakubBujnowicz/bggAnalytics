@@ -47,7 +47,10 @@ bggGames <- R6Class(
     initialize = function(ids, chunk_size = 500, params = NULL)
     {
         # Assertions -----------------------------------------------------------
-        assert_that(.are_positive_integers(ids))
+        assert_integerish(ids, lower = 1, min.len = 1,
+                          any.missing = FALSE)
+        assert_count(chunk_size)
+
         params <- .process_params(params, class = "bggGames")
 
         ids <- unique(ids)
@@ -61,17 +64,17 @@ bggGames <- R6Class(
         {
             paste0(.bgg_url("api"), "thing?id=", paste0(x, collapse = ","))
         }
-        api_url <- lapply(chunks, .get_base_gameurl)
-        api_url <- sapply(api_url, .extend_url_by_params, params = params,
-                          class = "bggGames")
-        api_url <- unname(api_url)
+        api_url <- sapply(chunks, .get_base_gameurl)
+        url_extension <- .extend_url_by_params("", params = params,
+                                               class = "bggGames")
+        api_url <- paste0(api_url, url_extension)
 
         # Fetch XMLs
-        xml <- lapply(api_url, function(x) .xml_expand(read_html(x)))
+        xml <- lapply(api_url, function(x) .xml_expand(read_xml(x)))
         xml <- .xml_concatenate(xml)
 
         # Testing IDs
-        xml_ids <- .attr2number(xml, xpath = ".", attr = "id")
+        xml_ids <- as.numeric(xml_attr(xml, attr = "id"))
 
         # Check for any success
         if (length(intersect(ids, xml_ids)) == 0) {
