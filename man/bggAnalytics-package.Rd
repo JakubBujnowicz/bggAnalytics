@@ -6,10 +6,7 @@
 \alias{bggAnalytics-package}
 \title{bggAnalytics: BoardGameGeek's Board Game Data Analysis Tools}
 \description{
-Tools for analysing board game data. Mainly focused on providing 
-    an interface for BoardGameGeek's XML API2 through R6 class system objects.
-    More details about the BoardGameGeek's API can be obtained here
-    <https://boardgamegeek.com/wiki/page/BGG_XML_API2>.
+Tools for analysing board game data. Mainly focused on providing an interface for BoardGameGeek's XML API2 through R6 class system objects. More details about the BoardGameGeek's API can be obtained here \url{https://boardgamegeek.com/wiki/page/BGG_XML_API2}.
 }
 \seealso{
 Useful links:

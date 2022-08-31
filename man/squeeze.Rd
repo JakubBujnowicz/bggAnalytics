@@ -10,7 +10,7 @@ squeeze(integers)
 unsqueeze(strings, strict = FALSE)
 }
 \arguments{
-\item{integers}{a numeric vector if integers.}
+\item{integers}{a numeric vector of integers.}
 
 \item{strings}{a character vector of strings, preferably outputs of
 \code{squeeze}.}
