@@ -16,10 +16,9 @@ globalVariables(
     c("self", "private"))
 
 # Options ######################################################################
-# Amount of elements to print
-options(`.bggAnalytics.print` = 10)
-# Should print messages from functions?
-options(`.bggAnalytics.verbose` = TRUE)
-
-# For testing
-options(`.bggAnalytics.username` = "Beo_")
+.onAttach <- function(libname, packagename) {
+    # Amount of elements to print
+    options(`.bggAnalytics.print` = 10)
+    # Should print messages from functions?
+    options(`.bggAnalytics.verbose` = TRUE)
+}
