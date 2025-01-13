@@ -2,15 +2,12 @@
 R package for simple downloading and organisation of board game data using BoardGameGeek's [XML API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2). Users of R programming language should have no problems extracting their BGG games collection data, or in fact, the information about any games from BGG. This allows for automatisation of the collection exporting task, which has to be done manually on the BGG website.
 
 ## Installation
-The package is currently available on CRAN. 
-```r
-install.packages("bggAnalytics")
-```
+> [!Warning]
+> The package is not currently actively maintained, therefore it was pulled from CRAN by the author and may not be functioning correctly.
 
 It can be installed using the `devtools` package.
 ```r
-library(devtools)
-install_github("JakubBujnowicz/bggAnalytics")
+devtools::install_github("JakubBujnowicz/bggAnalytics")
 ```
 
 ## How To Use?
