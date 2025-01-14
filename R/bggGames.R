@@ -31,7 +31,9 @@ bggGames <- R6Class(
     #' @param chunk_size a positive integer, the maximum length of a chunk that
     #'   \code{ids} are split into. All chunks connect to BoardGameGeek's API
     #'   separately, so lowering this number increases computation time. On the
-    #'   other hand if a chunk is too long, URL might be too long to fetch.
+    #'   other hand if a chunk is too long, URL might be too long to fetch. The
+    #'   API caps the number of \code{ids} per URL at 20, which is the default
+    #'   value.
     #' @param params a list of object parameters. If not all the parameters are
     #'   included in the list, default values are used (\code{NULL} instead of
     #'   the list is possible for all the default parameters). \cr
@@ -44,12 +46,12 @@ bggGames <- R6Class(
     #'       ranking and rating stats be included for every item. Note that some
     #'       variables require that \code{stats} is \code{TRUE}.}
     #'   }
-    initialize = function(ids, chunk_size = 500, params = NULL)
+    initialize = function(ids, chunk_size = 20, params = NULL)
     {
         # Assertions -----------------------------------------------------------
         assert_integerish(ids, lower = 1, min.len = 1,
                           any.missing = FALSE)
-        assert_count(chunk_size)
+        assert_int(chunk_size, lower = 1, upper = 20)
 
         params <- .process_params(params, class = "bggGames")
 
