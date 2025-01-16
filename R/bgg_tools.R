@@ -138,7 +138,7 @@ bgg_namestyle <- function(dt)
 #' @examples
 #' bgg_topgames()
 #'
-#' x <- 1:10 * 25 + 5
+#' x <- 1:5 * 25 + 5
 #' ids <- bgg_topgames(sample(x))
 #' gm <- bggGames$new(ids)
 #' gm$expand(c("name", "rank"))

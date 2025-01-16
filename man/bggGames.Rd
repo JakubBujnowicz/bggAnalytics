@@ -25,23 +25,23 @@ Although this class is named `bggGames`, it inherits it's
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{bggGames$new()}}
-\item \href{#method-print}{\code{bggGames$print()}}
-\item \href{#method-clone}{\code{bggGames$clone()}}
+\item \href{#method-bggGames-new}{\code{bggGames$new()}}
+\item \href{#method-bggGames-print}{\code{bggGames$print()}}
+\item \href{#method-bggGames-clone}{\code{bggGames$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="expand">}\href{../../bggAnalytics/html/bggAPI.html#method-expand}{\code{bggAnalytics::bggAPI$expand()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="fetch">}\href{../../bggAnalytics/html/bggAPI.html#method-fetch}{\code{bggAnalytics::bggAPI$fetch()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="switch_namestyle">}\href{../../bggAnalytics/html/bggAPI.html#method-switch_namestyle}{\code{bggAnalytics::bggAPI$switch_namestyle()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="expand"><a href='../../bggAnalytics/html/bggAPI.html#method-bggAPI-expand'><code>bggAnalytics::bggAPI$expand()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="fetch"><a href='../../bggAnalytics/html/bggAPI.html#method-bggAPI-fetch'><code>bggAnalytics::bggAPI$fetch()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="switch_namestyle"><a href='../../bggAnalytics/html/bggAPI.html#method-bggAPI-switch_namestyle'><code>bggAnalytics::bggAPI$switch_namestyle()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-bggGames-new"></a>}}
+\if{latex}{\out{\hypertarget{method-bggGames-new}{}}}
 \subsection{Method \code{new()}}{
 Object initialization.
 \subsection{Usage}{
@@ -76,8 +76,8 @@ default values in parentheses:
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-bggGames-print"></a>}}
+\if{latex}{\out{\hypertarget{method-bggGames-print}{}}}
 \subsection{Method \code{print()}}{
 Print object information.
 \subsection{Usage}{
@@ -86,8 +86,8 @@ Print object information.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-bggGames-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-bggGames-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

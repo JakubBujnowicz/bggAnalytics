@@ -5,7 +5,7 @@
 #' boundary values only. Please see the examples section. \code{unsqueez}
 #' reverses this operation.
 #'
-#' @param integers a numeric vector if integers.
+#' @param integers a numeric vector of integers.
 #'
 #' @return \code{squeeze} returns a vector of characters, \code{unsqueeze}
 #'   returns a list of numerics or a numeric vector.

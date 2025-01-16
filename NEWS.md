@@ -1,3 +1,8 @@
+# bggAnalytics 0.2.1 (2022-08-31)
+
+* Updated documentation.
+
+
 # bggAnalytics 0.2.0 (2021-09-23)
 
 * Slight optimization of variable fetching.
@@ -6,6 +11,7 @@
 * Improved the consistency of the `unsqueeze()` function output.
 * Fixed bugged calls to internal package functions.
 * Fixed a bug which caused `fetch()` variables to have improper names.
+
 
 # bggAnalytics 0.1.0 (2020-10-07)
 

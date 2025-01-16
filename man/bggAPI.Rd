@@ -42,15 +42,15 @@ date.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-fetch}{\code{bggAPI$fetch()}}
-\item \href{#method-expand}{\code{bggAPI$expand()}}
-\item \href{#method-switch_namestyle}{\code{bggAPI$switch_namestyle()}}
-\item \href{#method-clone}{\code{bggAPI$clone()}}
+\item \href{#method-bggAPI-fetch}{\code{bggAPI$fetch()}}
+\item \href{#method-bggAPI-expand}{\code{bggAPI$expand()}}
+\item \href{#method-bggAPI-switch_namestyle}{\code{bggAPI$switch_namestyle()}}
+\item \href{#method-bggAPI-clone}{\code{bggAPI$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-fetch"></a>}}
-\if{latex}{\out{\hypertarget{method-fetch}{}}}
+\if{html}{\out{<a id="method-bggAPI-fetch"></a>}}
+\if{latex}{\out{\hypertarget{method-bggAPI-fetch}{}}}
 \subsection{Method \code{fetch()}}{
 Fetches variables with given \code{variable_names} from the
   object's \code{xml}. Returns them as a list. This is a main method of
@@ -73,8 +73,8 @@ should be compress into a scalar form (if possible).}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-expand"></a>}}
-\if{latex}{\out{\hypertarget{method-expand}{}}}
+\if{html}{\out{<a id="method-bggAPI-expand"></a>}}
+\if{latex}{\out{\hypertarget{method-bggAPI-expand}{}}}
 \subsection{Method \code{expand()}}{
 Expands the \code{data} table by given \code{variable_names}
   by reference. For the list of available variables for every object
@@ -93,8 +93,8 @@ to \code{data}.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-switch_namestyle"></a>}}
-\if{latex}{\out{\hypertarget{method-switch_namestyle}{}}}
+\if{html}{\out{<a id="method-bggAPI-switch_namestyle"></a>}}
+\if{latex}{\out{\hypertarget{method-bggAPI-switch_namestyle}{}}}
 \subsection{Method \code{switch_namestyle()}}{
 Switches between two styles of naming the variables:
   \code{'classic'} and \code{'pretty'}. The former is a default value and
@@ -117,8 +117,8 @@ Returns \code{TRUE} or \code{FALSE} invisibly depending on
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-bggAPI-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-bggAPI-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
