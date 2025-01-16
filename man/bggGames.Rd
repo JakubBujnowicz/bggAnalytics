@@ -45,7 +45,7 @@ Although this class is named `bggGames`, it inherits it's
 \subsection{Method \code{new()}}{
 Object initialization.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bggGames$new(ids, chunk_size = 500, params = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{bggGames$new(ids, chunk_size = 20, params = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -57,7 +57,9 @@ include in the object.}
 \item{\code{chunk_size}}{a positive integer, the maximum length of a chunk that
 \code{ids} are split into. All chunks connect to BoardGameGeek's API
 separately, so lowering this number increases computation time. On the
-other hand if a chunk is too long, URL might be too long to fetch.}
+other hand if a chunk is too long, URL might be too long to fetch. The
+API caps the number of \code{ids} per URL at 20, which is the default
+value.}
 
 \item{\code{params}}{a list of object parameters. If not all the parameters are
 included in the list, default values are used (\code{NULL} instead of
