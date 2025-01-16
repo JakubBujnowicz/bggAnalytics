@@ -1,6 +1,8 @@
-# bggAnalytics 0.2.1 (2022-08-31)
+# bggAnalytics (development version)
 
+## Other changes
 * Updated documentation.
+
 
 
 # bggAnalytics 0.2.0 (2021-09-23)
@@ -16,3 +18,4 @@
 # bggAnalytics 0.1.0 (2020-10-07)
 
 * First working version of the package.
+
