@@ -8,6 +8,9 @@ R package for simple downloading and organisation of board game data using Board
 It can be installed using the `devtools` package.
 ```r
 devtools::install_github("JakubBujnowicz/bggAnalytics")
+
+# Development version
+devtools::install_github("JakubBujnowicz/bggAnalytics", ref = "develop")
 ```
 
 ## How To Use?
