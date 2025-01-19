@@ -21,7 +21,7 @@ function returns an atomic vector instead.}
 }
 \value{
 \code{squeeze} returns a vector of characters, \code{unsqueeze}
-  returns a list of numerics or a numeric vector.
+returns a list of numerics or a numeric vector.
 }
 \description{
 This acts similar to \code{\link[base]{toString}} function, but it tries to

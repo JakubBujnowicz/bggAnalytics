@@ -10,7 +10,7 @@
 \item{slotname}{Single string, name of private slot.}
 }
 \value{
-Function that extracts the private `slotname` slot from a R6 object.
+Function that extracts the private \code{slotname} slot from a R6 object.
 }
 \description{
 This function returns another function which is able to extract private

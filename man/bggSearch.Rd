@@ -5,16 +5,16 @@
 \title{API for BoardGameGeek search engine}
 \description{
 Search for items on the BoardGameGeek with a given query. See
-  \code{\link{bggAPI}} for more details on inherited slots and methods.
+\code{\link{bggAPI}} for more details on inherited slots and methods.
 }
 \details{
 Note that the result is trimmed to items with unique IDs. Due to
-XML API2 `Search` returning multiple items for a single ID with different
+XML API2 \code{Search} returning multiple items for a single ID with different
 types, variable \code{'type'} might be not accurately represented.
 }
 \references{
 \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
-  API2}
+API2}
 }
 \section{Super class}{
 \code{\link[bggAnalytics:bggAPI]{bggAnalytics::bggAPI}} -> \code{bggSearch}
@@ -63,14 +63,14 @@ the list is possible for all the default parameters). \cr
 Following parameters are allowed for the \code{bggGames} class with
 default values in parentheses:
 \itemize{
-    \item{\code{pretty_names}} - (\code{FALSE}) a boolean value,
-    should the object should use pretty names,
-    \item{\code{type}} - (\code{NULL}) a single string, type of things
-    to look for. Possible values: \code{'rpgitem'}, \code{'videogame'},
-    \code{'boardgame'}, \code{'boardgameaccessory'},
-    \code{'boardgameexpansion'}. \code{NULL} uses all possible values.
-    \item{\code{exact}} - (\code{FALSE}) a boolean value, should the
-    results be restricted to items that match the \code{query} exactly.
+\item{\code{pretty_names}} - (\code{FALSE}) a boolean value,
+should the object should use pretty names,
+\item{\code{type}} - (\code{NULL}) a single string, type of things
+to look for. Possible values: \code{'rpgitem'}, \code{'videogame'},
+\code{'boardgame'}, \code{'boardgameaccessory'},
+\code{'boardgameexpansion'}. \code{NULL} uses all possible values.
+\item{\code{exact}} - (\code{FALSE}) a boolean value, should the
+results be restricted to items that match the \code{query} exactly.
 }}
 }
 \if{html}{\out{</div>}}
