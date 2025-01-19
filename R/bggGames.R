@@ -37,11 +37,11 @@ bggGames <- R6Class(
     #'   included in the list, default values are used (`NULL` instead of
     #'   the list is possible for all the default parameters). \cr
     #'   Following parameters are allowed for the `bggGames` class with
-    #'   default values in parentheses:
+    #'   default values in brackets:
     #'   \itemize{
-    #'       \item{`pretty_names`} - (`FALSE`) a boolean value,
+    #'       \item{`pretty_names`} \[`FALSE`\] --- a boolean value,
     #'       should the object should use pretty names,
-    #'       \item{`stats`} - (`TRUE`) a boolean value, should the
+    #'       \item{`stats`} \[`TRUE`\] --- a boolean value, should the
     #'       ranking and rating stats be included for every item. Note that some
     #'       variables require that `stats` is `TRUE`.
     #'   }

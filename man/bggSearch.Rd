@@ -60,15 +60,15 @@ Object initialization.
 included in the list, default values are used (\code{NULL} instead of
 the list is possible for all the default parameters). \cr
 Following parameters are allowed for the \code{bggGames} class with
-default values in parentheses:
+default values in brackets:
 \itemize{
-\item{\code{pretty_names}} - (\code{FALSE}) a boolean value,
+\item{\code{pretty_names}} [\code{FALSE}] --- a boolean value,
 should the object should use pretty names,
-\item{\code{type}} - (\code{NULL}) a single string, type of things
+\item{\code{type}} [\code{NULL}] --- a single string, type of things
 to look for. Possible values: \code{'rpgitem'}, \code{'videogame'},
 \code{'boardgame'}, \code{'boardgameaccessory'},
 \code{'boardgameexpansion'}. \code{NULL} uses all possible values.
-\item{\code{exact}} - (\code{FALSE}) a boolean value, should the
+\item{\code{exact}} [\code{FALSE}] --- a boolean value, should the
 results be restricted to items that match the \code{query} exactly.
 }}
 }

@@ -36,15 +36,15 @@ bggSearch <- R6Class(
     #'   included in the list, default values are used (`NULL` instead of
     #'   the list is possible for all the default parameters). \cr
     #'   Following parameters are allowed for the `bggGames` class with
-    #'   default values in parentheses:
+    #'   default values in brackets:
     #'   \itemize{
-    #'       \item{`pretty_names`} - (`FALSE`) a boolean value,
+    #'       \item{`pretty_names`} \[`FALSE`\] --- a boolean value,
     #'       should the object should use pretty names,
-    #'       \item{`type`} - (`NULL`) a single string, type of things
+    #'       \item{`type`} \[`NULL`\] --- a single string, type of things
     #'       to look for. Possible values: `'rpgitem'`, `'videogame'`,
     #'       `'boardgame'`, `'boardgameaccessory'`,
     #'       `'boardgameexpansion'`. `NULL` uses all possible values.
-    #'       \item{`exact`} - (`FALSE`) a boolean value, should the
+    #'       \item{`exact`} \[`FALSE`\] --- a boolean value, should the
     #'       results be restricted to items that match the `query` exactly.
     #'   }
     initialize = function(query, params = NULL)

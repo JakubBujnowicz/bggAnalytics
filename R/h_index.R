@@ -13,8 +13,7 @@
 #'
 #' @references
 #' [H-Index in Wikipedia](https://en.wikipedia.org/wiki/H-index)
-#' [BoardGameGeek
-#' thread about H-Index](https://boardgamegeek.com/thread/953084/whats-your-h-index)
+#' [BoardGameGeek thread about H-Index](https://boardgamegeek.com/thread/953084/whats-your-h-index)
 #'
 #'
 #' @examples

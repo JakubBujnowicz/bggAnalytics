@@ -34,23 +34,23 @@ bggCollection <- R6Class(
     #'   included in the list, default values are used (`NULL` instead of
     #'   the list is possible for all the default parameters). \cr
     #'   Following parameters are allowed for the `bggGames` class with
-    #'   default values in parentheses:
+    #'   default values in brackets:
     #'   \itemize{
-    #'       \item{`pretty_names`} - (`FALSE`) a boolean value,
+    #'       \item{`pretty_names`} \[`FALSE`\] --- a boolean value,
     #'       should the object should use pretty names,
-    #'       \item{`stats`} - (`TRUE`) a boolean value, should the
+    #'       \item{`stats`} \[`TRUE`\] --- a boolean value, should the
     #'       ranking and rating stats be included for every item. Note that some
     #'       variables require that `stats` is `TRUE`.
-    #'       \item{`brief`} - (`FALSE`) a boolean value, should the
+    #'       \item{`brief`} \[`FALSE`\] --- a boolean value, should the
     #'       results be abbreviated.
-    #'       \item{`own, rated, played, comment, trade, want, wishlist`} -
-    #'       (`NULL`) a boolean value, `FALSE` excludes items with a
+    #'       \item{`own, rated, played, comment, trade, want, wishlist`}
+    #'       \[`NULL`\] --- a boolean value, `FALSE` excludes items with a
     #'       given status while `TRUE` includes only them. `NULL`
     #'       returns items regardless of the status.
-    #'       \item{`wishlistpriority`} - (`NULL`) a positive integer
+    #'       \item{`wishlistpriority`} \[`NULL`\] --- a positive integer
     #'       between 1 and 5, returns only items with a given wishlist
     #'       priority. `NULL` returns items regardless of the priority.
-    #'       \item{`minrating, rating`} - (`NULL`) a positive integer
+    #'       \item{`minrating, rating`} \[`NULL`\] --- a positive integer
     #'       between 1 and 10, returns only items with a given minimum rating
     #'       (`minrating`) or maximum rating (`rating`). `NULL`
     #'       returns items regardless of the rating.
