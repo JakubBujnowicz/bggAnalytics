@@ -30,7 +30,7 @@ bgg_gameurl <- function(ids)
 #' (unless they are already there).
 #'
 #' @param x,y objects that inherit from `bggAPI` class.
-#' @param ... other arguments passed to \code{\link[data.table]{merge}}.
+#' @param ... other arguments passed to [data.table::merge()].
 #'
 #' @return A data.table with variables from both `x` and `y`.
 #' @export

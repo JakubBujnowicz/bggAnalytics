@@ -2,7 +2,7 @@
 #' API for user collections
 #'
 #' @description Access the data of a given user's collection. See
-#'   \code{\link{bggAPI}} for more details on inherited slots and methods.
+#'   [bggAPI()] for more details on inherited slots and methods.
 #'
 #' @references
 #'   [BoardGameGeek XML API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2)

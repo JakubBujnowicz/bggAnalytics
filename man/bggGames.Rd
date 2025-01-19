@@ -7,7 +7,7 @@
 This class provides an interface for games, expansions,
 accessories and other things listed on BoardGameGeek. The official
 documentation describes \code{things} as every physical, tangible item.See
-\code{\link{bggAPI}} for more details on inherited slots and methods.
+\code{\link[=bggAPI]{bggAPI()}} for more details on inherited slots and methods.
 }
 \details{
 Although this class is named \code{bggGames}, it inherits it's

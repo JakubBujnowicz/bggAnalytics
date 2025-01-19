@@ -2,7 +2,7 @@
 #' API for BoardGameGeek search engine
 #'
 #' @description Search for items on the BoardGameGeek with a given query. See
-#'   \code{\link{bggAPI}} for more details on inherited slots and methods.
+#'   [bggAPI()] for more details on inherited slots and methods.
 #'
 #' @details Note that the result is trimmed to items with unique IDs. Due to
 #' XML API2 `Search` returning multiple items for a single ID with different

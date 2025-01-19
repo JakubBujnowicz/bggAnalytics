@@ -4,7 +4,7 @@
 #' @description This class provides an interface for games, expansions,
 #'   accessories and other things listed on BoardGameGeek. The official
 #'   documentation describes `things` as every physical, tangible item.See
-#'   \code{\link{bggAPI}} for more details on inherited slots and methods.
+#'   [bggAPI()] for more details on inherited slots and methods.
 #'
 #' @details Although this class is named `bggGames`, it inherits it's
 #'   functionality from the BoardGameGeek XML API2 `Things` (see References).

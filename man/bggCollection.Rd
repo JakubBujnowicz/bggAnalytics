@@ -5,7 +5,7 @@
 \title{API for user collections}
 \description{
 Access the data of a given user's collection. See
-\code{\link{bggAPI}} for more details on inherited slots and methods.
+\code{\link[=bggAPI]{bggAPI()}} for more details on inherited slots and methods.
 }
 \references{
 \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML API2}

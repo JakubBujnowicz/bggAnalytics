@@ -9,7 +9,7 @@ bgg_merge(x, y, ...)
 \arguments{
 \item{x, y}{objects that inherit from \code{bggAPI} class.}
 
-\item{...}{other arguments passed to \code{\link[data.table]{merge}}.}
+\item{...}{other arguments passed to \code{\link[data.table:merge]{data.table::merge()}}.}
 }
 \value{
 A data.table with variables from both \code{x} and \code{y}.
