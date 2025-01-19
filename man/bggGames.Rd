@@ -67,11 +67,11 @@ the list is possible for all the default parameters). \cr
 Following parameters are allowed for the \code{bggGames} class with
 default values in parentheses:
 \itemize{
-    \item{\code{pretty_names}}{ - (\code{FALSE}) a boolean value,
-    should the object should use pretty names,}
-    \item{\code{stats}}{ - (\code{TRUE}) a boolean value, should the
+    \item{\code{pretty_names}} - (\code{FALSE}) a boolean value,
+    should the object should use pretty names,
+    \item{\code{stats}} - (\code{TRUE}) a boolean value, should the
     ranking and rating stats be included for every item. Note that some
-    variables require that \code{stats} is \code{TRUE}.}
+    variables require that \code{stats} is \code{TRUE}.
 }}
 }
 \if{html}{\out{</div>}}

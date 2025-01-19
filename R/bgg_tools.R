@@ -84,7 +84,7 @@ bgg_merge <- function(x, y, ...)
 #' @export
 #'
 #' @examples
-#' gm <- bggGames$new(ids = 167791)
+#' gm <- bggGames$new(ids = 224517)
 #' bgg_namestyle(gm$data)
 #'
 #' gm$switch_namestyle("pretty")

@@ -20,7 +20,7 @@ working on a modified table that is no longer directly connected to any
 \code{bggAPI} object.
 }
 \examples{
-gm <- bggGames$new(ids = 167791)
+gm <- bggGames$new(ids = 224517)
 bgg_namestyle(gm$data)
 
 gm$switch_namestyle("pretty")

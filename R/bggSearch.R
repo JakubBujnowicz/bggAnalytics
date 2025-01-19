@@ -39,14 +39,14 @@ bggSearch <- R6Class(
     #'   Following parameters are allowed for the \code{bggGames} class with
     #'   default values in parentheses:
     #'   \itemize{
-    #'       \item{\code{pretty_names}}{ - (\code{FALSE}) a boolean value,
-    #'       should the object should use pretty names,}
-    #'       \item{\code{type}}{ - (\code{NULL}) a single string, type of things
+    #'       \item{\code{pretty_names}} - (\code{FALSE}) a boolean value,
+    #'       should the object should use pretty names,
+    #'       \item{\code{type}} - (\code{NULL}) a single string, type of things
     #'       to look for. Possible values: \code{'rpgitem'}, \code{'videogame'},
     #'       \code{'boardgame'}, \code{'boardgameaccessory'},
-    #'       \code{'boardgameexpansion'}. \code{NULL} uses all possible values.}
-    #'       \item{\code{exact}}{ - (\code{FALSE}) a boolean value, should the
-    #'       results be restricted to items that match the \code{query} exactly.}
+    #'       \code{'boardgameexpansion'}. \code{NULL} uses all possible values.
+    #'       \item{\code{exact}} - (\code{FALSE}) a boolean value, should the
+    #'       results be restricted to items that match the \code{query} exactly.
     #'   }
     initialize = function(query, params = NULL)
     {

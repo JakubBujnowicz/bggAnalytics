@@ -37,24 +37,24 @@ bggCollection <- R6Class(
     #'   Following parameters are allowed for the \code{bggGames} class with
     #'   default values in parentheses:
     #'   \itemize{
-    #'       \item{\code{pretty_names}}{ - (\code{FALSE}) a boolean value,
-    #'       should the object should use pretty names,}
-    #'       \item{\code{stats}}{ - (\code{TRUE}) a boolean value, should the
+    #'       \item{\code{pretty_names}} - (\code{FALSE}) a boolean value,
+    #'       should the object should use pretty names,
+    #'       \item{\code{stats}} - (\code{TRUE}) a boolean value, should the
     #'       ranking and rating stats be included for every item. Note that some
-    #'       variables require that \code{stats} is \code{TRUE}.}
-    #'       \item{\code{brief}}{ - (\code{FALSE}) a boolean value, should the
-    #'       results be abbreviated.}
-    #'       \item{\code{own, rated, played, comment, trade, want, wishlist}}{ -
+    #'       variables require that \code{stats} is \code{TRUE}.
+    #'       \item{\code{brief}} - (\code{FALSE}) a boolean value, should the
+    #'       results be abbreviated.
+    #'       \item{\code{own, rated, played, comment, trade, want, wishlist}} -
     #'       (\code{NULL}) a boolean value, \code{FALSE} excludes items with a
     #'       given status while \code{TRUE} includes only them. \code{NULL}
-    #'       returns items regardless of the status.}
-    #'       \item{\code{wishlistpriority}}{ - (\code{NULL}) a positive integer
+    #'       returns items regardless of the status.
+    #'       \item{\code{wishlistpriority}} - (\code{NULL}) a positive integer
     #'       between 1 and 5, returns only items with a given wishlist
-    #'       priority. \code{NULL} returns items regardless of the priority.}
-    #'       \item{\code{minrating, rating}}{ - (\code{NULL}) a positive integer
+    #'       priority. \code{NULL} returns items regardless of the priority.
+    #'       \item{\code{minrating, rating}} - (\code{NULL}) a positive integer
     #'       between 1 and 10, returns only items with a given minimum rating
     #'       (\code{minrating}) or maximum rating (\code{rating}). \code{NULL}
-    #'       returns items regardless of the rating.}
+    #'       returns items regardless of the rating.
     #'   }
     initialize = function(username = NULL, params = NULL)
     {
