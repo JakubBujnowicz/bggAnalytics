@@ -16,8 +16,7 @@ The name is motivated by the fact that the whole BoardGameGeek's site as
 well as this package is mainly focused on board games.
 }
 \references{
-\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
-API2}
+\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML API2}
 }
 \section{Super class}{
 \code{\link[bggAnalytics:bggAPI]{bggAnalytics::bggAPI}} -> \code{bggGames}

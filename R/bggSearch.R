@@ -6,11 +6,10 @@
 #'
 #' @details Note that the result is trimmed to items with unique IDs. Due to
 #' XML API2 `Search` returning multiple items for a single ID with different
-#' types, variable \code{'type'} might be not accurately represented.
+#' types, variable `'type'` might be not accurately represented.
 #'
 #' @references
-#'   \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
-#'   API2}
+#'   [BoardGameGeek XML API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2)
 #'
 #' @export
 #' @include bggAPI.R
@@ -34,19 +33,19 @@ bggSearch <- R6Class(
     #'
     #' @param query a single string, query used to perform the search.
     #' @param params a list of object parameters. If not all the parameters are
-    #'   included in the list, default values are used (\code{NULL} instead of
+    #'   included in the list, default values are used (`NULL` instead of
     #'   the list is possible for all the default parameters). \cr
-    #'   Following parameters are allowed for the \code{bggGames} class with
+    #'   Following parameters are allowed for the `bggGames` class with
     #'   default values in parentheses:
     #'   \itemize{
-    #'       \item{\code{pretty_names}} - (\code{FALSE}) a boolean value,
+    #'       \item{`pretty_names`} - (`FALSE`) a boolean value,
     #'       should the object should use pretty names,
-    #'       \item{\code{type}} - (\code{NULL}) a single string, type of things
-    #'       to look for. Possible values: \code{'rpgitem'}, \code{'videogame'},
-    #'       \code{'boardgame'}, \code{'boardgameaccessory'},
-    #'       \code{'boardgameexpansion'}. \code{NULL} uses all possible values.
-    #'       \item{\code{exact}} - (\code{FALSE}) a boolean value, should the
-    #'       results be restricted to items that match the \code{query} exactly.
+    #'       \item{`type`} - (`NULL`) a single string, type of things
+    #'       to look for. Possible values: `'rpgitem'`, `'videogame'`,
+    #'       `'boardgame'`, `'boardgameaccessory'`,
+    #'       `'boardgameexpansion'`. `NULL` uses all possible values.
+    #'       \item{`exact`} - (`FALSE`) a boolean value, should the
+    #'       results be restricted to items that match the `query` exactly.
     #'   }
     initialize = function(query, params = NULL)
     {

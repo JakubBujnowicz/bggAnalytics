@@ -26,7 +26,7 @@ returns a list of numerics or a numeric vector.
 \description{
 This acts similar to \code{\link[base]{toString}} function, but it tries to
 make the string as short as possible by squeezing sequences of integers into
-boundary values only. Please see the examples section. \code{unsqueez}
+boundary values only. Please see the examples section. \code{unsqueeze()}
 reverses this operation.
 }
 \examples{

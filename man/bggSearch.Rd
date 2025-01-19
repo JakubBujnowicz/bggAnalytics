@@ -13,8 +13,7 @@ XML API2 \code{Search} returning multiple items for a single ID with different
 types, variable \code{'type'} might be not accurately represented.
 }
 \references{
-\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
-API2}
+\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML API2}
 }
 \section{Super class}{
 \code{\link[bggAnalytics:bggAPI]{bggAnalytics::bggAPI}} -> \code{bggSearch}

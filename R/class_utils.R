@@ -31,7 +31,7 @@
 
 #' Get variable specification table for a given class
 #'
-#' This can be used within \code{bggAPI} methods to extract rows for a proper
+#' This can be used within `bggAPI` methods to extract rows for a proper
 #' class. This also handles the 'pretty names'.
 #'
 #' @return The data.table with variable specifications

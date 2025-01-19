@@ -63,7 +63,7 @@
 
 #' Extend given URL by class params
 #'
-#' This takes an \code{url} and extends it by the given parameters for a
+#' This takes an `url` and extends it by the given parameters for a
 #' certain class
 #'
 #' @param url a single string.

@@ -15,7 +15,7 @@
 A list.
 }
 \description{
-This splits \code{x} using \code{\link[base]{split}} by making sure that
+This splits \code{x} using \code{\link[base:split]{base::split()}} by making sure that
 the returned list is of the same length as \code{list} and every element
 is of the same length as \code{list}'s elements.
 }

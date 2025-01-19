@@ -2,12 +2,12 @@
 #'
 #' This acts similar to \code{\link[base]{toString}} function, but it tries to
 #' make the string as short as possible by squeezing sequences of integers into
-#' boundary values only. Please see the examples section. \code{unsqueez}
+#' boundary values only. Please see the examples section. `unsqueeze()`
 #' reverses this operation.
 #'
 #' @param integers a numeric vector of integers.
 #'
-#' @return \code{squeeze} returns a vector of characters, \code{unsqueeze}
+#' @return `squeeze` returns a vector of characters, `unsqueeze`
 #'   returns a list of numerics or a numeric vector.
 #'
 #' @author Jakub Bujnowicz \email{bujnowiczgithub@@gmail.com}
@@ -66,9 +66,9 @@ squeeze <- function(integers)
 #' @rdname squeeze
 #'
 #' @param strings a character vector of strings, preferably outputs of
-#'   \code{squeeze}.
+#'   `squeeze`.
 #' @param strict a logical value, decides whether the output should be strictly
-#'   a list. If \code{FALSE} and the \code{strings} is a single string, the
+#'   a list. If `FALSE` and the `strings` is a single string, the
 #'   function returns an atomic vector instead.
 #'
 #' @export

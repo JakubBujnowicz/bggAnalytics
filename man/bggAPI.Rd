@@ -5,13 +5,12 @@
 \title{Interface for BoardGameGeek's XML API2}
 \description{
 This is a class that works as a main interface to
-BoardGameGeek's API. All other \code{bgg*} classes inherit from
+BoardGameGeek's API. All other \verb{bgg*} classes inherit from
 \code{bggAPI}. Furthermore, there is no initialization method for
 \code{bggAPI} as it serves just as a super class for other classes.
 }
 \references{
-\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
-API2}
+\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML API2}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}

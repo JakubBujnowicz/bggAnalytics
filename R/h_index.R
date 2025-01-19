@@ -12,9 +12,9 @@
 #' @export
 #'
 #' @references
-#' \href{https://en.wikipedia.org/wiki/H-index}{H-Index in Wikipedia}
-#' \href{https://boardgamegeek.com/thread/953084/whats-your-h-index}{BoardGameGeek
-#' thread about H-Index}
+#' [H-Index in Wikipedia](https://en.wikipedia.org/wiki/H-index)
+#' [BoardGameGeek
+#' thread about H-Index](https://boardgamegeek.com/thread/953084/whats-your-h-index)
 #'
 #'
 #' @examples

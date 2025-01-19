@@ -12,8 +12,7 @@
 #'   well as this package is mainly focused on board games.
 #'
 #' @references
-#'   \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
-#'   API2}
+#'   [BoardGameGeek XML API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2)
 #'
 #' @export
 #' @include bggAPI.R
@@ -29,22 +28,22 @@ bggGames <- R6Class(
     #' @param ids a numeric vector of positive integers, IDs of games/things to
     #'   include in the object.
     #' @param chunk_size a positive integer, the maximum length of a chunk that
-    #'   \code{ids} are split into. All chunks connect to BoardGameGeek's API
+    #'   `ids` are split into. All chunks connect to BoardGameGeek's API
     #'   separately, so lowering this number increases computation time. On the
     #'   other hand if a chunk is too long, URL might be too long to fetch. The
-    #'   API caps the number of \code{ids} per URL at 20, which is the default
+    #'   API caps the number of `ids` per URL at 20, which is the default
     #'   value.
     #' @param params a list of object parameters. If not all the parameters are
-    #'   included in the list, default values are used (\code{NULL} instead of
+    #'   included in the list, default values are used (`NULL` instead of
     #'   the list is possible for all the default parameters). \cr
-    #'   Following parameters are allowed for the \code{bggGames} class with
+    #'   Following parameters are allowed for the `bggGames` class with
     #'   default values in parentheses:
     #'   \itemize{
-    #'       \item{\code{pretty_names}} - (\code{FALSE}) a boolean value,
+    #'       \item{`pretty_names`} - (`FALSE`) a boolean value,
     #'       should the object should use pretty names,
-    #'       \item{\code{stats}} - (\code{TRUE}) a boolean value, should the
+    #'       \item{`stats`} - (`TRUE`) a boolean value, should the
     #'       ranking and rating stats be included for every item. Note that some
-    #'       variables require that \code{stats} is \code{TRUE}.
+    #'       variables require that `stats` is `TRUE`.
     #'   }
     initialize = function(ids, chunk_size = 20, params = NULL)
     {
