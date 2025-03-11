@@ -1,7 +1,7 @@
 Package: bggAnalytics
 Type: Package
 Title: BoardGameGeek's Board Game Data Analysis Tools
-Description: Tools for analysing board game data. Mainly focused on providing 
+Description: Tools for analysing board game data. Mainly focused on providing
     an interface for BoardGameGeek's XML API2 through R6 class system objects.
     More details about the BoardGameGeek's API can be obtained here
     <https://boardgamegeek.com/wiki/page/BGG_XML_API2>.
@@ -14,10 +14,10 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
 Language: en-GB
-Imports: checkmate, pryr, stringr, utils, xml2
-Depends: 
-    R (>= 4.0.0), data.table, R6
-Collate: 
+Imports: checkmate, data.table, pryr, R6, stringr, utils, xml2
+Depends:
+    R (>= 4.0.0)
+Collate:
     'class_utils.R'
     'bggAPI.R'
     'bggAnalytics-package.R'
@@ -34,6 +34,6 @@ Collate:
     'postprocessing.R'
     'squeeze.R'
     'utils.R'
-Suggests: 
+Suggests:
     testthat
 Roxygen: list(markdown = TRUE)
