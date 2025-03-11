@@ -5,13 +5,12 @@
 \title{Interface for BoardGameGeek's XML API2}
 \description{
 This is a class that works as a main interface to
-  BoardGameGeek's API. All other \code{bgg*} classes inherit from
-  \code{bggAPI}. Furthermore, there is no initialization method for
-  \code{bggAPI} as it serves just as a super class for other classes.
+BoardGameGeek's API. All other \verb{bgg*} classes inherit from
+\code{bggAPI}. Furthermore, there is no initialization method for
+\code{bggAPI} as it serves just as a super class for other classes.
 }
 \references{
-\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
-  API2}
+\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML API2}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -42,20 +41,20 @@ date.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-fetch}{\code{bggAPI$fetch()}}
-\item \href{#method-expand}{\code{bggAPI$expand()}}
-\item \href{#method-switch_namestyle}{\code{bggAPI$switch_namestyle()}}
-\item \href{#method-clone}{\code{bggAPI$clone()}}
+\item \href{#method-bggAPI-fetch}{\code{bggAPI$fetch()}}
+\item \href{#method-bggAPI-expand}{\code{bggAPI$expand()}}
+\item \href{#method-bggAPI-switch_namestyle}{\code{bggAPI$switch_namestyle()}}
+\item \href{#method-bggAPI-clone}{\code{bggAPI$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-fetch"></a>}}
-\if{latex}{\out{\hypertarget{method-fetch}{}}}
+\if{html}{\out{<a id="method-bggAPI-fetch"></a>}}
+\if{latex}{\out{\hypertarget{method-bggAPI-fetch}{}}}
 \subsection{Method \code{fetch()}}{
 Fetches variables with given \code{variable_names} from the
-  object's \code{xml}. Returns them as a list. This is a main method of
-  getting non-scalar variables (as they are hard to fit into a
-  data.table).
+object's \code{xml}. Returns them as a list. This is a main method of
+getting non-scalar variables (as they are hard to fit into a
+data.table).
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{bggAPI$fetch(variable_names = NULL, compress = FALSE)}\if{html}{\out{</div>}}
 }
@@ -73,12 +72,12 @@ should be compress into a scalar form (if possible).}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-expand"></a>}}
-\if{latex}{\out{\hypertarget{method-expand}{}}}
+\if{html}{\out{<a id="method-bggAPI-expand"></a>}}
+\if{latex}{\out{\hypertarget{method-bggAPI-expand}{}}}
 \subsection{Method \code{expand()}}{
 Expands the \code{data} table by given \code{variable_names}
-  by reference. For the list of available variables for every object
-  check the \code{\link{bgg_variables}} dataset.
+by reference. For the list of available variables for every object
+check the \code{\link[=bgg_variables]{bgg_variables()}} dataset.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{bggAPI$expand(variable_names = NULL)}\if{html}{\out{</div>}}
 }
@@ -93,13 +92,13 @@ to \code{data}.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-switch_namestyle"></a>}}
-\if{latex}{\out{\hypertarget{method-switch_namestyle}{}}}
+\if{html}{\out{<a id="method-bggAPI-switch_namestyle"></a>}}
+\if{latex}{\out{\hypertarget{method-bggAPI-switch_namestyle}{}}}
 \subsection{Method \code{switch_namestyle()}}{
 Switches between two styles of naming the variables:
-  \code{'classic'} and \code{'pretty'}. The former is a default value and
-  uses code names concordant with BoardGameGeek's naming convention in
-  the XMLs. The latter is more intuitive and uses UpperCamelCase.
+\code{'classic'} and \code{'pretty'}. The former is a default value and
+uses code names concordant with BoardGameGeek's naming convention in
+the XMLs. The latter is more intuitive and uses UpperCamelCase.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{bggAPI$switch_namestyle(to)}\if{html}{\out{</div>}}
 }
@@ -113,12 +112,12 @@ Switches between two styles of naming the variables:
 }
 \subsection{Returns}{
 Returns \code{TRUE} or \code{FALSE} invisibly depending on
-  whether the names have been switched.
+whether the names have been switched.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-bggAPI-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-bggAPI-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

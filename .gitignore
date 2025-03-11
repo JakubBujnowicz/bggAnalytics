@@ -1,11 +1,6 @@
-# My own
-package_building.R
+# Project specific
 tars/
 manuals/
-tests/testing_script.R
-.Rprofile
-CRAN-RELEASE
-
 
 # History files
 .Rhistory
@@ -16,6 +11,7 @@ CRAN-RELEASE
 
 # User-specific files
 .Ruserdata
+.Rprofile
 
 # Example code in package build process
 *-Ex.R

@@ -7,7 +7,7 @@
 .bgg_url(of)
 }
 \arguments{
-\item{of}{Single string, either `api`, "ranking" or "boardgame".}
+\item{of}{Single string, either "api", "ranking" or "boardgame".}
 }
 \value{
 Single string with a page URL.

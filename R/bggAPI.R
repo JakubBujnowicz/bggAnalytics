@@ -2,13 +2,13 @@
 #' Interface for BoardGameGeek's XML API2
 #'
 #' @description This is a class that works as a main interface to
-#'   BoardGameGeek's API. All other \code{bgg*} classes inherit from
-#'   \code{bggAPI}. Furthermore, there is no initialization method for
-#'   \code{bggAPI} as it serves just as a super class for other classes.
+#'   BoardGameGeek's API. All other `bgg*` classes inherit from
+#'   `bggAPI`. Furthermore, there is no initialization method for
+#'   `bggAPI` as it serves just as a super class for other classes.
 #'
 #' @references
-#'   \href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
-#'   API2}
+#'   [BoardGameGeek XML
+#'   API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2)
 #'
 #' @export
 #' @include class_utils.R
@@ -31,12 +31,12 @@ bggAPI <- R6::R6Class(
     active = list(
         #' @field ids Numeric vector of positive integers. Contains IDs of all
         #'   BoardGameGeek items that were requested and are present in
-        #'   \code{data}. The vector is sorted by default.
+        #'   `data`. The vector is sorted by default.
         ids = .private_getter("ids"),
 
         #' @field data Data.table with currently fetched variables from the
-        #'   object's XML. It has a row count equal to the length of \code{ids}.
-        #'   Note that the copy is returned, so no modification of \code{data}
+        #'   object's XML. It has a row count equal to the length of `ids`.
+        #'   Note that the copy is returned, so no modification of `data`
         #'   is possible outside of class methods.
         data = function(value)
         {
@@ -50,7 +50,7 @@ bggAPI <- R6::R6Class(
         },
 
         #' @field xml An XML nodeset obtained through the BoardGameGeek's API.
-        #'   It's length is equal to the length of \code{ids}.
+        #'   It's length is equal to the length of `ids`.
         xml = .private_getter("xml"),
 
         #' @field api_url A character vector of one or more strings with URLs
@@ -68,8 +68,8 @@ bggAPI <- R6::R6Class(
 
     public = list(
     # Fetch --------------------------------------------------------------------
-    #' @description Fetches variables with given \code{variable_names} from the
-    #'   object's \code{xml}. Returns them as a list. This is a main method of
+    #' @description Fetches variables with given `variable_names` from the
+    #'   object's `xml`. Returns them as a list. This is a main method of
     #'   getting non-scalar variables (as they are hard to fit into a
     #'   data.table).
     #'
@@ -170,12 +170,12 @@ bggAPI <- R6::R6Class(
 
 
     # Expand ---------------------------------------------------------------
-    #' @description Expands the \code{data} table by given \code{variable_names}
+    #' @description Expands the `data` table by given `variable_names`
     #'   by reference. For the list of available variables for every object
-    #'   check the \code{\link{bgg_variables}} dataset.
+    #'   check the [bgg_variables()] dataset.
     #'
     #' @param variable_names a character vector with names of variables to add
-    #'   to \code{data}.
+    #'   to `data`.
     expand = function(variable_names = NULL)
     {
         # Assign to avoid NOTEs while checking the package
@@ -241,14 +241,14 @@ bggAPI <- R6::R6Class(
 
     # Switch namestyle -----------------------------------------------------
     #' @description Switches between two styles of naming the variables:
-    #'   \code{'classic'} and \code{'pretty'}. The former is a default value and
+    #'   `'classic'` and `'pretty'`. The former is a default value and
     #'   uses code names concordant with BoardGameGeek's naming convention in
     #'   the XMLs. The latter is more intuitive and uses UpperCamelCase.
     #'
-    #' @return Returns \code{TRUE} or \code{FALSE} invisibly depending on
+    #' @return Returns `TRUE` or `FALSE` invisibly depending on
     #'   whether the names have been switched.
     #'
-    #' @param to a single string, either \code{'classic'} or \code{'pretty'}.
+    #' @param to a single string, either `'classic'` or `'pretty'`.
     switch_namestyle = function(to)
     {
         # Assertions

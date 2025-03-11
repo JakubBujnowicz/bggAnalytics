@@ -1,10 +1,10 @@
 #' Safely scrap HTML website
 #'
-#' Opens the connection with \code{curl} and closes in case of error. Returns
+#' Opens the connection with `curl` and closes in case of error. Returns
 #' more unambiguous error messages.
 #'
 #' @param url a single string, an URL to a given website.
-#' @param ... other arguments passed to \code{read_html}.
+#' @param ... other arguments passed to `read_html`.
 #'
 #' @return A parsed XML.
 #' @keywords internal
@@ -43,7 +43,7 @@
 #'
 #' Get hyperlinks to given pages of BoardGameGeek site.
 #'
-#' @param of Single string, either `api`, "ranking" or "boardgame".
+#' @param of Single string, either "api", "ranking" or "boardgame".
 #'
 #' @return Single string with a page URL.
 #' @keywords internal
@@ -61,9 +61,9 @@
 
 #' Get all 'items' nodes from XML Nodeset
 #'
-#' This function expands \code{xml_nodeset} objects to all 'item' children. It
-#' allows to use \code{lapply(., f)} per object (corresponding to one row in
-#' \code{data}).
+#' This function expands `xml_nodeset` objects to all 'item' children. It
+#' allows to use `lapply(., f)` per object (corresponding to one row in
+#' `data`).
 #'
 #' @param xml an XML nodeset.
 #'
@@ -79,7 +79,7 @@
 
 #' Concatenate XML nodesets from a list
 #'
-#' Take a list of XML nodesets (e.g. outputs of \code{.xml_expand}) and combine
+#' Take a list of XML nodesets (e.g. outputs of `.xml_expand`) and combine
 #' them together.
 #'
 #' @param xml_list a list of XML nodesets.
@@ -108,7 +108,7 @@
 #' @param xpath Single string, name of XPATH expression, for example node name.
 #' @param attr Single string, name of attribute
 #'
-#' @return List of elements of equal length as \code{xml}.
+#' @return List of elements of equal length as `xml`.
 #' @keywords internal
 #'
 #' @name extraction_functions

@@ -3,7 +3,7 @@
 
 #' Compress vector into single string
 #'
-#' Returns string which shows \code{n_show} first elements and \code{vec} and
+#' Returns string which shows `n_show` first elements and `vec` and
 #' amount of truncated elements.
 #'
 #' @param vec Atomic vector.
@@ -59,11 +59,11 @@
 
 #' Split according to a list
 #'
-#' This splits \code{x} using \code{\link[base]{split}} by making sure that
-#' the returned list is of the same length as \code{list} and every element
-#' is of the same length as \code{list}'s elements.
+#' This splits `x` using [base::split()] by making sure that
+#' the returned list is of the same length as `list` and every element
+#' is of the same length as `list`'s elements.
 #'
-#' @param x an \code{R} object to split.
+#' @param x an `R` object to split.
 #' @param list a list.
 #'
 #' @return A list.
@@ -83,7 +83,7 @@
 #' Get one of the internal functions from the package
 #'
 #' This makes sure internal functions from this package can be accessed which
-#' sometimes fails when using \code{match.fun}.
+#' sometimes fails when using `match.fun`.
 #'
 #' @param fun_name a single string.
 #'

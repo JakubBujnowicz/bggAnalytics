@@ -5,11 +5,10 @@
 \title{API for user collections}
 \description{
 Access the data of a given user's collection. See
-  \code{\link{bggAPI}} for more details on inherited slots and methods.
+\code{\link[=bggAPI]{bggAPI()}} for more details on inherited slots and methods.
 }
 \references{
-\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
-  API2}
+\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML API2}
 }
 \section{Super class}{
 \code{\link[bggAnalytics:bggAPI]{bggAnalytics::bggAPI}} -> \code{bggCollection}
@@ -25,23 +24,23 @@ should be fetched.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{bggCollection$new()}}
-\item \href{#method-print}{\code{bggCollection$print()}}
-\item \href{#method-clone}{\code{bggCollection$clone()}}
+\item \href{#method-bggCollection-new}{\code{bggCollection$new()}}
+\item \href{#method-bggCollection-print}{\code{bggCollection$print()}}
+\item \href{#method-bggCollection-clone}{\code{bggCollection$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="expand">}\href{../../bggAnalytics/html/bggAPI.html#method-expand}{\code{bggAnalytics::bggAPI$expand()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="fetch">}\href{../../bggAnalytics/html/bggAPI.html#method-fetch}{\code{bggAnalytics::bggAPI$fetch()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="switch_namestyle">}\href{../../bggAnalytics/html/bggAPI.html#method-switch_namestyle}{\code{bggAnalytics::bggAPI$switch_namestyle()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="expand"><a href='../../bggAnalytics/html/bggAPI.html#method-bggAPI-expand'><code>bggAnalytics::bggAPI$expand()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="fetch"><a href='../../bggAnalytics/html/bggAPI.html#method-bggAPI-fetch'><code>bggAnalytics::bggAPI$fetch()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="switch_namestyle"><a href='../../bggAnalytics/html/bggAPI.html#method-bggAPI-switch_namestyle'><code>bggAnalytics::bggAPI$switch_namestyle()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-bggCollection-new"></a>}}
+\if{latex}{\out{\hypertarget{method-bggCollection-new}{}}}
 \subsection{Method \code{new()}}{
 Object initialization.
 \subsection{Usage}{
@@ -52,40 +51,41 @@ Object initialization.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{username}}{a single string with a BoardGameGeek name of a user whose
-collection is to be fetched.}
+collection is to be fetched.
+\code{NULL} is filled by default with \code{getOption(bggAnalytics.username)}.}
 
 \item{\code{params}}{a list of object parameters. If not all the parameters are
 included in the list, default values are used (\code{NULL} instead of
 the list is possible for all the default parameters). \cr
 Following parameters are allowed for the \code{bggGames} class with
-default values in parentheses:
+default values in brackets:
 \itemize{
-    \item{\code{pretty_names}}{ - (\code{FALSE}) a boolean value,
-    should the object should use pretty names,}
-    \item{\code{stats}}{ - (\code{TRUE}) a boolean value, should the
-    ranking and rating stats be included for every item. Note that some
-    variables require that \code{stats} is \code{TRUE}.}
-    \item{\code{brief}}{ - (\code{FALSE}) a boolean value, should the
-    results be abbreviated.}
-    \item{\code{own, rated, played, comment, trade, want, wishlist}}{ -
-    (\code{NULL}) a boolean value, \code{FALSE} excludes items with a
-    given status while \code{TRUE} includes only them. \code{NULL}
-    returns items regardless of the status.}
-    \item{\code{wishlistpriority}}{ - (\code{NULL}) a positive integer
-    between 1 and 5, returns only items with a given wishlist
-    priority. \code{NULL} returns items regardless of the priority.}
-    \item{\code{minrating, rating}}{ - (\code{NULL}) a positive integer
-    between 1 and 10, returns only items with a given minimum rating
-    (\code{minrating}) or maximum rating (\code{rating}). \code{NULL}
-    returns items regardless of the rating.}
+\item{\code{pretty_names}} [\code{FALSE}] --- a boolean value,
+should the object should use pretty names,
+\item{\code{stats}} [\code{TRUE}] --- a boolean value, should the
+ranking and rating stats be included for every item. Note that some
+variables require that \code{stats} is \code{TRUE}.
+\item{\code{brief}} [\code{FALSE}] --- a boolean value, should the
+results be abbreviated.
+\item{\verb{own, rated, played, comment, trade, want, wishlist}}
+[\code{NULL}] --- a boolean value, \code{FALSE} excludes items with a
+given status while \code{TRUE} includes only them. \code{NULL}
+returns items regardless of the status.
+\item{\code{wishlistpriority}} [\code{NULL}] --- a positive integer
+between 1 and 5, returns only items with a given wishlist
+priority. \code{NULL} returns items regardless of the priority.
+\item{\verb{minrating, rating}} [\code{NULL}] --- a positive integer
+between 1 and 10, returns only items with a given minimum rating
+(\code{minrating}) or maximum rating (\code{rating}). \code{NULL}
+returns items regardless of the rating.
 }}
 }
 \if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-bggCollection-print"></a>}}
+\if{latex}{\out{\hypertarget{method-bggCollection-print}{}}}
 \subsection{Method \code{print()}}{
 Print object information.
 \subsection{Usage}{
@@ -94,8 +94,8 @@ Print object information.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-bggCollection-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-bggCollection-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

@@ -5,7 +5,7 @@
 #'
 #' @param ids a numeric vector of positive integers.
 #'
-#' @return A character vector of the same length as \code{x}, contains URLs.
+#' @return A character vector of the same length as `x`, contains URLs.
 #'
 #' @author Jakub Bujnowicz \email{bujnowiczgithub@@gmail.com}
 #' @export
@@ -26,13 +26,13 @@ bgg_gameurl <- function(ids)
 #' Merge data from two bggAPI objects
 #'
 #' This allows for merging data from two bggAPI objects. Namestyle is inherited
-#' from \code{x} and columns from \code{y$data} are added to \code{x$data}
+#' from `x` and columns from `y$data` are added to `x$data`
 #' (unless they are already there).
 #'
-#' @param x,y objects that inherit from \code{bggAPI} class.
-#' @param ... other arguments passed to \code{\link[data.table]{merge}}.
+#' @param x,y objects that inherit from `bggAPI` class.
+#' @param ... other arguments passed to [data.table::merge()].
 #'
-#' @return A data.table with variables from both \code{x} and \code{y}.
+#' @return A data.table with variables from both `x` and `y`.
 #' @export
 #'
 #' @examples
@@ -70,13 +70,13 @@ bgg_merge <- function(x, y, ...)
 
 #' Detect the namestyle of the data table
 #'
-#' Detects whether the \code{dt} data.table was created by a \code{bggAPI}
-#' object with \code{'pretty'} or \code{'classic'} names. Ends with the error if
+#' Detects whether the `dt` data.table was created by a `bggAPI`
+#' object with `'pretty'` or `'classic'` names. Ends with the error if
 #' one of them cannot be unequivocally determined. This can be useful when
 #' working on a modified table that is no longer directly connected to any
-#' \code{bggAPI} object.
+#' `bggAPI` object.
 #'
-#' @param dt a data.table from \code{data} slot of a \code{bggAPI} object.
+#' @param dt a data.table from `data` slot of a `bggAPI` object.
 #'
 #' @return A single string.
 #'
@@ -84,14 +84,16 @@ bgg_merge <- function(x, y, ...)
 #' @export
 #'
 #' @examples
-#' gm <- bggGames$new(ids = 167791)
-#' bgg_namestyle(gm$data)
+#' \dontrun{
+#'     gm <- bggGames$new(ids = 224517)
+#'     bgg_namestyle(gm$data)
 #'
-#' gm$switch_namestyle("pretty")
-#' bgg_namestyle(gm$data)
+#'     gm$switch_namestyle("pretty")
+#'     bgg_namestyle(gm$data)
 #'
-#' # Breaks
-#' # bgg_namestyle(iris)
+#'     # Breaks
+#'     # bgg_namestyle(iris)
+#' }
 #'
 bgg_namestyle <- function(dt)
 {
@@ -126,7 +128,7 @@ bgg_namestyle <- function(dt)
 #' Get IDs of top rated games on BoardGameGeek
 #'
 #' This function scraps BoardGameGeek website for IDs of games with given
-#' \code{places} in the games ranking.
+#' `places` in the games ranking.
 #'
 #' @param places a numeric vector of positive integers.
 #'
@@ -138,7 +140,7 @@ bgg_namestyle <- function(dt)
 #' @examples
 #' bgg_topgames()
 #'
-#' x <- 1:10 * 25 + 5
+#' x <- 1:5 * 25 + 5
 #' ids <- bgg_topgames(sample(x))
 #' gm <- bggGames$new(ids)
 #' gm$expand(c("name", "rank"))
@@ -172,3 +174,4 @@ bgg_topgames <- function(places = 1:100)
     result <- as.numeric(result)
     return(result)
 }
+

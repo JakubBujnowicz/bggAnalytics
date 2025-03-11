@@ -41,21 +41,21 @@ name within \code{.fetch_internal}.
 }
 \section{Functions}{
 \itemize{
-\item \code{.fetch_pollplayers}: Method for pollplayers of bggGames.
+\item \code{.fetch_pollplayers()}: Method for pollplayers of bggGames.
 
-\item \code{.fetch_pollage}: Method for pollage of bggGames.
+\item \code{.fetch_pollage()}: Method for pollage of bggGames.
 
-\item \code{.fetch_polllanguage}: Method for polllanguage of bggGames.
+\item \code{.fetch_polllanguage()}: Method for polllanguage of bggGames.
 
-\item \code{.fetch_ranks_gms}: Method for ranks of bggGames.
+\item \code{.fetch_ranks_gms()}: Method for ranks of bggGames.
 
-\item \code{.fetch_ranks_cllctn}: Method for ranks of bggCollection.
+\item \code{.fetch_ranks_cllctn()}: Method for ranks of bggCollection.
 
-\item \code{.fetch_bestplayers}: Method for bestplayers of bggGames.
+\item \code{.fetch_bestplayers()}: Method for bestplayers of bggGames.
 
-\item \code{.fetch_recplayers}: Method for recplayers of bggGames.
+\item \code{.fetch_recplayers()}: Method for recplayers of bggGames.
 
-\item \code{.fetch_notrecplayers}: Method for bestplayers of bggGames.
+\item \code{.fetch_notrecplayers()}: Method for bestplayers of bggGames.
+
 }}
-
 \keyword{internal}

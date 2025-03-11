@@ -2,7 +2,7 @@
 #'
 #' This methods are written for more complicated structures (called variables
 #' here) that can't be contained into a simple atomic vector. They are called by
-#' name within \code{.fetch_internal}.
+#' name within `.fetch_internal`.
 #'
 #' @param xml an XML nodeset.
 #'

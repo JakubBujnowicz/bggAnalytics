@@ -5,19 +5,18 @@
 \title{API for Games and Things}
 \description{
 This class provides an interface for games, expansions,
-  accessories and other things listed on BoardGameGeek. The official
-  documentation describes `things` as every physical, tangible item.See
-  \code{\link{bggAPI}} for more details on inherited slots and methods.
+accessories and other things listed on BoardGameGeek. The official
+documentation describes \code{things} as every physical, tangible item.See
+\code{\link[=bggAPI]{bggAPI()}} for more details on inherited slots and methods.
 }
 \details{
-Although this class is named `bggGames`, it inherits it's
-  functionality from the BoardGameGeek XML API2 `Things` (see References).
-  The name is motivated by the fact that the whole BoardGameGeek's site as
-  well as this package is mainly focused on board games.
+Although this class is named \code{bggGames}, it inherits it's
+functionality from the BoardGameGeek XML API2 \code{Things} (see References).
+The name is motivated by the fact that the whole BoardGameGeek's site as
+well as this package is mainly focused on board games.
 }
 \references{
-\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML
-  API2}
+\href{https://boardgamegeek.com/wiki/page/BGG_XML_API2}{BoardGameGeek XML API2}
 }
 \section{Super class}{
 \code{\link[bggAnalytics:bggAPI]{bggAnalytics::bggAPI}} -> \code{bggGames}
@@ -25,27 +24,27 @@ Although this class is named `bggGames`, it inherits it's
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{bggGames$new()}}
-\item \href{#method-print}{\code{bggGames$print()}}
-\item \href{#method-clone}{\code{bggGames$clone()}}
+\item \href{#method-bggGames-new}{\code{bggGames$new()}}
+\item \href{#method-bggGames-print}{\code{bggGames$print()}}
+\item \href{#method-bggGames-clone}{\code{bggGames$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="expand">}\href{../../bggAnalytics/html/bggAPI.html#method-expand}{\code{bggAnalytics::bggAPI$expand()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="fetch">}\href{../../bggAnalytics/html/bggAPI.html#method-fetch}{\code{bggAnalytics::bggAPI$fetch()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="switch_namestyle">}\href{../../bggAnalytics/html/bggAPI.html#method-switch_namestyle}{\code{bggAnalytics::bggAPI$switch_namestyle()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="expand"><a href='../../bggAnalytics/html/bggAPI.html#method-bggAPI-expand'><code>bggAnalytics::bggAPI$expand()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="fetch"><a href='../../bggAnalytics/html/bggAPI.html#method-bggAPI-fetch'><code>bggAnalytics::bggAPI$fetch()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="bggAnalytics" data-topic="bggAPI" data-id="switch_namestyle"><a href='../../bggAnalytics/html/bggAPI.html#method-bggAPI-switch_namestyle'><code>bggAnalytics::bggAPI$switch_namestyle()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-bggGames-new"></a>}}
+\if{latex}{\out{\hypertarget{method-bggGames-new}{}}}
 \subsection{Method \code{new()}}{
 Object initialization.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{bggGames$new(ids, chunk_size = 500, params = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{bggGames$new(ids, chunk_size = 20, params = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -57,27 +56,29 @@ include in the object.}
 \item{\code{chunk_size}}{a positive integer, the maximum length of a chunk that
 \code{ids} are split into. All chunks connect to BoardGameGeek's API
 separately, so lowering this number increases computation time. On the
-other hand if a chunk is too long, URL might be too long to fetch.}
+other hand if a chunk is too long, URL might be too long to fetch. The
+API caps the number of \code{ids} per URL at 20, which is the default
+value.}
 
 \item{\code{params}}{a list of object parameters. If not all the parameters are
 included in the list, default values are used (\code{NULL} instead of
 the list is possible for all the default parameters). \cr
 Following parameters are allowed for the \code{bggGames} class with
-default values in parentheses:
+default values in brackets:
 \itemize{
-    \item{\code{pretty_names}}{ - (\code{FALSE}) a boolean value,
-    should the object should use pretty names,}
-    \item{\code{stats}}{ - (\code{TRUE}) a boolean value, should the
-    ranking and rating stats be included for every item. Note that some
-    variables require that \code{stats} is \code{TRUE}.}
+\item{\code{pretty_names}} [\code{FALSE}] --- a boolean value,
+should the object should use pretty names,
+\item{\code{stats}} [\code{TRUE}] --- a boolean value, should the
+ranking and rating stats be included for every item. Note that some
+variables require that \code{stats} is \code{TRUE}.
 }}
 }
 \if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-bggGames-print"></a>}}
+\if{latex}{\out{\hypertarget{method-bggGames-print}{}}}
 \subsection{Method \code{print()}}{
 Print object information.
 \subsection{Usage}{
@@ -86,8 +87,8 @@ Print object information.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-bggGames-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-bggGames-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
