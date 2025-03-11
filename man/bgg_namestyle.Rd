@@ -20,14 +20,16 @@ working on a modified table that is no longer directly connected to any
 \code{bggAPI} object.
 }
 \examples{
-gm <- bggGames$new(ids = 224517)
-bgg_namestyle(gm$data)
+\dontrun{
+    gm <- bggGames$new(ids = 224517)
+    bgg_namestyle(gm$data)
 
-gm$switch_namestyle("pretty")
-bgg_namestyle(gm$data)
+    gm$switch_namestyle("pretty")
+    bgg_namestyle(gm$data)
 
-# Breaks
-# bgg_namestyle(iris)
+    # Breaks
+    # bgg_namestyle(iris)
+}
 
 }
 \author{

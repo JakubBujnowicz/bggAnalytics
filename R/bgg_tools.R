@@ -84,14 +84,16 @@ bgg_merge <- function(x, y, ...)
 #' @export
 #'
 #' @examples
-#' gm <- bggGames$new(ids = 224517)
-#' bgg_namestyle(gm$data)
+#' \dontrun{
+#'     gm <- bggGames$new(ids = 224517)
+#'     bgg_namestyle(gm$data)
 #'
-#' gm$switch_namestyle("pretty")
-#' bgg_namestyle(gm$data)
+#'     gm$switch_namestyle("pretty")
+#'     bgg_namestyle(gm$data)
 #'
-#' # Breaks
-#' # bgg_namestyle(iris)
+#'     # Breaks
+#'     # bgg_namestyle(iris)
+#' }
 #'
 bgg_namestyle <- function(dt)
 {
@@ -172,3 +174,4 @@ bgg_topgames <- function(places = 1:100)
     result <- as.numeric(result)
     return(result)
 }
+

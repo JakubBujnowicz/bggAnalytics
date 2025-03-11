@@ -30,6 +30,7 @@ bggCollection <- R6Class(
     #'
     #' @param username a single string with a BoardGameGeek name of a user whose
     #'   collection is to be fetched.
+    #'   `NULL` is filled by default with `getOption(bggAnalytics.username)`.
     #' @param params a list of object parameters. If not all the parameters are
     #'   included in the list, default values are used (`NULL` instead of
     #'   the list is possible for all the default parameters). \cr
@@ -58,7 +59,7 @@ bggCollection <- R6Class(
     initialize = function(username = NULL, params = NULL)
     {
         if (is.null(username)) {
-            username <- getOption(".bggAnalytics.username")
+            username <- getOption("bggAnalytics.username")
         }
 
         # Assertions -----------------------------------------------------------
@@ -77,7 +78,7 @@ bggCollection <- R6Class(
         processing_message <-
             "request for this collection has been accepted and will be processed."
 
-        messages <- getOption(".bggAnalytics.verbose")
+        messages <- getOption("bggAnalytics.verbose")
         while (grepl(processing_message, txt)) {
             if (messages) {
                 message("Server needs time to process the request...")
@@ -126,7 +127,7 @@ bggCollection <- R6Class(
     #'
     print = function()
     {
-        n_show <- getOption(".bggAnalytics.print")
+        n_show <- getOption("bggAnalytics.print")
 
         nc <- ncol(private$.data)
         nr <- nrow(private$.data)

@@ -21,10 +21,12 @@ globalVariables(
 
 
 # Options ----------------------------------------------------------------------
-.onAttach <- function(libname, pkgname) {
-    # Amount of elements to print
-    options(`.bggAnalytics.print` = 10)
-    # Should print messages from functions?
-    options(`.bggAnalytics.verbose` = TRUE)
+.onLoad <- function(libname, pkgname)
+{
+    .set_default_options(
+        # Amount of elements to print
+        bggAnalytics.print = 10,
+        # Should print messages from functions?
+        bggAnalytics.verbose = TRUE)
 }
 

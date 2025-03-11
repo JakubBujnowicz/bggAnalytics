@@ -51,7 +51,8 @@ Object initialization.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{username}}{a single string with a BoardGameGeek name of a user whose
-collection is to be fetched.}
+collection is to be fetched.
+\code{NULL} is filled by default with \code{getOption(bggAnalytics.username)}.}
 
 \item{\code{params}}{a list of object parameters. If not all the parameters are
 included in the list, default values are used (\code{NULL} instead of

@@ -29,6 +29,7 @@ Collate:
     'data.R'
     'h_index.R'
     'html_utils.R'
+    'options.R'
     'params_utils.R'
     'postprocessing.R'
     'squeeze.R'

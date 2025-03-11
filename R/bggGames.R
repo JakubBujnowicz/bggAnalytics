@@ -114,7 +114,7 @@ bggGames <- R6Class(
     #'
     print = function()
     {
-        n_show <- getOption(".bggAnalytics.print")
+        n_show <- getOption("bggAnalytics.print")
 
         nc <- ncol(private$.data)
         nr <- nrow(private$.data)
