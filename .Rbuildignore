@@ -8,6 +8,7 @@ data-raw/
 tests/
 .Rprofile
 LICENSE
+build.R
 cran-comments.md
 ^CRAN-RELEASE$
 ^cran-comments\.md$
