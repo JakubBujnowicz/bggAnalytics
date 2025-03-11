@@ -1,4 +1,4 @@
-# bggAnalytics (development version)
+# bggAnalytics 0.2.1 (2025-03-11)
 
 ## Fixed issues
 * Adjusted `bggGames` fetching to the latest changes in bggAPI (maximum of 20
@@ -7,7 +7,7 @@ entries per call), done by limiting `chunk_size` to 20.
 
 ## Other changes
 * Updated documentation.
-* R6 and data.table are now longer depended on, now they are imported
+* R6 and data.table are now longer depended on, now they are imported.
 
 
 # bggAnalytics 0.2.0 (2021-09-23)
