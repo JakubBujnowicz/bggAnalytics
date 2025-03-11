@@ -3,7 +3,8 @@ R package for simple downloading and organisation of board game data using Board
 
 ## Installation
 > [!Warning]
-> The package is not currently actively maintained, therefore it was pulled from CRAN by the author and may not be functioning correctly.
+> The package is low-maintenance mode, therefore it was pulled from CRAN and
+> mostly receives bugfixes only.
 
 It can be installed using the `devtools` package.
 ```r
