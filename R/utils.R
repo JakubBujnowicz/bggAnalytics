@@ -94,3 +94,26 @@
 {
     get(fun_name, envir = asNamespace("bggAnalytics"))
 }
+
+
+#' Unenclose a closure
+#'
+#' Unenclose a closure by substituting names for values found in the
+#' enclosing environment. Previously a part of `pryr` package.
+#'
+#' @return A function with a modified environment.
+#' @keywords internal
+#'
+.unenclose <- function(f)
+{
+    # Get the environment where the closure's variables live and body
+    f_env <- rlang::fn_env(f)
+    f_body <- rlang::fn_body(f)
+
+    new_body <- substitute(f_body, f_env)
+    body(f) <- new_body
+
+    return(f)
+}
+
+

@@ -24,7 +24,7 @@
         }
     }
 
-    result_fun <- unenclose(result_fun)
+    result_fun <- .unenclose(result_fun)
     return(result_fun)
 }
 

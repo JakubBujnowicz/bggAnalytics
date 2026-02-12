@@ -13,7 +13,8 @@
 #' @importFrom httr2 req_perform
 #' @importFrom httr2 request
 #' @importFrom httr2 resp_body_xml
-#' @importFrom pryr unenclose
+#' @importFrom rlang fn_body
+#' @importFrom rlang fn_env
 #' @importFrom utils globalVariables
 ## usethis namespace: end
 NULL

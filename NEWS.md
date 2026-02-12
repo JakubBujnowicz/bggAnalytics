@@ -4,6 +4,8 @@
 * The package allows for setting the now required authorization token
 by `set_token()`. This token is later used internally for connecting to
 BGG XML API2. Thanks to @EstherHerbert for the PR.
+* Superseded dependency on `pryr` changed to `rlang`. Thanks to
+@EstherHerbert for the report.
 
 
 

@@ -11,7 +11,7 @@
 #'   API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2)
 #'
 #' @export
-#' @include class_utils.R
+#' @include utils.R class_utils.R
 #'
 bggAPI <- R6::R6Class(
     classname = "bggAPI",
