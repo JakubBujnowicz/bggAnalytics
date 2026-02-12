@@ -13,5 +13,7 @@ decides whether additional diagnostic information is printed while
 fetching data.
 \item{\code{bggAnalytics.username}} [\code{NULL}] --- a single string,
 decides the default username value for \link{bggCollection} objects.
+\item{\code{bggAnalytics.token}}[\code{NULL}] --- a single string, the BGG API
+authorization token.
 }
 }

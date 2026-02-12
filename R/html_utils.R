@@ -1,3 +1,27 @@
+#' Get XML using an autherization token
+#'
+#' Creates an XML from a given URL, using the provided BGG Authorization token.
+#'
+#' @param url a single string, an URL to a given website.
+#' @param token a single string, the authorization token.
+#'
+#' @return A parsed XML.
+#' @keywords internal
+#'
+.bgg_read_with_token <- function(url, token)
+{
+    checkmate::assert_string(url)
+
+    header <- paste("Bearer", token)
+
+    req <- httr2::request(url)
+    req_with_header <- httr2::req_headers(req, Authorization = header)
+    resp <- httr2::req_perform(req_with_header)
+    xml <- httr2::resp_body_xml(resp)
+    return(xml)
+}
+
+
 #' Safely scrap HTML website
 #'
 #' Opens the connection with `curl` and closes in case of error. Returns

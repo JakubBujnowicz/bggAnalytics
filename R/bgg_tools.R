@@ -36,13 +36,14 @@ bgg_gameurl <- function(ids)
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#'     sr <- bggSearch$new("Terraforming Mars")
+#'     gm <- bggGames$new(sr$ids)
 #'
-#' sr <- bggSearch$new("Terraforming Mars")
-#' gm <- bggGames$new(sr$ids)
+#'     gm$expand(c("name", "type", "rank"))
 #'
-#' gm$expand(c("name", "type", "rank"))
-#'
-#' bgg_merge(sr, gm)
+#'     bgg_merge(sr, gm)
+#' }
 #'
 bgg_merge <- function(x, y, ...)
 {
@@ -138,13 +139,15 @@ bgg_namestyle <- function(dt)
 #' @export
 #'
 #' @examples
-#' bgg_topgames()
+#' \dontrun{
+#'     bgg_topgames()
 #'
-#' x <- 1:5 * 25 + 5
-#' ids <- bgg_topgames(sample(x))
-#' gm <- bggGames$new(ids)
-#' gm$expand(c("name", "rank"))
-#' gm
+#'     x <- 1:5 * 25 + 5
+#'     ids <- bgg_topgames(sample(x))
+#'     gm <- bggGames$new(ids)
+#'     gm$expand(c("name", "rank"))
+#'     gm
+#' }
 #'
 bgg_topgames <- function(places = 1:100)
 {

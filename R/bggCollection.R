@@ -61,6 +61,7 @@ bggCollection <- R6Class(
         if (is.null(username)) {
             username <- getOption("bggAnalytics.username")
         }
+        token <- get_token()
 
         # Assertions -----------------------------------------------------------
         assert_string(username)
@@ -71,10 +72,10 @@ bggCollection <- R6Class(
         api_url <- .extend_url_by_params(api_url, params,
                                          class = "bggCollection")
 
-        # Check if the request has been processed
-        xml <- read_xml(api_url)
+        xml <- .bgg_read_with_token(url = api_url, token = token)
         txt <- xml_text(xml)
 
+        # Check if the request has been processed
         processing_message <-
             "request for this collection has been accepted and will be processed."
 
@@ -86,10 +87,10 @@ bggCollection <- R6Class(
             }
 
             # Server needs a while to process this request
-            Sys.sleep(1)
+            Sys.sleep(2)
 
             # Try again
-            xml <- read_xml(api_url)
+            xml <- .bgg_read_with_token(url = api_url, token = token)
             txt <- xml_text(xml)
         }
         xml <- .xml_expand(xml)
@@ -122,6 +123,7 @@ bggCollection <- R6Class(
         }
     },
 
+
     # Print --------------------------------------------------------------------
     #' @description Print object information.
     #'
@@ -143,3 +145,5 @@ bggCollection <- R6Class(
         print(private$.data, nrows = n_show, trunc.cols = TRUE)
     })
 )
+
+

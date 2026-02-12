@@ -9,6 +9,8 @@
 #'      fetching data.
 #'    \item{`bggAnalytics.username`} \[`NULL`\] --- a single string,
 #'      decides the default username value for [bggCollection] objects.
+#'    \item{`bggAnalytics.token`}\[`NULL`\] --- a single string, the BGG API
+#'      authorization token.
 #' }
 #'
 #' @name options

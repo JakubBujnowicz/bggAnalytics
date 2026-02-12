@@ -47,6 +47,8 @@ bggGames <- R6Class(
     #'   }
     initialize = function(ids, chunk_size = 20, params = NULL)
     {
+        token <- get_token()
+
         # Assertions -----------------------------------------------------------
         assert_integerish(ids, lower = 1, min.len = 1,
                           any.missing = FALSE)
@@ -71,7 +73,11 @@ bggGames <- R6Class(
         api_url <- paste0(api_url, url_extension)
 
         # Fetch XMLs
-        xml <- lapply(api_url, function(x) .xml_expand(read_xml(x)))
+        xml <- lapply(api_url,
+                      function(x) {
+                          .xml_expand(.bgg_read_with_token(url = x,
+                                                           token = token))
+                      })
         xml <- .xml_concatenate(xml)
 
         # Testing IDs
@@ -130,3 +136,5 @@ bggGames <- R6Class(
         print(private$.data, nrows = n_show, trunc.cols = TRUE)
     })
 )
+
+
