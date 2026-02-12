@@ -18,10 +18,10 @@
 #' @include bggAPI.R
 #'
 bggGames <- R6Class(
-  classname = "bggGames",
-  inherit = bggAPI,
-  
-  public = list(
+    classname = "bggGames",
+    inherit = bggAPI,
+
+    public = list(
     # Initialize ---------------------------------------------------------------
     #' @description Object initialization.
     #'
@@ -47,100 +47,94 @@ bggGames <- R6Class(
     #'   }
     initialize = function(ids, chunk_size = 20, params = NULL)
     {
-      
-      if(is.null(getOption("bggAnalytics.token"))) {
-        stop("Please set your authorization token for the BGG API: `options(bggAnalytics.token = 'YOUR TOKEN')`")
-      }
-      
-      # Assertions -----------------------------------------------------------
-      assert_integerish(ids, lower = 1, min.len = 1,
-                        any.missing = FALSE)
-      assert_int(chunk_size, lower = 1, upper = 20)
-      
-      params <- .process_params(params, class = "bggGames")
-      
-      ids <- unique(ids)
-      
-      # Split into chunks
-      chunks <- (seq_along(ids) - 1) %/% chunk_size
-      chunks <- split(ids, chunks)
-      
-      # Getting the API URL
-      .get_base_gameurl <- function(x)
-      {
-        paste0(.bgg_url("api"), "thing?id=", paste0(x, collapse = ","))
-      }
-      api_url <- sapply(chunks, .get_base_gameurl)
-      url_extension <- .extend_url_by_params("", params = params,
-                                             class = "bggGames")
-      api_url <- paste0(api_url, url_extension)
-      
-      # Fetch XMLs
-      xml <- lapply(api_url, function(x) {
-        .xml_expand(
-          httr::with_config(
-            httr::add_headers(
-              Authorization = paste("Bearer", getOption("bggAnalytics.token"))
-            ),
-            read_xml(httr::GET(x))
-          )
-        )
-      })
-      xml <- .xml_concatenate(xml)
-      
-      # Testing IDs
-      xml_ids <- as.numeric(xml_attr(xml, attr = "id"))
-      
-      # Check for any success
-      if (length(intersect(ids, xml_ids)) == 0) {
-        stop("None of the given 'ids' were available through BGG API",
-             call. = FALSE)
-      }
-      
-      # Check for missing
-      missing <- setdiff(ids, xml_ids)
-      if (length(missing) > 0) {
-        warning("Following ids were not available through BGG API:\n",
-                squeeze(missing), call. = FALSE)
-      }
-      
-      # Sorting IDs and XML
-      ids_order <- order(xml_ids)
-      ids <- xml_ids[ids_order]
-      xml <- xml[ids_order]
-      
-      # Setting private variables --------------------------------------------
-      private$.timestamp <- Sys.time()
-      private$.ids <- ids
-      private$.xml <- xml
-      private$.api_url <- api_url
-      private$.params <- params
-      private$.data <- data.table(objectid = ids)
-      setkey(private$.data, objectid)
-      
-      if (params$pretty_names) {
-        self$switch_namestyle("pretty")
-      }
+        token <- get_token()
+
+        # Assertions -----------------------------------------------------------
+        assert_integerish(ids, lower = 1, min.len = 1,
+                          any.missing = FALSE)
+        assert_int(chunk_size, lower = 1, upper = 20)
+
+        params <- .process_params(params, class = "bggGames")
+
+        ids <- unique(ids)
+
+        # Split into chunks
+        chunks <- (seq_along(ids) - 1) %/% chunk_size
+        chunks <- split(ids, chunks)
+
+        # Getting the API URL
+        .get_base_gameurl <- function(x)
+        {
+            paste0(.bgg_url("api"), "thing?id=", paste0(x, collapse = ","))
+        }
+        api_url <- sapply(chunks, .get_base_gameurl)
+        url_extension <- .extend_url_by_params("", params = params,
+                                               class = "bggGames")
+        api_url <- paste0(api_url, url_extension)
+
+        # Fetch XMLs
+        xml <- lapply(api_url,
+                      function(x) {
+                          .xml_expand(.bgg_read_with_token(url = x,
+                                                           token = token))
+                      })
+        xml <- .xml_concatenate(xml)
+
+        # Testing IDs
+        xml_ids <- as.numeric(xml_attr(xml, attr = "id"))
+
+        # Check for any success
+        if (length(intersect(ids, xml_ids)) == 0) {
+            stop("None of the given 'ids' were available through BGG API",
+                 call. = FALSE)
+        }
+
+        # Check for missing
+        missing <- setdiff(ids, xml_ids)
+        if (length(missing) > 0) {
+            warning("Following ids were not available through BGG API:\n",
+                    squeeze(missing), call. = FALSE)
+        }
+
+        # Sorting IDs and XML
+        ids_order <- order(xml_ids)
+        ids <- xml_ids[ids_order]
+        xml <- xml[ids_order]
+
+        # Setting private variables --------------------------------------------
+        private$.timestamp <- Sys.time()
+        private$.ids <- ids
+        private$.xml <- xml
+        private$.api_url <- api_url
+        private$.params <- params
+        private$.data <- data.table(objectid = ids)
+        setkey(private$.data, objectid)
+
+        if (params$pretty_names) {
+            self$switch_namestyle("pretty")
+        }
     },
-    
+
     # Print --------------------------------------------------------------------
     #' @description Print object information.
     #'
     print = function()
     {
-      n_show <- getOption("bggAnalytics.print")
-      
-      nc <- ncol(private$.data)
-      nr <- nrow(private$.data)
-      
-      string <- paste0(
-        "----- bggGames -----",
-        "\nGames data API.\n",
-        "Creation timestamp: ", private$.timestamp,
-        ".\nThe data contains ", nr, " ", .plural("object", nr), " and ",
-        nc, " ", .plural("variable", nc), ".\n\n")
-      cat(string)
-      cat("------- Data -------\n")
-      print(private$.data, nrows = n_show, trunc.cols = TRUE)
+        n_show <- getOption("bggAnalytics.print")
+
+        nc <- ncol(private$.data)
+        nr <- nrow(private$.data)
+
+        string <- paste0(
+            "----- bggGames -----",
+            "\nGames data API.\n",
+            "Creation timestamp: ", private$.timestamp,
+            ".\nThe data contains ", nr, " ", .plural("object", nr), " and ",
+            nc, " ", .plural("variable", nc), ".\n\n")
+        cat(string)
+        cat("------- Data -------\n")
+        print(private$.data, nrows = n_show, trunc.cols = TRUE)
     })
 )
+
+

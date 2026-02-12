@@ -49,11 +49,8 @@ bggSearch <- R6Class(
     #'   }
     initialize = function(query, params = NULL)
     {
-      
-      if(is.null(getOption("bggAnalytics.token"))) {
-        stop("Please set your authorization token for the BGG API: `options(bggAnalytics.token = 'YOUR TOKEN')`")
-      }
-      
+        token <- get_token()
+
         # Assertions -----------------------------------------------------------
         assert_character(query, any.missing = FALSE,
                          min.len = 1)
@@ -67,18 +64,12 @@ bggSearch <- R6Class(
         api_url <- paste0(.bgg_url("api"), "search?query=", query_str)
         api_url <- .extend_url_by_params(api_url, params, class = "bggSearch")
 
-        xml <- httr::with_config(
-          httr::add_headers(
-            Authorization = paste("Bearer", getOption("bggAnalytics.token"))
-          ),
-          read_xml(httr::GET(api_url))
-        )
+        xml <- .bgg_read_with_token(url = api_url, token = token)
         xml <- .xml_expand(xml)
 
         # Preparing data -------------------------------------------------------
         ids <- as.numeric(xml_attr(xml, attr = "id"))
         uniq <- !duplicated(ids)
-        # uniq <- rep(TRUE, length(ids))
         data <- data.table(objectid = ids[uniq])
         setkey(data, objectid)
 

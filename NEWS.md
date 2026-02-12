@@ -1,3 +1,12 @@
+# bggAnalytics (development version)
+
+## Fixed issues
+* The package allows for setting the now required authorization token
+by `set_token()`. This token is later used internally for connecting to
+BGG XML API2. Thanks to @EstherHerbert for the PR.
+
+
+
 # bggAnalytics 0.2.1 (2025-03-11)
 
 ## Fixed issues
@@ -10,6 +19,7 @@ entries per call), done by limiting `chunk_size` to 20.
 * R6 and data.table are now longer depended on, now they are imported.
 
 
+
 # bggAnalytics 0.2.0 (2021-09-23)
 
 * Slight optimization of variable fetching.
@@ -18,6 +28,7 @@ entries per call), done by limiting `chunk_size` to 20.
 * Improved the consistency of the `unsqueeze()` function output.
 * Fixed bugged calls to internal package functions.
 * Fixed a bug which caused `fetch()` variables to have improper names.
+
 
 
 # bggAnalytics 0.1.0 (2020-10-07)

@@ -6,11 +6,15 @@
 ## usethis namespace: start
 #' @import checkmate
 #' @import data.table
-#' @importFrom pryr unenclose
 #' @import R6
 #' @import stringr
-#' @importFrom utils globalVariables
 #' @import xml2
+#' @importFrom httr2 req_headers
+#' @importFrom httr2 req_perform
+#' @importFrom httr2 request
+#' @importFrom httr2 resp_body_xml
+#' @importFrom pryr unenclose
+#' @importFrom utils globalVariables
 ## usethis namespace: end
 NULL
 

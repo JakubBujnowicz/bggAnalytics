@@ -61,99 +61,89 @@ bggCollection <- R6Class(
         if (is.null(username)) {
             username <- getOption("bggAnalytics.username")
         }
-      
-      if(is.null(getOption("bggAnalytics.token"))) {
-        stop("Please set your authorization token for the BGG API: `options(bggAnalytics.token = 'YOUR TOKEN')`")
-      }
-      
-      # Assertions -----------------------------------------------------------
-      assert_string(username)
-      params <- .process_params(params, class = "bggCollection")
-      
-      # Connecting to API ----------------------------------------------------
-      api_url <- paste0(.bgg_url("api"), "collection?username=", username)
-      api_url <- .extend_url_by_params(api_url, params,
-                                       class = "bggCollection")
-      
-      # Check if the request has been processed
-      
-      
-      xml <- httr::with_config(
-        httr::add_headers(
-          Authorization = paste("Bearer", getOption("bggAnalytics.token"))
-        ),
-        read_xml(httr::GET(api_url))
-      )
-      txt <- xml_text(xml)
-      
-      processing_message <-
-        "request for this collection has been accepted and will be processed."
-      
-      messages <- getOption("bggAnalytics.verbose")
-      while (grepl(processing_message, txt)) {
-        if (messages) {
-          message("Server needs time to process the request...")
-          messages <- FALSE
-        }
-        
-        # Server needs a while to process this request
-        Sys.sleep(1)
-        
-        # Try again
-        xml <- httr::with_config(
-          httr::add_headers(Authorization = "Bearer a323e76c-eb09-4549-b596-2e0976ce48bd"),
-          read_xml(httr::GET(api_url))
-        )
+        token <- get_token()
+
+        # Assertions -----------------------------------------------------------
+        assert_string(username)
+        params <- .process_params(params, class = "bggCollection")
+
+        # Connecting to API ----------------------------------------------------
+        api_url <- paste0(.bgg_url("api"), "collection?username=", username)
+        api_url <- .extend_url_by_params(api_url, params,
+                                         class = "bggCollection")
+
+        xml <- .bgg_read_with_token(url = api_url, token = token)
         txt <- xml_text(xml)
-      }
-      xml <- .xml_expand(xml)
-      
-      # Extract IDs ----------------------------------------------------------
-      ids <- as.numeric(xml_attr(xml, attr = "objectid"))
-      
-      if (length(ids) == 0) {
-        warning("this collection contains no games, perhaps the ",
-                "username is wrong?")
-      }
-      
-      # Sorting IDs and XML
-      ids_order <- order(ids)
-      ids <- ids[ids_order]
-      xml <- xml[ids_order]
-      
-      # Setting private variables --------------------------------------------
-      private$.timestamp <- Sys.time()
-      private$.username <- username
-      private$.ids <- ids
-      private$.xml <- xml
-      private$.api_url <- api_url
-      private$.params <- params
-      private$.data <- data.table(objectid = ids)
-      setkey(private$.data, objectid)
-      
-      if (params$pretty_names) {
-        self$switch_namestyle("pretty")
-      }
+
+        # Check if the request has been processed
+        processing_message <-
+            "request for this collection has been accepted and will be processed."
+
+        messages <- getOption("bggAnalytics.verbose")
+        while (grepl(processing_message, txt)) {
+            if (messages) {
+                message("Server needs time to process the request...")
+                messages <- FALSE
+            }
+
+            # Server needs a while to process this request
+            Sys.sleep(2)
+
+            # Try again
+            xml <- .bgg_read_with_token(url = api_url, token = token)
+            txt <- xml_text(xml)
+        }
+        xml <- .xml_expand(xml)
+
+        # Extract IDs ----------------------------------------------------------
+        ids <- as.numeric(xml_attr(xml, attr = "objectid"))
+
+        if (length(ids) == 0) {
+            warning("this collection contains no games, perhaps the ",
+                    "username is wrong?")
+        }
+
+        # Sorting IDs and XML
+        ids_order <- order(ids)
+        ids <- ids[ids_order]
+        xml <- xml[ids_order]
+
+        # Setting private variables --------------------------------------------
+        private$.timestamp <- Sys.time()
+        private$.username <- username
+        private$.ids <- ids
+        private$.xml <- xml
+        private$.api_url <- api_url
+        private$.params <- params
+        private$.data <- data.table(objectid = ids)
+        setkey(private$.data, objectid)
+
+        if (params$pretty_names) {
+            self$switch_namestyle("pretty")
+        }
     },
-    
+
+
     # Print --------------------------------------------------------------------
     #' @description Print object information.
     #'
     print = function()
     {
-      n_show <- getOption("bggAnalytics.print")
-      
-      nc <- ncol(private$.data)
-      nr <- nrow(private$.data)
-      
-      string <- paste0(
-        "----- bggCollection -----",
-        "\nUser collection API of the following user: '", private$.username,
-        "'.\nCreation timestamp: ", private$.timestamp,
-        ".\nThe data contains ", nr, " ", .plural("object", nr), " and ",
-        nc, " ", .plural("variable", nc), ".\n\n")
-      cat(string)
-      cat("--------- Data ----------\n")
-      print(private$.data, nrows = n_show, trunc.cols = TRUE)
+        n_show <- getOption("bggAnalytics.print")
+
+        nc <- ncol(private$.data)
+        nr <- nrow(private$.data)
+
+        string <- paste0(
+            "----- bggCollection -----",
+            "\nUser collection API of the following user: '", private$.username,
+            "'.\nCreation timestamp: ", private$.timestamp,
+            ".\nThe data contains ", nr, " ", .plural("object", nr), " and ",
+            nc, " ", .plural("variable", nc), ".\n\n")
+        cat(string)
+        cat("--------- Data ----------\n")
+        print(private$.data, nrows = n_show, trunc.cols = TRUE)
     })
 )
+
+

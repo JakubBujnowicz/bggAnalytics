@@ -20,13 +20,13 @@ from \code{x} and columns from \code{y$data} are added to \code{x$data}
 (unless they are already there).
 }
 \examples{
- \dontrun{
-sr <- bggSearch$new("Terraforming Mars")
-gm <- bggGames$new(sr$ids)
+\dontrun{
+    sr <- bggSearch$new("Terraforming Mars")
+    gm <- bggGames$new(sr$ids)
 
-gm$expand(c("name", "type", "rank"))
+    gm$expand(c("name", "type", "rank"))
 
-bgg_merge(sr, gm)
+    bgg_merge(sr, gm)
 }
 
 }
